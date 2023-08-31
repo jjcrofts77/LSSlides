@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 12</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	<!-- ################################################### -->
+    <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L12</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Solving systems of inhomogeneous ODEs</li>
+			</span>
+			<br>
+			<li>Examples</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>Systems of inhomogeneous ODEs</h2>					
+					
+			<p>First let us remind ourselves how to solve a single inhomogeneous ODE of the form:</p>					
+
+			\[
+			\frac{\mathrm{d}x}{\mathrm{d}t} = ax+f(t):\quad x(0)=x_0
+			\]
+			
+			
+			<span class="fragment fade-in">
+			<p>Rearranging we get</p>
+			\[
+			 \frac{\mathrm{d}x}{\mathrm{d}t} -ax = f(t)
+			\]
+			</span>
+			<span class="fragment fade-in">
+			<p>Which upon multiplying by the <em>integrating factor</em> $\displaystyle e^{-at}$ becomes</p>
+			\[
+			\begin{align*}
+			e^{-at}\frac{\mathrm{d}x}{\mathrm{d}t}-ae^{-at}x= e^{-at}f(t)\quad &\implies \quad\frac{\mathrm{d}}{\mathrm{d}t}\left\{ e^{-at}x(t)\right\} = e^{-at}f(t)\\
+			&\implies\quad e^{-at}x(t)=x_0+\int_0^t e^{-a\tau}f(\tau)\mathrm{d}\tau
+			\end{align*}
+			\]
+			</span>
+		</section>
+		<section  align="left">		
+		<p>Finally we solve for $x$ to obtain</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		 x(t)=x_0e^{at}+\int_0^t e^{a(t-\tau)}f(\tau)\mathrm{d}\tau
+		 }}}
+		\]
+		
+		<span class="fragment fade-in">
+		<h3>Exercise 12.1</h3>
+		<p>Using the above formula, show that the equation</p>
+		
+		\[
+		\frac{\mathrm{d}x}{\mathrm{d}t} = 3x+e^{-2t}:\quad x(0)=2
+		\]
+		
+		<p>has solution </p>
+		\[
+		x(t) = \frac{11}{5}e^{3t}-\frac{1}{5}e^{-2t}
+		\]
+			
+		</span>
+		</section>
+	</section>
+			
+	<section>
+		<section  align="left">										
+		<p>Let us now consider a system of the form</p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+\mathbf{f}(t): \quad \mathbf{x}(0)=\mathbf{x}_0
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Applying Laplace transforms we obtain</p>
+		\[
+		s\bar{\mathbf{x}}(s)-\mathbf{x}_0 = A\bar{\mathbf{x}}(s) +\bar{\mathbf{f}}(s)		
+		\]
+		<p>Which rearranges to give</p>		
+		\[
+		 \begin{align*}
+		  \bar{\mathbf{x}}(s)&= (sI_n-A)^{-1}\left[\mathbf{x}_0+\bar{\mathbf{f}}(s)\right]\\
+		  &=(sI_n-A)^{-1}\mathbf{x}_0+(sI_n-A)^{-1}\bar{\mathbf{f}}(s)
+		 \end{align*}
+		\]
+		
+		<img style="margin:0px;padding:0px;border: 3px solid magenta;position:absolute;top:200px;left:700px"				
+				height="150"					
+				src="figures/BasicLTs.png">
+		</span>					
+		<img style="margin:0px;padding:0px;border: 3px solid black;position:absolute;top:425px;left:280px"				
+				height="100"					
+				src="figures/SeenB4.png" class="fragment fade-in">
+		</section>
+		<section  align="left">											
+			<p>From Lecture 7 we know that</p>
+			\[
+			 \mathcal{L}^{-1}\left[(sI_n-A)^{-1}\mathbf{x}_0\right] = \mathcal{L}^{-1}\left[(sI_n-A)^{-1}\right]\mathbf{x}_0 = e^{At}\mathbf{x}_0
+			\]
+			
+			<span class="fragment fade-in">
+			<p>In order to compute </p>
+			\[
+			 \mathcal{L}^{-1}\left[(sI_n-A)^{-1}\bar{\mathbf{f}}(s)\right]
+			\]
+			
+			<p>We need to use the so-called <em>convolution theorem</em> which states that</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			 \mathcal{L}\left[\int_0^t\mathbf{f}(\tau)\mathbf{g}(t-\tau)\mathrm{d}\tau\right] = \bar{\mathbf{f}}(s)\bar{\mathbf{g}}(s)
+			 }}}
+			\]
+			<p>Here</p>
+			<ul>
+				<li>$\displaystyle \bar{\mathbf{f}}(s), \bar{\mathbf{g}}(s)$ denote the Laplace transforms of the functions $\displaystyle \mathbf{f}(t), \mathbf{g}(t)$</li>
+				<li>And the integral
+				\[
+				\int_0^t\mathbf{f}(\tau)\mathbf{g}(t-\tau)\mathrm{d}\tau
+				\]
+				is a <em>convolution integral</em>
+				</li>
+			</ul>
+			</span>			
+			
+		</section>
+		
+		<section  align="left">									
+		<p>Setting</p>
+		\[
+		 \bar{\mathbf{g}}(s)=(sI_n-A)^{-1}
+		\]
+		<p>And using the fact that </p>
+		\[
+		 \mathcal{L}\left[(sI_n-A)^{-1}\right] = e^{At}
+		\]
+		<p>We can use the convolution theorem to obtain</p>
+		\[
+		\begin{align*}
+		 \mathcal{L}^{-1}\left[\bar{\mathbf{g}}(s)\bar{\mathbf{f}}(s)\right]&=\mathcal{L}^{-1}\left[(sI_n-A)^{-1}\bar{\mathbf{f}}(s)\right]\\
+		 &= \int_0^te^{A(t-\tau)}\mathbf{f}(\tau)\mathrm{d}\tau
+		\end{align*}
+		\]
+		
+		<p>Here $\displaystyle g(t)=e^{At}$</p>
+		
+		<p class="fragment fade-in">We can use the above to solve our system of ODEs...</p>
+		</section>
+		
+		<section  align="left">									
+		<p>Applying inverse Laplace transforms to</p>
+		\[
+		 \bar{\mathbf{x}}(s) = (sI_n-A)^{-1}\mathbf{x}_0+(sI_n-A)^{-1}\bar{\mathbf{f}}(s)
+		\]
+		<p>We obtain</p>
+		\[
+		\begin{align*}
+		\mathbf{x}(t)&=\mathcal{L}^{-1}\left[(sI_n-A)^{-1}\mathbf{x}_0\right]+\mathcal{L}^{-1}\left[(sI_n-A)^{-1}\bar{\mathbf{f}}(s)\right]\\
+		&=\mathcal{L}^{-1}\left[(sI_n-A)^{-1}\right]\mathbf{x}_0+\mathcal{L}^{-1}\left[(sI_n-A)^{-1}\bar{\mathbf{f}}(s)\right]\\
+		&= \color{red}{\boxed{\color{white}{e^{At}\mathbf{x}_0 + \int_0^te^{A(t-\tau)}\mathbf{f}(\tau)\mathrm{d}\tau}}}
+		\end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<h3>Note</h3>
+		<p>The above solution can also be written as</p>
+		\[
+		e^{At}\mathbf{x}_0 + \int_0^te^{A\tau}\mathbf{f}(t-\tau)\mathrm{d}\tau
+		\]
+		</span>
+		
+		</section>
+	</section>
+			
+	<!-- ################################################### -->
+    <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L12</h1>
+		<br>
+		<ul>
+			
+			<li>Solving systems of inhomogeneous ODEs</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Examples</li>			
+			</span>
+		</ul>
+	</section>				
+			
+	<section>
+		<section  align="left">									
+		
+		<h3>Example 12.1</h3> 
+		<p>The matrix</p>
+		\[
+		 A=\begin{bmatrix}-2&1&0\\0&-1&1\\1&-1&0\end{bmatrix}=HJH^{-1}
+		\]
+		<p>Where</p>
+		\[
+		J=\begin{bmatrix}-1&1&0\\0&-1&1\\0&0&-1\end{bmatrix}\quad H=\begin{bmatrix}1&0&1\\1&1&1\\0&1&1\end{bmatrix}\quad 
+		H^{-1}=\begin{bmatrix}0&1&-1\\-1&1&0\\1&-1&1\end{bmatrix}
+		\]
+		<p>Compute the matrix exponential and use it to determine the solution of </p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+\mathbf{b}e^{-t}:\quad \mathbf{x}(0)=\begin{bmatrix}1&0&0\end{bmatrix}^T
+		\]
+		<p>Where</p>
+		\[
+		 \mathbf{b} = \begin{bmatrix}0&0&1\end{bmatrix}^T
+		\]
+		</section>
+		
+		<section  align="left">									
+		<h3>Solution</h3>
+		<p>Recall</p>
+		\[
+		e^{At}=He^{Jt}H^{-1} \quad\text{and}\quad e^{Jt}=\begin{bmatrix}1&t&\frac{t^2}{2}\\0&1&t\\0&0&1\end{bmatrix}e^{-t}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>So that</p>
+		\[
+		 \begin{align*}
+		 e^{At}&=H \begin{bmatrix}1&t&\frac{t^2}{2}\\0&1&t\\0&0&1\end{bmatrix}\begin{bmatrix}0&1&-1\\-1&1&0\\1&-1&1\end{bmatrix}e^{-t}\\
+		 &=\begin{bmatrix}1&0&1\\1&1&1\\0&1&1\end{bmatrix}\begin{bmatrix}\frac{t^2}{2}-t&1+t-\frac{t^2}{2}&\frac{t^2}{2}-1\\
+		 t-1&1-t&t\\1&-1&12\end{bmatrix}e^{-t}\\
+		 &=\color{red}{\boxed{\color{white}{\begin{bmatrix}\frac{t^2}{2}-t+1&t-\frac{t^2}{2}&\frac{t^2}{2}\\\frac{t^2}{2}&1-\frac{t^2}{2}&\frac{t^2}{2}+t\\t&-t&1+t\end{bmatrix}e^{-t}}}}
+		 \end{align*}
+		\]
+		</span>
+		</section>
+		
+		<section  align="left">											
+		<p>Thus</p>
+		\[
+		 e^{At}\mathbf{x}_0 = e^{-t}\begin{bmatrix}\frac{t^2}{2}-t+1&t-\frac{t^2}{2}&\frac{t^2}{2}\\\frac{t^2}{2}&1-\frac{t^2}{2}&\frac{t^2}{2}+t\\t&-t&1+t\end{bmatrix}
+		 \begin{bmatrix}1\\0\\0\end{bmatrix} =\color{red}{\boxed{\color{white}{ \begin{bmatrix}\frac{t^2}{2}-t+1\\\frac{t^2}{2}\\t\end{bmatrix}e^{-t}}}}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>And</p>
+		\[
+		 e^{A\tau}\mathbf{f}(t-\tau) = e^{-\tau}\begin{bmatrix}\frac{\tau^2}{2}-\tau+1&\tau-\frac{\tau^2}{2}&\frac{\tau^2}{2}\\\frac{\tau^2}{2}&1-\frac{\tau^2}{2}&\frac{\tau^2}{2}+\tau\\\tau&-\tau&1+\tau\end{bmatrix}
+		 \begin{bmatrix}0\\0\\e^{-(t-\tau)}\end{bmatrix} = \color{#00FF00}{\boxed{\color{white}{\begin{bmatrix}\frac{\tau^2}{2}\\\frac{\tau^2}{2}+\tau\\1+\tau\end{bmatrix}e^{-t}}}}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>It follows that</p>
+		\[
+		\begin{align*}
+		\mathbf{x}(t) &=e^{At}\mathbf{x}_0+\int_0^te^{A\tau}\mathbf{f}(t-\tau)\mathrm{d}\tau\\&= \begin{bmatrix}\frac{t^2}{2}-t+1\\\frac{t^2}{2}\\t\end{bmatrix}e^{-t} + \int_0^t\begin{bmatrix}\frac{\tau^2}{2}\\\frac{\tau^2}{2}+\tau\\1+\tau\end{bmatrix}e^{-t} \mathrm{d}\tau
+		\end{align*}
+		\]
+		</section>
+		
+		<section  align="left">											
+		<p>Thus we need to compute the integral</p>
+		\[
+		\int_0^t\begin{bmatrix}\frac{\tau^2}{2}\\\frac{\tau^2}{2}+\tau\\1+\tau\end{bmatrix}e^{-t} \mathrm{d}\tau
+		\]
+		
+		<span class="fragment fade-in">
+		<p>For vector (or matrix) functions we perform integration component-wise</p>
+		
+		<p>Noting that $\displaystyle e^{-t}$ does not depend on the integration variable $\tau$ we can write</p>
+		\[
+		 \int_0^t\begin{bmatrix}\frac{\tau^2}{2}\\\frac{\tau^2}{2}+\tau\\1+\tau\end{bmatrix}e^{-t} \mathrm{d}\tau = 
+		 e^{-t}\left.\begin{bmatrix}\frac{\tau^3}{6}\\\frac{\tau^3}{6}+\frac{\tau^2}{2}\\\tau+\frac{\tau^2}{2}\end{bmatrix}\right|_0^t=\color{#00FF00}{\boxed{\color{white}{
+		 e^{-t}\begin{bmatrix}\frac{t^3}{6}\\\frac{t^3}{6}+\frac{t^2}{2}\\t+\frac{t^2}{2}\end{bmatrix}}}}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>And so</p>
+		\[
+		 \mathbf{x}(t) = \begin{bmatrix}\frac{t^2}{2}-t+1\\\frac{t^2}{2}\\t\end{bmatrix}e^{-t}+\begin{bmatrix}\frac{t^3}{6}\\\frac{t^3}{6}+\frac{t^2}{2}\\t+\frac{t^2}{2}\end{bmatrix}e^{-t} = 
+		 \color{red}{\boxed{\color{white}{
+		 \begin{bmatrix}\frac{t^3}{6}+\frac{t^2}{2}-t+1\\\frac{t^3}{6}+t^2\\2t+\frac{t^2}{2}\end{bmatrix}e^{-t}}}}
+		\]
+		</span>
+		</section>
+	</section>
+
+	<section>
+		<h2 style="color:#00FF00">Lecture 12 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>solving systems of inhomogeneous ODEs</li>													
+						<li>examples</li>
+					</ul><br>
+					<li>After this lecture you should</li>
+					<ul>
+						<li>recall how to solve simple 1D inhomogeneous ODEs</li>												
+						<li>be able to derive similar results for systems using Laplace transforms</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

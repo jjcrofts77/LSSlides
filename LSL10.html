@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 10</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L10</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Introduction to Markov processes</li>
+			</span>
+			<br>
+			<li>Examples</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>Markov Processes</h2>					
+					
+			<p>A <em>Markov process</em> describes a system made up of elements that can be in noe of several <em>states</em>, such that
+			after a transition, the numbers in each state changes according to certain probabilities</p>					
+			
+			<span class="fragment fade-in">
+			<h3>Example 10.1 (Nottingham weather)</h3>
+			<p>Model assumptions:</p>
+			<ol>
+			 <li>The best way to predict tomorrows weather is to say it will be the same as today</li>
+			 <li class="fragment fade-in">Two types of weather: sunshine or rain</li>
+			</ol>
+			
+			<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:500px;left:150px"				
+			class="fragment fade-in" height="125" src="figures/Ex10p1.png">
+			
+			</span>
+			
+			
+		</section>
+		<section  align="left">		
+		
+		<span>
+		<p>Markov weather model (ctd)</p>
+		
+		<p>Suppose the model predicts the weather correct 75% of the time</p>
+				
+		
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:150px;left:150px"				
+		height="135" src="figures/Ex10p1b.png">
+		</span>
+		
+		<br><br><br><br>
+		<span class="fragment fade-in">
+		<p>We can write down a matrix description of the above model</p>
+		\[
+		 P = \begin{bmatrix}\frac{3}{4}&\frac{1}{4}\\\frac{1}{4}&\frac{3}{4}\end{bmatrix}
+		\]
+		<p>The matrix $P$ is called the <em>transition matrix</em> of the Markov process</p>
+		</span>
+		</section>
+		
+		<section  align="left">		
+		
+		<span>
+		<h3>Note</h3>
+		
+		<ol>
+		 <li><p>We say that $P$ is a <em>stochastic matrix</em> since</p>
+		 \[
+		  \sum_iP_{ij}=\sum_jP_{ij}=1
+		 \]
+		 </li>
+		 
+		 <li class="fragment fade-in"><p>Typically $P$ will only be <em>row stochastic</em> meaning that $\displaystyle \sum_jP_{ij}=1$ only</p>
+		 </li>		 
+		 <li class="fragment fade-in"><p>The above fomulation provides a simple model for describing the Nottingham weather:</p>
+		 \[
+		  \begin{align*}
+		   \mathbf{x}_{k+1} &= P^T\mathbf{x}_k\\
+		   &=\begin{bmatrix}\frac{3}{4}&\frac{1}{4}\\\frac{1}{4}&\frac{3}{4}\end{bmatrix}\mathbf{x}_k\qquad \mathbf{x}_0=\mathbf{c}
+		  \end{align*}
+		 \]
+		<p>$\mathbf{x}_k$ gives the probability of rain or sunshine on the $k$th day</p> 
+		 </li>
+		</ol>
+		
+		</section>
+		
+		<section  align="left">		
+		<p>Multiplying out we see that</p>
+		\[
+		 \begin{align*}
+		 x^{(1)}_{k+1}&=\frac{3}{4}x^{(1)}_k+\frac{1}{4}x^{(2)}_k\quad x^{(1)}_0=c^{(1)}\\
+		 x^{(2)}_{k+1}&=\frac{1}{4}x^{(1)}_k+\frac{3}{4}x^{(2)}_k\quad x^{(2)}_0=c^{(2)}
+		 \end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Now suppose that $\displaystyle c^T=\begin{bmatrix}1&0\end{bmatrix}$, that is it is sunny today, then</p>
+		\[
+		\begin{align*}
+		\begin{bmatrix}x^{(1)}_1\\x^{(2)}_1\end{bmatrix}&=\begin{bmatrix}\frac{3}{4}\\\frac{1}{4}\end{bmatrix}\qquad \text{\textcolor{red}{75\% chance of sunshine;~~ 25\% chance of rain}}\\
+		\begin{bmatrix}x^{(1)}_2\\x^{(2)}_2\end{bmatrix}&=\begin{bmatrix}\frac{3}{4}\cdot\frac{3}{4}+\frac{1}{4}\cdot\frac{1}{4}\\\frac{1}{4}\cdot\frac{3}{4}+\frac{3}{4}\cdot\frac{1}{4}\end{bmatrix}\\
+		&=\begin{bmatrix}\frac{10}{16}\\\frac{6}{16}\end{bmatrix}\qquad \text{\textcolor{red}{62\% chance of sunshine;~~ 38\% chance of rain}}
+		\end{align*}
+		\]
+		</span>
+		<p class="fragment fade-in">Importantly we see that uncertainty increases as we move further in to the future, as expected</p>
+		</section>
+		
+		<section  align="left">		
+		 <p>Note that</p>
+		 \[
+		  \chi_{P^T}(t) = (t-1)\left(t-\frac{1}{2}\right)
+		 \]
+		 <p>Thus $\lambda=1$ is a <em>dominant eigenvalue</em> and so for large $k$ the vector $\mathbf{x}_k$ will tend to a constant vector $\mathbf{x}^*$</p>
+		 
+		 <span class="fragment fade-in">
+		 <p>It can be shown that this constant vector is given by the eigenvector $\mathbf{v}$ of $P^T$ corresponding to $\lambda=1$</p>
+		 
+		 <p>Thus in our model</p>
+		 \[
+		  \mathbf{x}_k\longrightarrow \mathbf{x}^*=\begin{bmatrix}0.5\\0.5\end{bmatrix} \quad\text{as $k\longrightarrow \infty$}
+		 \]		 
+		 </span>
+		 
+		 <span class="fragment fade-in">
+		 <p>Since $\mathbf{x}^*$ is a probability vector we have to normalise the eigenvector $\mathbf{v}$ as follows 
+		 \[
+		  \mathbf{x}^* = \frac{\mathbf{v}}{\sum_iv^{(i)}}
+		 \]
+		 </span>
+		</section>
+	</section>
+			
+	<section>
+		<section  align="left">										
+		<p>More generally we define an $n$-state Markov process by a transition matrix $P\in\mathbb{R}^{n\times n}$ given by</p>
+		\[
+		P = \begin{bmatrix}p_{11}&p_{12}&\cdots&p_{1n}\\p_{21}&&&p_{2n}\\\vdots&&&\vdots\\p_{n1}&p_{n2}&\cdots&p_{nn}\end{bmatrix}
+		\]
+		<p>Here, $\displaystyle P_{ij}$ gives the probability of moving between states $i$ and $j$</p>
+		
+		<span class="fragment fade-in">
+			<p>The state vector $\mathbf{x}_k$ contains the probabilities of being in each state at time $t=k$ and so</p>
+			\[
+			 0\leq x^{(i)}_k\leq 1 \forall i\qquad \text{and} \qquad \sum_{i}x^{(i)}_k=1
+			\]
+			</span>
+					
+		</section>
+		
+		<section  align="left">											
+			<p>Since states at different 'times' are related by the equation</p>
+			\[
+				\mathbf{x}_{k+1} = P^T\mathbf{x}_k
+			\]
+			<p>We have that for a given initial condition $\mathbf{x}_0$ the solution is</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+				\mathbf{x}_{k} = \left(P^T\right)^k\mathbf{x}_0
+				}}}
+			\]
+			
+			<span class="fragment fade-in">
+			<p>As usual we can use the eigendecomposition of $P$ in order to compute powers of $P$:</p>
+			\[
+			P^T=HJH^{-1} \implies \mathbf{x}_k = HJ^kH^{-1}\mathbf{x}_0
+			\]
+			<p>And so again we deploy known results on powers of Jordan matrices</p>
+			</span>
+				
+		</section>
+		
+	</section>
+	
+	<section  align="left">									
+		<p>It is easy to show $\lambda=1$ is an eigenvalue of $P^T$ since</p>
+		\[
+		 \begin{align*}
+		 \left|P^T-1\cdot I_n\right|&=\begin{vmatrix}p_{11}-1&p_{21}&\cdots&p_{n1}\\p_{21}&p_{22}-1&\cdots&p_{2n}\\\vdots&&\ddots&\vdots\\p_{1n}&p_{2n}&\cdots&p_{nn}-1\end{vmatrix}
+		 \quad \text{\textcolor{red}{$(R_1\longrightarrow R_1+R_2+\cdots+R_n)$}}
+		 \\
+		 &=\begin{vmatrix}\sum_ip_{1i}-1&\sum_ip_{2i}-1&\cdots&\sum_ip_{ni}-1\\p_{21}&p_{22}-1&\cdots&p_{2n}\\\vdots&&\ddots&\vdots\\p_{1n}&p_{2n}&\cdots&p_{nn}-1\end{vmatrix}\\
+		 &= \begin{vmatrix}0&0&\cdots&0\\p_{21}&p_{22}-1&\cdots&p_{2n}\\\vdots&&\ddots&\vdots\\p_{1n}&p_{2n}&\cdots&p_{nn}-1\end{vmatrix} = 0
+		 \end{align*}
+		\]
+		<span class="fragment fade-in">
+		<p>From which the result follows</p>	
+
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:450px;left:700px"				
+				height="200"		
+				src="figures/RowOps.png">		
+				</span>
+	</section>
+	
+	 <!-- ################################################### -->
+     <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L10</h1>
+		<br>
+		<ul>			
+			<li>Introduction to Markov processes</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Examples</li>			</span>
+		</ul>
+	</section>			
+	
+	<section  align="left">									
+		
+		<h3>Example 10.2</h3> 
+		<p>The transition matrix $\displaystyle P_1=\begin{bmatrix}0&1\\1&0\end{bmatrix}$ has characteristic polynomial given by</p>
+		\[
+		\chi_{P_1^T}(t) = (t+1)(t-1)
+		\]
+		<p>And the eigenvector corresponding to $\lambda=1$ is</p>
+		\[
+		 \mathbf{v}=\begin{bmatrix}0.5 &0.5\end{bmatrix}^T\qquad \text{\textcolor{red}{(Exercise)}}
+		\]
+		<p>However $\mathbf{x}_k$ does <em>not</em> tend to $\mathbf{x}^*=\mathbf{v}$ for large $k$</p>
+		
+		<span class="fragment fade-in">
+		<p>To see this let $\mathbf{x_0}=\begin{bmatrix}1&0\end{bmatrix}^T$ then</p>
+		\[
+		\mathbf{x}_1=\begin{bmatrix}0\\1\end{bmatrix}, \quad\mathbf{x}_2=\begin{bmatrix}1\\0\end{bmatrix}, \quad\mathbf{x}_3=\begin{bmatrix}0\\1\end{bmatrix}\ldots
+		\]
+		<p>This sequence is periodic and so does not converge to $\mathbf{x}^*$</p>
+		
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:300px;left:725px"				
+			height="250" src="figures/Ex10p2.png">
+		</span>
+		
+	</section>
+			
+	<section>
+		
+		<section  align="left">									
+		
+		<h3>Example 10.3</h3> 
+		<font size="5">
+		<p>Let $P$ be the following matrix</p>
+		\[
+		 P = \frac{1}{4}\begin{bmatrix}2&2&0&0\\0&4&0&0\\2&0&1&1\\3&0&0&1\end{bmatrix}
+		\]
+		<p>Such that $P=HJH^{-1}$ where</p>
+		\[
+		 H =\begin{bmatrix}1&1&0&0\\1&0&0&0\\1&5&1&0\\1&3&0&1\end{bmatrix} \quad H^{-1}=\begin{bmatrix}0&1&0&0\\1&-1&0&0\\-5&4&1&0\\-3&2&0&1\end{bmatrix}\quad J=\begin{bmatrix}4&0&0&0\\0&2&0&0\\0&0&1&1\\0&0&0&1\end{bmatrix}
+		\]
+		<p>Compute the probability that after 10 transitions an element that (a) started in the first state will still be in the first state; and (b) started in the third state will have moved to the second</p>
+		</section>
+		
+		<section  align="left">									
+		<h3>Solution</h3>
+		<p>Recall that $\displaystyle (P^k)_{ij}$ is the probability of moving from state $i$ to state $j$ in k steps</p>
+		
+		<span class="fragment fade-in">
+		<p>(a) </p>
+		<p>We know that  $\displaystyle P^k = HJ^kH^{-1}$ and that</p>
+				
+		\[
+		J^{10} = \frac{1}{4^{10}}\begin{bmatrix}4^{10}&&&\\&2^{10}&&\\&&1&10\\&&0&1\end{bmatrix}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>Thus</p>
+		\[
+		\begin{align*}
+		 (P^{10})_{11} = \left(HJ^{10}H^{-1}\right)_{11}
+		 &= \frac{1}{4^{10}}\begin{bmatrix}1&1&0&0\\1&0&0&0\\1&5&1&0\\1&3&0&1\end{bmatrix}\begin{bmatrix}4^{10}&&&\\&2^{10}&&\\&&1&10\\&&0&1\end{bmatrix}
+		 \begin{bmatrix}0&1&0&0\\1&-1&0&0\\-5&4&1&0\\-3&2&0&1\end{bmatrix}\\
+		 &=\frac{1}{4^{10}}\begin{bmatrix}1&1&0&0\\*&*&*&*\\*&*&*&*\\*&*&*&*\end{bmatrix}\begin{bmatrix}0&*&*&*\\2^{10}&*&*&*\\-5-3\cdot 10&*&*&*\\-3&*&*&*\end{bmatrix} = \frac{1}{4^{10}}2^{10}
+		 =\color{red}{\boxed{\color{white}{\left(\frac{1}{2}\right)^{10}}}}
+		\end{align*}
+		\]
+		</span>
+		</font>
+		</section>
+		
+		<section  align="left">									
+		<p>(b) </p>
+		\[
+		\begin{align*}
+		 (P^{10})_{32} = \left(HJ^{10}H^{-1}\right)_{32}
+		 &= \frac{1}{4^{10}}\begin{bmatrix}1&1&0&0\\1&0&0&0\\1&5&1&0\\1&3&0&1\end{bmatrix}\begin{bmatrix}4^{10}&&&\\&2^{10}&&\\&&1&10\\&&0&1\end{bmatrix}
+		 \begin{bmatrix}0&1&0&0\\1&-1&0&0\\-5&4&1&0\\-3&2&0&1\end{bmatrix}\\
+		 &=\frac{1}{4^{10}}\begin{bmatrix}*&*&*&*\\*&*&*&*\\1&5&1&0\\*&*&*&*\end{bmatrix}\begin{bmatrix}*&4^{10}&*&*\\*&-2^{10}&*&*\\*&4+2\cdot 10&*&*\\*&2&*&*\end{bmatrix}\\ 
+		 &= \frac{1}{4^{10}}\left(4^{10}-5\cdot 2^{10}+24\right)\\
+		 &=1-5\left(\frac{1}{2}\right)^{10}+24\left(\frac{1}{4}\right)^{10} \approx \color{red}{\boxed{\color{white}{0.9951}}}
+		\end{align*}
+		\]
+		</section>
+	</section>
+
+	<section>
+		<h2 style="color:#00FF00">Lecture 10 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>an introduction to Markov processes</li>													
+						<li>examples</li>
+					</ul><br>
+					<li>After this lecture you should</li>
+					<ul>
+						<li>have acquired knowledge of the basic properties of Markov processes</li>												
+						<li>be able to use these properties to investigate simple Markov models</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

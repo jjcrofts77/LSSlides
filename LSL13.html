@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 13</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L13</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Introduction to inhomogeneous ODEs (Ctd)</li>
+			</span>
+			<br>
+			<li>Further examples</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>Inhomogeneous ODEs (ctd)</h2>					
+					
+			<p>Recall from last week that the system</p>					
+			\[
+			 \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+\mathbf{f}(t):\quad \mathbf{x}(0)=\mathbf{x}_0
+			\]
+			<p>Has solution</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			 \begin{align*}
+			  \mathbf{x}(t) &= e^{At}\mathbf{x}_0 +\int_0^te^{A(t-\tau)}\mathbf{f}(\tau)\mathrm{d}\tau\\
+			  &= e^{At}\mathbf{x}_0 +\int_0^te^{A\tau}\mathbf{f}(t-\tau)\mathrm{d}\tau
+			 \end{align*}
+			 }}}
+			\]
+						
+			<p>The equivalence of the two formula follows via a simple change of variable</p>
+			
+		</section>
+		<section  align="left">		
+		<p>Consider the first integral</p>
+		\[
+		 \int_0^te^{A(t-\tau)}\mathbf{f}(\tau)\mathrm{d}\tau
+		\]
+		<p>Making the change of variable $\displaystyle s=t-\tau$ so that $\displaystyle \mathrm{d}s=-\mathrm{d}\tau$ gives</p>
+		\[
+		 \begin{align*}
+		 \int_0^te^{A(t-\tau)}\mathbf{f}(\tau)\mathrm{d}\tau&=\int_0^te^{As}\mathbf{f}(t-s)(-\mathrm{d}s)\\
+		 &=-\int_t^0e^{As}\mathbf{f}(t-s)\mathrm{d}s\\
+		 &=\int_0^te^{As}\mathbf{f}(t-s)\mathrm{d}s=\int_0^te^{A\tau}\mathbf{f}(t-\tau)\mathrm{d}\tau
+		 \end{align*}
+		\]
+		<p>As required</p>
+		
+		<span class="fragment fade-in">
+		<p>In the above we have use the fact that $\color{red}{\boxed{\color{white}{\int_a^b=-\int_b^a}}}$</p>
+		</span>
+		
+		</section>
+	</section>
+	
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L13</h1>
+		<br>
+		<ul>			
+			<li>Introduction to inhomogeneous ODEs (Ctd)</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Further examples</li>			
+			</span>
+		</ul>
+	</section>				
+			
+	<section>
+		<section  align="left">										
+		<h3>Example 13.1</h3> 
+		<font size="5">
+		<p>The matrix</p>
+		\[
+		 A=\begin{bmatrix}-2&1&1\\0&0&-2\\-4&2&0\end{bmatrix}=HJH^{-1}
+		\]
+		<p>Where</p>
+		\[
+		J=\begin{bmatrix}-2&0&0\\0&0&1\\0&0&0\end{bmatrix}\quad H=\begin{bmatrix}1&-1&0\\1&-2&0\\1&0&1\end{bmatrix}\quad 
+		H^{-1}=\begin{bmatrix}2&-1&0\\1&-1&0\\-2&1&1\end{bmatrix}
+		\]
+		<p>Compute the matrix exponential and use it to determine the solution of </p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+\mathbf{f}(t):\quad \mathbf{x}(0)=\mathbf{x}_0
+		\]
+		<p>Where</p>
+		\[
+		 \mathbf{f} = \begin{bmatrix}0\\1\\0\end{bmatrix} \quad\text{and}\quad \mathbf{x}_0=\begin{bmatrix}0\\0\\0\end{bmatrix}
+		\]
+					</font>
+		</section>
+		
+		<section  align="left">											
+			<h3>Solution</h3>
+			<p>Recall that</p>
+			\[
+			 \begin{align*}
+			 e^{At}&=He^{Jt}H^{-1}\\
+			 &= \begin{bmatrix}1&-1&0\\1&-2&0\\1&0&1\end{bmatrix}\begin{bmatrix}e^{-2t}&0&0\\0&1&t\\0&0&1\end{bmatrix}
+		\begin{bmatrix}2&-1&0\\1&-1&0\\-2&1&1\end{bmatrix}\\		
+		&=\begin{bmatrix}1&-1&0\\1&-2&0\\1&0&1\end{bmatrix}\begin{bmatrix}2e^{-2t}&-e^{-2t}&0\\1-2t&t-1&t\\-2&1&1\end{bmatrix}\\
+		&=\color{red}{\boxed{\color{white}{
+		\begin{bmatrix}2e^{-2t}+2t-1&1-t-e^{-2t}&-t\\2e^{-2t}+4t-2&2-2t-e^{-2t}&-2t\\2e^{-2t}-2&1-e^{-2t}&1\end{bmatrix}}}}
+			 \end{align*}
+			\]
+		</section>
+		
+		<section  align="left">									
+		<p>Noting that</p>
+		\[
+		e^{At}\mathbf{0}=\mathbf{0}
+		\]
+		<p>And</p>
+		\[
+		\begin{align*}
+		e^{At}\mathbf{f}(t)&=\begin{bmatrix}2e^{-2t}+2t-1&1-t-e^{-2t}&-t\\2e^{-2t}+4t-2&2-2t-e^{-2t}&-2t\\2e^{-2t}-2&1-e^{-2t}&1\end{bmatrix}
+		\begin{bmatrix}0\\1\\0\end{bmatrix}\\
+		&=\color{red}{\boxed{\color{white}{\begin{bmatrix}1-t-e^{-2t}\\2-2t-e^{-2t}\\1-e^{-2t}\end{bmatrix}}}}
+		\end{align*}
+		\]
+		<span class="fragment fade-in">
+		<p>Thus</p>
+		\[
+		\mathbf{x}(t) = e^{At}\mathbf{x}_0+\int_0^te^{A\tau}\mathbf{f}(t-\tau)\mathrm{d}\tau = \int_0^t\begin{bmatrix}1-\tau-e^{-2\tau}\\2-2\tau-e^{-2\tau}\\1-e^{-2\tau}\end{bmatrix}\mathrm{d}\tau
+		\]
+		<p>So we just need to compute the integral to solve the ODE</p>
+		</span>
+		</section>
+		
+		<section  align="left">									
+		<p>We integrate component-wise so that</p>
+		\[
+		\begin{align*}
+		\int_0^t\begin{bmatrix}1-\tau-e^{-2\tau}\\2-2\tau-e^{-2\tau}\\1-e^{-2\tau}\end{bmatrix}\mathrm{d}\tau &= 
+		\left.\begin{bmatrix}\tau-\frac{\tau^2}{2}+\frac{1}{2}e^{-2\tau}\\2\tau-\tau^2+\frac{1}{2}e^{-2\tau}\\\tau++\frac{1}{2}e^{-2\tau}\end{bmatrix}\right|_0^t\\
+		&=\begin{bmatrix}t-\frac{t^2}{2}+\frac{1}{2}\left(e^{-2t}-1\right)\\2t-t^2+\frac{1}{2}\left(e^{-2t}-1\right)\\t+\frac{1}{2}\left(e^{-2t}-1\right)\end{bmatrix}
+		\end{align*}
+		\]
+		<span class="fragment fade-in">
+		<p>Thus</p>
+		\[
+		\color{#00FF00}{\boxed{\color{white}{
+		 \mathbf{x}(t) = \begin{bmatrix}t-\frac{t^2}{2}+\frac{1}{2}\left(e^{-2t}-1\right)\\2t-t^2+\frac{1}{2}\left(e^{-2t}-1\right)\\t+\frac{1}{2}\left(e^{-2t}-1\right)\end{bmatrix}
+		 }}}
+		\]
+		</span>
+		
+		
+		<span class="fragment fade-in">
+		<h3>Note</h3>
+		<ol>
+		<li>We chose to use the second formula since $\mathbf{f}$ is a constant vector</li>
+		<li class="fragment fade-in">Integration of a vector or matrix is performed component-wise</li>
+		</ol>
+		</span>
+		</section>
+	</section>
+	
+	<section  align="left">									
+	<p>Actually we could have solved this problem slightly differently</p>
+	\[
+	\begin{align*}
+	\mathbf{x}(t)&=\int_0^te^{A\tau}\mathbf{f}(t-\tau)\mathrm{d}\tau\\
+	&=\int_0^tHe^{J\tau}H^{-1}\mathbf{f}(t-\tau)\mathrm{d}\tau\\
+	&=H\left(\int_0^te^{J\tau}\mathrm{d}\tau\right)H^{-1}\mathbf{f} \quad \text{(since $\mathbf{f}$ is constant)}
+	\end{align*}
+	\]
+	<span class="fragment fade-in">
+	 <p>Thus in the case where $\mathbf{f}$ is a constant vector, we can integrate $\displaystyle e^{Jt}$ and then just multiply by $H$ and $H^{-1}$</p>
+	 
+	 <p class="fragment fade-in">Let's see how this works in practice</p>
+	</span>
+	</section>
+	
+	<section>
+	<section  align="left">											
+	<h3>Example 13.2</h3>
+	<p>Solve Example 13.1 using the method over slide</p>
+			<h3>Solution</h3>
+			<font size="5">
+			<span class="fragment fade-in">
+			<p>Recall that</p>
+			\[
+			J=\begin{bmatrix}-2&0&0\\0&0&1\\0&0&0\end{bmatrix}\quad H=\begin{bmatrix}1&-1&0\\1&-2&0\\1&0&1\end{bmatrix}\quad 
+		H^{-1}=\begin{bmatrix}2&-1&0\\1&-1&0\\-2&1&1\end{bmatrix}
+			\]
+			<p>So that</p>
+			\[
+			 e^{Jt} = \begin{bmatrix}e^{-2t}&0&0\\0&1&t\\0&0&1\end{bmatrix}
+			\]
+			</span>
+			
+			<span class="fragment fade-in">
+			<p>It follows that</p>
+			\[
+			\mathbf{x}(t) = H\left(\int_0^t \begin{bmatrix}e^{-2\tau}&0&0\\0&1&\tau\\0&0&1\end{bmatrix}\mathrm{d}\tau \right)H^{-1}\mathbf{f}
+			\]
+			</span>
+			</font>
+			
+		</section>
+		
+		<section  align="left">	
+		<p>Now</p>
+		\[
+		\int_0^t \begin{bmatrix}e^{-2\tau}&0&0\\0&1&\tau\\0&0&1\end{bmatrix}\mathrm{d}\tau = 
+		\left.\begin{bmatrix}-\frac{1}{2}e^{-2\tau}&0&0\\0&\tau&\frac{\tau^2}{2}\\0&0&\tau\end{bmatrix}\right|_0^t
+		\]
+		<span class="fragment fade-in">
+		<p>So that</p>
+		\[
+		\begin{align*}
+		\mathbf{x}(t) &= H\left(\int_0^t \begin{bmatrix}e^{-2\tau}&0&0\\0&1&\tau\\0&0&1\end{bmatrix}\mathrm{d}\tau \right)H^{-1}\mathbf{f}\\
+		&=\begin{bmatrix}1&-1&0\\1&-2&0\\1&0&1\end{bmatrix}\begin{bmatrix}\frac{1}{2}\left(1-e^{-2t}\right)&0&0\\0&t&\frac{t^2}{2}\\0&0&t\end{bmatrix}
+		\begin{bmatrix}-1\\-1\\1\end{bmatrix}\\
+		&=\begin{bmatrix}1&-1&0\\1&-2&0\\1&0&1\end{bmatrix}\begin{bmatrix}\frac{1}{2}(e^{-2t}-1)\\\frac{t^2}{2}-t\\t\end{bmatrix} = \color{red}{\boxed{\color{white}{
+		\begin{bmatrix}t-\frac{t^2}{2}+\frac{1}{2}(e^{-2t}-1)\\2t-t^2+\frac{1}{2}(e^{-2t}-1)\\t+\frac{1}{2}(e^{-2t}-1)\end{bmatrix}}}}
+		\end{align*}
+		\]		
+		</span>
+		</section>
+	</section>
+			
+	<section>
+		<h2 style="color:#00FF00">Lecture 13 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>systems of inhomogeneous ODEs (Ctd)</li>													
+						<li>further examples</li>
+					</ul><br>
+					<li>After this lecture you should </li>
+					<ul>
+						<li>be confident in solving systems of inhomogeneous systems</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

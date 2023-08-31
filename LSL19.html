@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 19</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L19</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>BIBO stability</li>
+			</span>
+			<br>
+			<li>Stabilising via feedback</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h3>BIBO stability</h3>					
+					
+			<p>Let us now return to controlled systems of the form</p>					
+			
+			\[
+			\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+B\mathbf{u}:\quad \mathbf{x}(0)=\mathbf{x}_0
+			\]
+			<p>We say that such a system is <em>stable for bounded inputs</em> if for a given initial condition $\mathbf{x}_0$
+			and nonnegative constant $L$ for which</p>
+			\[
+			 ||\mathbf{u}(t)|| \leq L \quad \forall t\geq 0
+			\]
+						
+			<p>there exists an $M>0$ such that</p>
+			\[
+			 ||\mathbf{x}(t)|| < M \quad \forall t\geq 0
+			\]
+			
+			<p class="fragment fade-in" style="color:red"><b>Thus if the input to the system is bounded then the system is stable</b></p>
+		</section>
+		<section  align="left">		
+		<p>Recalling that the solution to such a system is given by</p>
+		\[
+		\begin{align*}
+		 \mathbf{x}(t)&=e^{At}\mathbf{x}_0+\int_0^te^{A\tau}\mathbf{f}(t-\tau)\mathrm{d}\tau\\
+		 &=e^{At}\mathbf{x}_0+\int_0^te^{A\tau}B\mathbf{u}(t-\tau)\mathrm{d}\tau
+		\end{align*}
+		\]
+		
+		<p>We can make the following observations:</p>
+		
+		<span class="fragment fade-in">
+		<ol>
+			<li>If the corresponding free system 
+			\[
+			\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}
+			\]
+			is a. stable then the control system is stable for bounded inputs
+			</li><br>
+			<li class="fragment fade-in">If the corresponding free system is unstable then so is the control system</li>			
+		</ol>
+		</span>
+		</section>
+		
+		<section  align="left">		
+		<p>Now suppose that in addition we consider the output</p>
+		\[
+		\mathbf{y}=C\mathbf{x}
+		\]
+		<p>then we say the system is <em>bounded input bounded output (BIBO) stable</em> if $\mathbf{x}(t)$ in the defintion 
+		of bounded input stability can be replaced by $\mathbf{y}(t)$</p>
+		
+		<span class="fragment fade-in">
+		<p>Again since</p>
+		\[
+		 \mathbf{y}(t) =C\mathbf{x}(t) = Ce^{At}\mathbf{x}_0+\int_0^tCe^{A\tau}B\mathbf{u}(t-\tau)\mathrm{d}\tau
+		\]
+		<p>we see that the control system is BIBO stable if the corresponding free system</p>
+		\[
+			\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}
+		\]
+		<p>is a. stable</p>
+		</span>		
+		</section>
+	</section>
+			
+	<section>
+		<section  align="left">
+		<h3>Example 19.1</h3>
+		<p>Discuss the BIBO stability of the system </p>		
+		\[
+		
+		\]
+		<p>when the matrix $A$ is similar to the following Jordan normal forms</p>
+		\[
+		\begin{bmatrix}-1&0&0&0\\0&-3i&0&0\\0&0&3i&0\\0&0&0&-10\end{bmatrix} \qquad \begin{bmatrix}-1&1&0&0\\0&-1&0&0\\0&0&2i-3&0\\0&0&0&-2i-3\end{bmatrix}
+		\qquad \begin{bmatrix}0&1&0\\0&0&0\\0&0&-2\end{bmatrix}
+		\]
+		
+		<h3>Solution</h3>
+		
+		<span class="fragment fade-in">
+		<p>Firstly</p>
+		\[
+		e^{Jt} = \begin{bmatrix}e^{-t}&0&0&0\\0&\cos{3t}&-\sin{3t}&0\\0&\sin{3t}&\cos{3t}&0\\0&0&0&e^{-10t}\end{bmatrix}\quad\implies\quad \text{Not BIBO stable}
+		\]
+		<p>This follows since $\displaystyle e^{Jt}$ is bounded as $t\to\infty$ due to the trigonometric terms</p>
+		</span>			
+		</section>
+		<section  align="left">											
+		<p>Next</p>
+		\[
+		e^{Jt} = \begin{bmatrix}e^{-t}&te^{-t}&0&0\\0&e^{-t}&0&0\\0&0&e^{-3t}\cos{2t}&-e^{-3t}\sin{2t}\\0&0&e^{-3t}\sin{2t}&e^{-3t}\cos{2t}\end{bmatrix}\to 0\quad \text{as}\quad t\to \infty\quad \implies \quad \text{BIBO stable}
+		\]	
+		<p>	Since the free system is a. stable the control system is BIBO stable</p>	
+		
+		<span class="fragment fade-in">
+		<p>Finally</p>
+		\[
+		e^{Jt} = \begin{bmatrix}1&t&1\\0&0&0\\0&0&e^{-2t}\end{bmatrix}\to\infty \quad \text{as}\quad t\to\infty
+		\]
+		<p>so the free system is not a. stable and the control system is not BIBO stable</p>
+		</span>
+		</section>
+		
+	</section>
+	
+	<section>
+		<section  align="left">
+		<h3>Example 19.2</h3>
+		<p>Discuss the BIBO stability of a controllable and observable system of the form</p>		
+		\[
+		\begin{align*}
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t}&=A\mathbf{x}+B\mathbf{u}\\
+		\mathbf{y}&=C\mathbf{x}
+		\end{align*}
+		\]
+		<p>when $A$ has characteristic polynomial </p>
+		\[
+		\chi_A(t) = t^4+\alpha t^3+(\alpha+1)t^2+\alpha t +1
+		\]
+		
+		<h3>Solution</h3>
+		
+		<span class="fragment fade-in">
+		<p>The Hurwitz matrix is given by</p>
+	
+		\[
+		H = \begin{bmatrix}\alpha&\alpha&0&0\\1&1+\alpha&1&0\\0&\alpha&\alpha&0\\0&1&1+\alpha&1\end{bmatrix}
+		\]
+		
+		</span>			
+		</section>
+		<section  align="left">		
+		<p>Thus</p>		
+		\[
+		H_1 =\color{red}{\boxed{\color{white}{\alpha>0}}} 
+		\qquad \color{white}{H_2=\begin{vmatrix}\alpha&\alpha\\1&1+\alpha\end{vmatrix} = \alpha^2+\alpha-\alpha=} \color{red}{\boxed{\color{white}{\alpha^2>0}}}
+		\]
+		<p>And</p>
+		\[
+		\begin{align*}
+		H_3=\begin{vmatrix}\alpha&\alpha&0\\1&\alpha+1&1\\0&\alpha&\alpha\end{vmatrix}&=\alpha\begin{vmatrix}\alpha+1&1\\\alpha&\alpha\end{vmatrix}-\alpha\begin{vmatrix}1&1\\0&\alpha\end{vmatrix}\\
+		&=\alpha(\alpha^2)-\alpha^2 = \alpha^2(\alpha-1)>0
+		\end{align*}
+		\]
+		<p>And</p>
+		\[
+		H_4 = 1\cdot H_3 = \color{red}{\boxed{\color{white}{\alpha^2(\alpha-1)>0}}}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Thus $H_3$ and $H_4$ are positive if $\alpha-1>0$ or $\alpha>1$ so that for</p>
+		\[
+		\alpha\in(1, \infty)
+		\]
+		<p>we have BIBO stability of the control system<p>
+		</span>								
+		
+		</section>
+	</section>
+	
+	 <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L19</h1>
+		<br>
+		<ul>			
+			<li>BIBO stability</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Stabilising via feedback</li>			
+			</span>
+		</ul>
+	</section>		
+			
+	<section>
+		<section  align="left">									
+		
+		<h2>Stabilising via feedback</h2> 
+		<p>Whena  system is not BIBO stable we can sometimes stabilise it by applying feedback of the form</p>
+		\[
+		 \mathbf{u} = K\mathbf{x}+\mathbf{v}
+		\]
+		<p>Then we obtain</p>
+		<font size="5">
+		\[
+		\begin{align*}
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t}&=A\mathbf{x}+B\mathbf{u}\\
+		&=A\mathbf{x}+B\left(K\mathbf{x}+\mathbf{v}\right)\\
+		&=\left(A+BK\right)\mathbf{x}+B\mathbf{v}
+		\end{align*}
+		\]
+		</font>
+		
+		<span class="fragment fade-in">
+		<p>Here we have constructed a <em>closed loop system</em> since the control $\mathbf{u}$ depends
+		upon the state $\mathbf{x}$, as opposed to an <em>open loop system</em></p>
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>The stability of the closed loop system is determined by the free system</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = \left(A+BK\right)\mathbf{x}
+		}}}
+		\]
+		</span>
+				
+		</section>
+	</section>
+
+
+
+	<section  align="left">									
+		
+		<h3>Example 19.3</h3> 
+		<font size="5">
+		<p>Determine whether the system </p>
+		\[
+		 \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} A\mathbf{x}+Bu
+		\]
+		<p>with</p>
+		\[
+		A=\begin{bmatrix}1&0&4\\-1&-1&-2\\1&2&-1\end{bmatrix} \qquad B=\begin{bmatrix}1\\0\\0\end{bmatrix}
+		\]
+		<p>is BIBO stable</p>
+						
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		<p>It is sufficient to determine the eigenvalues of $A$</p>
+		\[
+		\begin{align*}
+		\chi_A(t) = \begin{vmatrix}1-t&0&4\\-1&-1-t&-2\\1&2&-1-t\end{vmatrix} &= (1-t)\begin{vmatrix}-1-t&-2\\2&-1-t\end{vmatrix}+4\begin{vmatrix}-1&-1-t\\1&2\end{vmatrix}\\
+		&=(1-t)((1+t)^2+4)+4(-2+(1+t)) = \color{red}{\boxed{\color{white}{(1-t)(1+t)^2}}}
+		\end{align*}\implies \color{#00FF00}{\boxed{\color{white}{\text{unstable}}}}
+		\]
+		
+		</span>
+		</font>
+	</section>
+	
+	<section>	
+		<section  align="left">									
+		<h3>Example 19.4</h3>
+		<p>Determine a range of $\alpha$ values for which the system in Example 19.3 can be stabilised using feedback of the form</p>
+		\[
+		 u=K\mathbf{x}+v
+		\]
+		<p>where</p>
+		\[
+		K = \begin{bmatrix}\alpha&0&-4\end{bmatrix}
+		\]
+		
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		\[
+		\begin{align*}
+		 A+BK &= \begin{bmatrix}1&0&4\\-1&-1&-2\\1&2&-1\end{bmatrix} +\begin{bmatrix}1\\0\\0\end{bmatrix}\begin{bmatrix}\alpha&0&-4\end{bmatrix}\\
+		 &=\begin{bmatrix}1&0&4\\-1&-1&-2\\1&2&-1\end{bmatrix} +\begin{bmatrix}\alpha&0&-4\\0&0&0\\0&0&0\end{bmatrix} = 
+		 \color{red}{\boxed{\color{white}{
+		 \begin{bmatrix}1+\alpha&0&0\\-1&-1&-2\\1&2&-1\end{bmatrix}
+		 }}}
+		 \end{align*}
+		\]
+		</span>				
+		</section>
+		
+		<section  align="left">									
+		<p>Thus the free system is</p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = \begin{bmatrix}1+\alpha&0&0\\-1&-1&-2\\1&2&-1\end{bmatrix}\mathbf{x}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>The characteristic polynomial is given by</p>
+		\[
+		 \begin{align*}
+		 |A+BK-tI_3| &=\begin{vmatrix}1+\alpha-t&0&0\\-1&-1-t&-2\\1&27-1-t\end{vmatrix}\\
+		 &=(1+\alpha-t)\begin{vmatrix}-1-t&-2\\2&-1-t\end{vmatrix} = (1+\alpha-t)(t^2+2t+5)\\\\
+		 &\implies \lambda_1=1+\alpha \quad\text{and}\quad \lambda_{2,3}=-1\pm2i
+		 \end{align*}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>Thus, if $\displaystyle \lambda_1=1+\alpha<0\quad$ <em>i.e.</em> 
+		\[
+		\color{red}{\boxed{\color{white}{
+		\alpha<-1
+		}}}
+		\]		
+		<p>the system is stabilised and so is BIBO stable for this range</p>
+		</span>
+		</section>
+	</section>
+
+	<section>
+		<h2 style="color:#00FF00">Lecture 19 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>BIBO stability</li>													
+						<li>stabilising via feedback</li>
+					</ul><br>
+					<li>After this lecture you should </li>
+					<ul>
+						<li>be able to determine whether a system is bounded-input, bounded-output (BIBO) stable</li>												
+						<li>under stand the difference between open and closed loop systems</li>												
+						<li>be able to stabilise a system by applying appropriate feedback</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

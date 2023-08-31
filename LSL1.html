@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 1</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  
+	<!-- ################################################### -->
+    <!-- ################################################### -->							
+	<section align="left">
+		<h1>Linear Systems L1</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Introductory slides</li>
+			</span>
+			<br>
+			<li>Real-world examples of linear systems</li>
+			<br>
+			<ul>
+				<li>Spring-mass system</li><br>
+				<li>Population dynamics</li>
+			</ul>
+		</ul>
+	</section>
+	
+	<section>
+	
+	<h3><b>Course Information</b></h3>
+	<font size="6">
+	<p style="border-width:2px; border-style:solid; border-color:white; padding: .5em;">
+	Lecturer: Dr Jonathan Crofts<br>
+	New Hall Block: Room 233<br>
+	Email: jonathan.crofts@ntu.ac.uk
+	</p>
+	
+	<h3><b>Timetable</b></h3>
+	<p style="border-width:2px; border-style:solid; border-color:white; padding: .5em;">
+	Lecturer: 11-12, Wednesday ERD 171<br>	
+	Seminars: Group M3, P 13-14, Tuesday CTLB P08<br>				
+	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Group M1, M2 - 10-11, Thursday Eng Build 104
+	</p>
+				
+	<h3><b>Office hours</b></h3>
+	<p style="border-width:2px; border-style:solid; border-color:white; padding: .5em;">
+	9:00-10:00 Monday
+	</p>
+	</font>
+	</section>
+			
+	<section align="left">
+	<h3><b>Module content</b></h3>
+	<br>
+	<ul>
+		<span> <li><b>Linear systems of differential and difference equations</b></li></span>
+		<ul>
+			<li>Solving using similarty transformations</li>
+			<li>Jordan canonical forms</li>
+			<li>Laplace and z-transforms</li>
+		</ul><br>
+		<span  class = "fragment fade-in"><li><b>Controllability, observability and stability</b></li>	
+		<ul>
+			<li>Classical controllability theory</li>
+			<li>Stability of linear systems</li>
+		</ul><br></span>
+		<span  class = "fragment fade-in"><li><b>System and transfer functions and matrices</b></li>
+		<ul>
+			<li>State-space representation  of physical systems</li>						
+		</ul></span>
+	</ul>
+	</font>
+	</section>
+			
+	<section align="left">
+	<h3 ><b>Reading list</b></h3>
+				
+	
+	<ul>
+		<li>You will probably not need to buy a book for this module as <a href="https://jjcrofts77.github.io/Linear-Systems-MATH30451/intro.html" target="_blank" style="color: red">notes</a> are provided, as well 
+		as supplementary material during seminars and via the <a href="https://now.ntu.ac.uk/" target="_blank" style="color: red">University's virtual learning service</a></li>
+		<br>
+		<li>However, the following books cover most of the material to be presented as well as providing a good basis for additional reading and learning</li><br>			
+		<ul>
+			<li>Lay, David C (2003), <a href="https://www.amazon.co.uk/Linear-Algebra-Its-Applications-David/dp/032198238X" target="_blank" style="color: yellow">Linear algebra and its applications 
+			for the engineering, physical and mathematical sciences</a></li><br>
+			<li>Kolman <em>et al.</em> (1997), <a href="https://www.amazon.co.uk/Introductory-Linear-Algebra-Applications-Bernard/dp/0132663139" target="_blank" style="color: yellow">Introductory linear algebra with applications</a></li><br>						
+			<li>Goode, Stephen W (2000), <a href="https://www.amazon.co.uk/Differential-Equations-Linear-Algebra-Books/dp/0321985818" target="_blank" style="color: yellow">Differential equations and linear algebra</a></li>
+		</ul>
+	</ul>
+
+	</section>
+			
+	<section align="left">	
+	<h3><b>Assessment</b></h3>
+	
+	<ul>		
+		<li>The module consists of two elements</li>
+		<ul>
+			<li>Coursework (E1): Element 1 is a coursework worth 40% and covers the first half of the module (handed out in February) </li>
+			<li>Summer Exam (E2): Element 2 is worth 60% and covers all material covered throughout the year</li>
+		</ul>
+		<br>
+		<li>See <a href="https://now.ntu.ac.uk/" target="_blank" style="color: red"><b>NOW</b></a> for assessment details</li>				
+		<br>	
+		<span class="fragment fade-in">
+		<li>Seminars are absolutely vital for high attainment in this course</li>
+		</span>
+		<br>
+		<span class="fragment fade-in">
+		<li>GOOD LUCK!!!</li>					
+		</span>
+	</ul>
+	
+	</section>
+			
+	<section align="left">
+		<h1>Linear Systems L1</h1>
+		<br>
+		<ul>
+			
+			<li>Introductory slides</li>
+			
+			<span style="color: #00FF00"> 
+			<br>
+			<li>Real-world examples of linear systems</li></span>
+			<br>
+			<ul>
+				<span style="color: #00FF00"> <li>Spring-mass system</li></span><br>
+				<li>Population dynamics</li>
+			</ul>
+		</ul>
+	</section>
+					
+	<section>			
+		
+		<section  align="left">								
+		<h2>Spring-mass system</h2>	<br>				
+		<h3>Example 1.1</h3> 
+			<p>Suppose we have a spring-mass system such as the one shown in the figure above</p>	
+			
+						
+			<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:0px;left:600px"				
+				height="200"		
+				src="figures/SpringMass.png">
+			
+			
+			<p>We would like to write down equations describing the behaviour of the system with time; in general these equations will be <em>non-linear</em>, but we can write down a <em>linear</em>
+			system if we make some modelling assumptions
+			</p>			
+			
+			<span class="fragment fade-in">
+			<p><b>Model assumptions:</b></p>
+			<ul>
+				<li>Ignore gravity</li>
+				<li>Assume the system is frictionless</li>
+			</ul>
+									
+			<p style="color:red"><b>i.e. the only forces acting on the masses are due to the springs</b></p>
+			</span>
+		</section>	
+				
+		<section  align="left">						
+		<p><b>Note that</b></p>
+		<br>
+		<ul>
+			<li>$x_1=x_2=0$ gives the positions of the masses when the spring is <em>unextended</em></li>
+			<li>$m_i$ the masses  and $k_i$ the spring constants</li>
+		</ul>
+		<br>
+		<img style="margin:0px;padding:0px;border: 3px solid black;position:absolute;top:300px;left:100px"				
+				height="600"		
+				src="figures/HookesLaw.png">
+		
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:200px;left:650px"				
+				height="200"		
+				src="figures/SpringMass.png">
+		</section>	
+				
+		<section  align="left">								
+			<p>Therefore the force acting on the first mass is</p>
+			
+			\[
+			 F_1 = -k_1x_1 + k_3(x_2-x_1)
+			\]					
+		<span class="fragment fade-in">	
+			<p>And the force acting on the second mass is</p>
+			
+			\[
+			\begin{align*}
+			 F_2 &= -k_3(x_2-x_1)+k_2(-x_2)\\
+			 &= -k_2x_2 - k_3(x_2-x_1) 
+			\end{align*}			 
+			\]
+		</span>
+		<span class="fragment fade-in">	
+			<p>Now, using Newton's second law (<em>i.e.</em> $F=ma$) we have</p>
+			
+			\[
+			\color{red}{\boxed{\color{white}{
+			\begin{align*}
+			 m_1\ddot{x}_1 &= -k_1x_1 + k_3(x_2-x_1)\\
+			 m_2\ddot{x}_2 &= -k_2x_2 - k_3(x_2-x_1) 
+			\end{align*}
+			}}}			
+			\]
+			
+			<p style="color: #00FF00"><b>This is a pair of second order ODEs describing the motion of the Spring-mass system</b></p>
+		</span>	
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:0px;left:700px"				
+				height="200"		
+				src="figures/SpringMass.png">
+		</section>	
+											
+	</section>
+			
+	<section>
+		<section  align="left">									
+			<p>Note that we can rewrite this system of two second order ODEs as a larger system of first order equations</p>
+			
+			<span class="fragment fade-in">
+			<p>To see this, write</p>
+			\[
+			 \frac{\mathrm{d}x_1}{\mathrm{d}t} = v_1 \qquad \text{and} \qquad \frac{\mathrm{d}x_2}{\mathrm{d}t} = v_2
+			\]
+			<p>so that the equations on the previous slide become</p>
+			
+			\[			
+			\begin{align*}
+			 m_1\dot{v}_1 &= -k_1x_1 + k_3(x_2-x_1)\\
+			 m_2\dot{v}_2 &= -k_2x_2 - k_3(x_2-x_1) 
+			\end{align*}			
+			\]
+			</span>
+			<span class="fragment fade-in">
+			<p>Thus we have four equations which we can write in matrix form as</p>
+			
+			\[
+			\color{red}{\boxed{\color{white}{
+			\frac{d}{dt}\left[\begin{array}{c}x_1\\x_2\\v_1\\v_2\end{array}\right] = 
+			\left[\begin{array}{cccc}0&0&1&0\\0&0&0&1\\-\frac{k_1+k_3}{m_1}&\frac{k_3}{m_1}
+			&0&0\\\frac{k_3}{m_2}&-\frac{k_2+k_3}{m_2}&0&0\end{array}\right]
+			\begin{bmatrix} x_1\\x_2\\v_1\\v_2\end{bmatrix} \qquad\text{or} \qquad\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathrm{x}
+			}}}
+			\]
+			
+			<p>With $A$ the matrix of coefficients and the vector $\mathbf{x} = \begin{bmatrix}x_1&x_2&v_1&v_2\end{bmatrix}^T$</p>
+			</span>
+		</section>	
+				
+		<section  align="left">						
+		<p>We can use the above technique to write a single $n$th order ODEof the form</p>
+		\[
+		\frac{d^nx}{dt^n}+a_1\frac{d^{n-1}x}{dt^{n-1}}+a_2\frac{d^{n-2}x}{dt^{n-2}}
+		+\cdots +a_{n-1}\frac{dx}{dt}+a_nx = 0
+		\]
+		<p>by a system of first order differential equations by writing</p>
+		\[
+		x_1=x, ~x_2=\frac{dx}{dt}, ~x_3=\frac{d^2x}{dt^2},\ldots, ~x_{n}=\frac{d^{n-1}x}{dt^{n-1}}
+		\]
+		<p>so that</p>
+		\[
+		\frac{dx_{n}}{dt}+a_1x_{n}+a_2x_{n-1}+\cdots+a_{n-1}x_2+a_nx_1 = 0
+		\]
+		<p>Then ...</p>
+		</section>	
+				
+		<section  align="left">		
+		
+		<p>Then</p>
+		\[
+		 \frac{d}{dt}\left[\begin{array}{c}x_1\\x_2\\x_3\\\vdots\\x_{n-1}\\x_{n}\end{array}\right]
+		 =\left[\begin{array}{cccccc}0&1&0&\ldots&0&0\\0&0&1&\ldots&0&0\\0&0&0&\ldots&0&0\\
+		 \vdots&\vdots&\vdots&&\vdots&\vdots\\0&0&0&\ldots&0&1\\-a_n&-a_{n-1}&-a_{n-2}
+		 &\ldots&-a_2&-a_1\end{array}\right]
+		 \left[\begin{array}{c}x_1\\x_2\\x_3\\\vdots\\x_{n-1}\\x_{n}\end{array}\right]
+		\]
+		
+		<br>
+		<span class="fragment fade-in">
+		<p>Again this can be written in matrix vector form</p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}
+		\]
+		<br>
+		<p style="color:red"><b>In this course we shall consider solutions of such first order systems</b></p>
+		</span>
+		</section>	
+				  
+	</section>
+		
+	<section  align="left">						
+	<h3>Example 1.2</h3> 
+		<p>Rewrite the third order ODE</p>
+		\[
+		\frac{\mathrm{d}^3x}{\mathrm{d}t^3}+2\frac{\mathrm{d}^2x}{\mathrm{d}t^2}+\frac{\mathrm{d}x}{\mathrm{d}t}+x=0
+		\]
+		<p>as a first order system of ODEs</p>
+				
+			
+		<h3>Solution</h3>
+		<span  class="fragment fade-in">
+		<p>Let</p>
+		\[
+		 x = v_1, \quad \frac{\mathrm{d}x}{\mathrm{d}t} = v_2 \quad\text{and}\quad \frac{\mathrm{d}^2x}{\mathrm{d}t^2} = v_3
+		\]
+		<p>so that</p>
+		\[
+		\frac{\mathrm{d}v_3}{\mathrm{d}t} = -v_1-v_2-2v_3 \implies 
+		\color{red}{\boxed{\color{white}{
+		\frac{d}{dt}\left[\begin{array}{c}v_1\\v_2\\v_3\end{array}\right] = 
+		\left[\begin{array}{rrr}0&1&0\\0&0&1\\
+		-1&-1&-2\end{array}\right]
+		\begin{bmatrix} v_1\\v_2\\v_3\end{bmatrix}}}}
+		\]
+		</span>
+	</section>	
+		
+						
+	<!-- ################################################### -->
+    <!-- ################################################### -->	
+	<section align="left">
+		<h1>Linear Systems L1</h1>
+		<br>
+		<ul>
+			
+			<li>Introductory slides</li>
+			
+			<span style="color: #00FF00"> 
+			<br>
+			<li>Real-world examples of linear systems</li></span>
+			<br>
+			<ul>
+				<li>Spring-mass system</li>
+				<span style="color: #00FF00"><li>Population dynamics</li></span><br>
+				
+			</ul>
+		</ul>
+	</section>
+	
+	<section>		
+		<section  align="left">		
+		<h3>Example 1.3</h3> 
+		<p>Suppose that an animal population can be classified in one of three ways</p>
+		\[
+		\begin{align*}
+		 S_1:&\quad \text{young} (1)\\
+		 S_2:&\quad \text{mature} (1-2)\\
+		 S_3:&\quad \text{old} (2+)\\
+		\end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Then if $y_k$, $m_k$ and $d_k$ are the number in each category at the start of the $k$th year, it follows</p>
+		
+		\[
+		 \begin{align*}
+		  y_{k+1}&=b_1m_k + b_2d_k\\
+		  m_{k+1}&=s_1y_k\\
+		  d_{k+1}&=s_2m_k+s_3d_k
+		 \end{align*}
+		\]
+		
+		<p>Here</p>
+		\[
+		 b_i - \text{ birth rates} \qquad s_i - \text{ survival rates}
+		\]
+		
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:350px;left:675px"				
+		height="200" src="figures/Ex1p3.png">
+		</span>
+		</section>	
+		
+		<section  align="left">						
+		<p>We can draw a <span style="color: red"><b>state diagram</b></span> to better understand the process		
+		<ul>
+			<li>The state diagram describes how each state<br> <span style="color: yellow"><b>transitions</b></span> to the next</li>
+			<br>
+			<li>For example, looking at the $y$-equations
+			\[
+			 y_{k+1} = b_1m_k + b_2d_k
+			\]
+			<br>
+			</li>
+			<li>The young category increases depending upon the<br> rate of births from the mature and old catagories</li>
+			<br>
+			<li>This is signified by incoming arrows in the state diagram</li>
+		</ul>
+		<img style="margin:0px;padding:2px;border: 3px solid #00FF00; float:right" height="300" src="figures/PopDyn.png">		
+		</section>
+		
+		<section  align="left">						
+		<p>Just as with the ODE system, we can rewrite the above <em>difference equations</em> describing the animal population using vector-matrix notation as follows:</p>
+		\[
+		 \mathbf{p}_{k+1} = L\mathbf{p}_k
+		\]	
+		<p>Here, </p>
+		\[
+		 \mathbf{p}_k = \begin{bmatrix}y_k\\m_k\\d_k\end{bmatrix}\quad \text{and}\quad L = \begin{bmatrix}0&b_1&b_2\\s_1&0&0\\0&s_2&0\end{bmatrix}
+		\]	
+		
+		<span class="fragment fade-in">
+		<h3>Note</h3>
+		<ul>
+			<li>The model above is termed a <span style="color: red">Leslie model</span> and the matrix $L$ a <span style="color: yellow">Leslie matrix</span></li><br></span>
+			<li class="fragment fade-in">We could also consider the introduction/removal of animals at times by adding a <em>forcing term</em> thus giving an <span style="color: #00FF00">inhomogeneous</span> system of difference equations
+			 \[
+			  \mathbf{p}_{k+1} = L\mathbf{p}_k+\mathbf{f}_k			
+			 \]
+			</li>
+		</ul>
+		</section>
+	</section>
+			
+		
+	<section>
+		<h2 style="color:#00FF00">Lecture 1 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+			<ul>
+				<li>The module content and assessment criteria</li>
+				<li>Examples of real-world systems that can be modelled by linear systems</li>												
+			</ul><br>
+			<li>After this lecture you should be </li>
+			<ul>
+				<li>able to provide examples of real-world linear systems of ODEs and difference equations</li>						
+				<li>able to rewrite an $n$th order ODE as a first order system</li>
+			</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/zoom/zoom.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 2</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L2</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Similarity transformations</li>
+			<br>
+			<ul>
+				<li>Diagonalisable matrices</li>
+			</ul>
+			</span>
+			<br>
+			<li>Examples</li>			
+			<br>
+			<li>Introduction to Jordan normal forms (JNF)</li>			
+		</ul>
+	</section>
+    <!-- ################################################### -->
+    <!-- ################################################### -->
+    <section>
+		<section  align="left">					
+			<h2>Similarity transformations</h2>					
+			<p>Recall that if $A$ is a real, symmetric matrix then there exists an invertible matrix $P$ such that</p>
+			
+			\[
+			A = PDP^{-1}
+			\]
+			<p>$P$ is called a <span style="color:red"><b>similarity transformation</b></p>
+			
+			<p>That is</p>
+			<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:350px;left:150px"				
+			height="300" src="figures/Eigs.png">
+			
+		</section>						
+		
+		<section align="left">
+		 <p>Importantly we can use this <span style="color: red"><b>decompostion</b></span> to solve systems of linear equations such as that discussed in last weeks lecture</p>
+		 
+		 <p>For example, we can transform a linear system of ODEs as follows:</p>		 		 
+		 
+		 \[
+		 \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x} \longrightarrow \frac{\mathrm{d}\mathbf{y}}{\mathrm{d}t} = D\mathbf{y}
+		 \]
+		 <p>Or</p>
+		 <img style="margin:0px;padding:0px;border: 3px solid yellow;position:absolute;top:350px;left:50px"				
+			height="250" src="figures/CoupledODEs.png">
+		  
+		</section>
+		
+		<section align="left">
+		<p>To transform from the coupled to the uncoupled system we start by introducing a change of variable:</p>
+		\[
+	     \color{red}{\boxed{\color{white}{
+		 \mathbf{y} = P^{-1}\mathbf{x}
+		 }}}
+		\]
+		<span class="fragment fade-in">
+		<p>To see why, use the matrix decomposition to rewrite $\displaystyle \mathrm{d}\mathbf{x}/\mathrm{d}t = A\mathbf{x}$ as </p>
+		\[
+		 \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = PDP^{-1}\mathbf{x}\quad \text{or}\quad \frac{\mathrm{d}\left(P^{-1}\mathbf{x}\right)}{\mathrm{d}t} = DP^{-1}\mathbf{x}
+		\]
+		<p>which reduces to</p>
+		\[
+		 \frac{\mathrm{d}\mathbf{y}}{\mathrm{d}t} = D\mathbf{y}
+		\]
+		<p>once we make the change of variables</p>
+		</span>
+		
+		<p style="color:red" class="fragment fade-in"><b>As we shall see, for diagonal matrices $D$ the above system is trivial to solve</b></p>
+		</section>
+		
+		<section align="left">
+		<p>To see how this transformation simplifies matters consider the first equations for each of the two (coupled and uncoupled) systems</p>
+		<br>
+		<p>The first $x$-equation is given by</p>
+		\[
+		\frac{\mathrm{d}x_1}{\mathrm{d}t} = a_{11}x_1+a_{12}x_2+\cdots+a_{1n}x_n
+		\]
+		<p>Whereas the first $y$-equation is given by</p>
+		\[
+		\frac{\mathrm{d}y_1}{\mathrm{d}t}=\lambda_1y_1
+		\]
+		<p>which is a separable ODE and so easy to solve</p>
+
+		<p style="color:#00FF00" class="fragment fade-in"><b>Since the right-hand side of the $y_1$-equation only involves $y_1$ terms it is said to be 
+		<em>uncoupled</em> (<em>i.e.</em> it doesn't depend on the other unkowns $y_2, y_3,\ldots y_n$) and so can be solved using standard techniques</b></p> 
+		</section>
+	</section>
+	 <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L2</h1>
+		<br>
+		<ul>			
+			<li>Similarity transformations</li>
+			<br>
+			<ul>
+				<li>Diagonalisable matrices</li>
+			</ul>			
+			<br>
+			<span style="color: #00FF00"> <li>Examples</li>			</span>
+			<br>
+			<li>Introduction to Jordan normal forms (JNF)</li>			
+		</ul>
+	</section>
+    <!-- ################################################### -->
+    <!-- ################################################### -->
+	<section>
+		<section align=left>
+		<h3>Example 2.1</h3>
+		<p>Solve the differential equation</p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x} = \begin{bmatrix}-3&1\\1&-3\end{bmatrix}\mathbf{x}
+		\]
+	
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		<p>The eigenvalues are obtained by solving</p>
+		\[
+		 |A-tI_2| = \begin{vmatrix}-3-t&1\\1&-3-t\end{vmatrix} = t^2+6t+8=(t+2)(t+4)
+		\]
+		<p>So the eigenvalues are $\lambda_{1,2} = -2, -4$</p>
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>To find the eigenvectors we solve the linear system $\displaystyle \left(A-\lambda I_2\right)\mathbf{u}=\mathbf{0}$</p>
+		
+		<p>$\lambda=\lambda_1=-2$:</p>
+		\[
+		\begin{bmatrix}-1&1\\1&-1\end{bmatrix}\begin{bmatrix}u^{(1)}\\u^{(2)}\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix} \implies \begin{bmatrix}1&-1\\0&0\end{bmatrix}
+		\begin{bmatrix}u^{(1)}\\u^{(2)}\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}\implies  \color{red}{\boxed{\color{white}{\mathbf{u} = \alpha\begin{bmatrix}1\\1\end{bmatrix}}}}
+		\]
+		</span>
+		</section>
+		
+		<section align=left>
+		<p>$\lambda=\lambda_2=-4$:</p>
+		\[
+		\begin{bmatrix}1&1\\1&1\end{bmatrix}\begin{bmatrix}u^{(1)}\\u^{(2)}\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix} \implies \begin{bmatrix}1&1\\0&0\end{bmatrix}
+		\begin{bmatrix}u^{(1)}\\u^{(2)}\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}\implies  \color{red}{\boxed{\color{white}{\mathbf{u} = \alpha\begin{bmatrix}-1\\1\end{bmatrix}}}}
+		\]
+		<span class="fragment fade-in">
+		<p>Thus</p>
+		\[
+		P = \begin{bmatrix}1&-1\\1&1\end{bmatrix} \text{ and } D = \begin{bmatrix}-2&0\\0&-4\end{bmatrix}\implies \frac{\mathrm{d}\mathbf{y}}{\mathrm{d}t} = \begin{bmatrix}-2&0\\0&-4\end{bmatrix}\mathbf{y}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>We can rewrite this system as a pair of ODEs</p>
+		\[
+		\begin{align*}
+		\frac{\mathrm{d}y^{(1)}}{\mathrm{d}t} &= -2y^{(1)}\\
+		\frac{\mathrm{d}y^{(2)}}{\mathrm{d}t} &= -4y^{(2)}
+		\end{align*}
+		\]
+		<p>and since these ODEs are separable they are readily solved to give</p>
+		\[
+		\begin{align*}
+		y^{(1)}(t) &= Ae^{-2t}\\
+		y^{(2)}(t) &= Be^{-4t}
+		\end{align*} \implies 
+		\color{#00FF00}{\boxed{\color{white}{
+		\mathbf{x}(t) = P\mathbf{y}(t) = \begin{bmatrix}Ae^{-2t}-Be^{-4t}\\Ae^{-2t}+Be^{-4t}\end{bmatrix}}}}
+		\]
+		</span>
+		</section>
+
+	</section>
+
+		 <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L2</h1>
+		<br>
+		<ul>			
+			<li>Similarity transformations</li>
+			<br>
+			<ul>
+				<li>Diagonalisable matrices</li>
+			</ul>			
+			<br>
+			<li>Examples</li>			
+			<br>
+			<span style="color: #00FF00"> <li>Introduction to Jordan normal forms (JNF)</li></span>			
+		</ul>
+	</section>
+    <!-- ################################################### -->
+    <!-- ################################################### -->
+	<section>
+		<section  align="left">					
+		<p style="color:red"><b>Question: What happens when $A$ is <em>not</em> symmetric?</b></p>
+	
+		<span class="fragment fade-in">  
+		  <p>Consider for example </p>
+		  \[
+		   A = \begin{bmatrix}1&-1\\1&3\end{bmatrix}
+		  \]
+		  
+		  <p>To diagonalise $A$ we need to compte the matrix of eigenvalues </p>
+		  \[
+		  D = \begin{bmatrix}\lambda_1&0\\0&\lambda_2\end{bmatrix}
+		  \]
+		  <p>and the corresponding matrix of eigenvectors</p>
+		  \[
+		  P = \begin{bmatrix}\mathbf{u}_1 &\mathbf{u}_2\end{bmatrix}
+		  \]
+		</span>  
+		
+		<p class="fragment fade-in"> Let us proceed to work out the eigenvalues and eigenvectors of this matrix...</p>
+		</section>
+								
+		<section  align="left">						
+		<p>The <em>characteristic polynomial</em> of $\displaystyle A = \begin{bmatrix}1&-1\\1&3\end{bmatrix}$ is given by</p>		
+		
+		\[
+		\begin{align*}
+		 \chi_A(t) &= |A-tI_2|\\
+	     &= \begin{vmatrix}1-t&-1\\1&3-t\end{vmatrix}\\
+		 &=(1-t)(3-t)+1\\
+		 &= t^2-4t+4 = \color{red}{\boxed{\color{white}{(t-2)^2}}}
+	    \end{align*}			 
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Therefore</p>
+		\[
+		\lambda_1=\lambda_2 = 2
+		\]		
+		<p>that is,	2 is the only eigenvalue of $A$; we say that the eigenvalue has <span style="color:red"><b>algebraic multiplicity</b></span> of 2</p>
+		</span>
+									
+		</section>	
+				
+		<section  align="left">						
+		<p>Let us compute the corresponding <em>eigenspace</em> to $\lambda=2$</p>
+		
+		<p>To do so, we solve the following eigenvalue-eigenvector problem:</p>
+		
+		\[
+		 \left(A-\lambda I_2\right)\mathbf{u} = \left(A-2 I_2\right)\mathbf{u} = 0
+		\]
+		
+		<span class="fragment fade-in">
+		<p>or</p>		
+		\[
+		\begin{bmatrix}-1&-1\\1&1\end{bmatrix}\begin{bmatrix}u_1\\u_2\end{bmatrix} = 0 \implies \begin{bmatrix}1&1\\0&0\end{bmatrix}\begin{bmatrix}u_1\\u_2\end{bmatrix}=0
+		\]
+		</span>
+		<span class="fragment fade-in">
+		<p>Solving this equation we obtain the eigenspace</p>
+		\[
+		\Biggl \{ \alpha\begin{bmatrix}-1\\1\end{bmatrix}: \alpha\in\mathbb{R} \Biggr \}
+		\]
+		</span>
+		
+		<p class="fragment fade-in"><b>What does the eigenspace look like geometrically?</b></p>
+		
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:400px;left:750px"				
+			height="200" src="figures/EigSpaceGeo.png" class="fragment fade-in">
+			
+		<br>		
+		<p style="color:red" class="fragment fade-in"><b>Notably we have only found one eigenvector and so we can not construct a <em>similarity transformation</em> $P$ with which to diagonalise our matrix</b></p>	
+		</section>	
+		
+		<section  align="left">						
+		<p>Let us come back to that last point</p>
+		
+		<span class="fragment fade-in">
+		<p>Since the eigenspace is one-dimensional (it is a linear space spanned by a single basis vector ($\displaystyle \begin{bmatrix} -1&1\end{bmatrix}^T$ in our example))</p>
+		
+		\[
+		\Biggl \{ r\begin{bmatrix}-1\\1\end{bmatrix}: r\in\mathbb{R} \Biggr \}
+		\]
+		<p><em>i.e.</em> it is a line</p>
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:175px;left:750px"				
+			height="150" src="figures/EigSpaceGeo.png">
+		</span>
+		
+		<p class="fragment fade-in">We have that the <em>geometric multiplicity</em> (GM) of the eigenvalue $\lambda=-2$ equals one</p>
+		
+		<span class="fragment fade-in">
+		<p>It can be proven that in order for a matrix to be diagonalisable the condition $AM=GM$ must be staisfied for <em>all</em> eigenvalues</p>
+		
+		<p>This is equivalent to saying that we have $n$ linearly independent eigenvectors</p>
+		</span>
+		
+		<p class="fragment fade-in">In our example we have $AM=2>GM=1$ so A is <em>not</em> diagonalisable</p>
+		
+		<p class="fragment fade-in" style="color:red"><b>Note that the AM is always greater than or equal to the GM</b></p>
+		</section>	
+		
+	</section>
+	
+	<section>
+				
+		<section  align="left">						
+		<h2>The Jordan Normal Form (JNF)</h2>
+		
+		<p>We can however find a matrix $P$ such that</p>
+		\[
+		A = PJP^{-1} \quad\text{with}\quad J = \begin{bmatrix}2&1\\0&2\end{bmatrix}
+		\]
+		<p>The matrix $J$ is the <em>Jordan normal form</em> of the matrix $A$</p>
+		
+		<span class="fragment fade-in">
+		<p>For example, the matrix</p>
+		\[
+		P = \begin{bmatrix}-1&0\\1&1\end{bmatrix}
+		\]
+		is such that 
+		\[
+		 P^{-1}AP = \begin{bmatrix}2&1\\0&2\end{bmatrix}
+		\]
+		</span>
+		
+		<p class="fragment fade-in" style="color:red"><b>Whilst we can't always diagonalise a matrix we can always transform it to its Jordan normal form</b></p>
+		</section>	
+				
+		<section  align="left">						
+			<p>More generally, it can be shown that for any real matrix $\displaystyle A\in\mathbb{R}^{n\times n}$ one can always decompose it as</p>
+			\[
+			A = PJP^{-1}
+			\]
+			<p>where</p>
+			\[
+			 J = \begin{bmatrix}J_{n_1}(\lambda_1)&&\\&\ddots&\\&&J_{n_k}(\lambda_k)\end{bmatrix} \qquad n_1+n_2+\cdots+n_k=n
+			\]
+			<p>is a <em>block diagonal matrix</em> with blocks of the form</p>
+			\[
+			 J_{n_i}(\lambda_i) = \begin{bmatrix}\lambda_i&1&\\&\ddots&1\\&&\lambda_i\end{bmatrix}\in\mathbb{R}^{n_i\times n_i}
+			\]
+			
+			<p class="fragment fade-in">In the example on the previous slide the matrix $J$ consisted of a single Jordan block of dimension $2$ (<em>i.e.</em> $n=n_1=2$)</p>
+		</section>	
+				
+	</section>	
+	
+	<section  align="left">	
+	<h3>Example 2.2</h3> 
+	<p> Determine the Jordan blocks of the matrices</p>
+	\[
+	\begin{bmatrix}2&0&0\\0&2&0\\0&0&2\end{bmatrix}, \quad \begin{bmatrix}2&0&0\\0&2&1\\0&0&2\end{bmatrix} \quad \text{and} \begin{bmatrix}2&1&0\\0&2&1\\0&0&2\end{bmatrix}
+	\]
+	
+	<h3>Solution</h3>
+	<span class="fragment fade-in">
+	<p>The first matrix consists of three one by one blocks:</p>
+	\[
+	 J = \begin{bmatrix}2&0&0\\0&2&0\\0&0&2\end{bmatrix} = \begin{bmatrix}J_1(2)&&\\&J_1(2)&\\&&J_1(2)\end{bmatrix}
+	\]
+	</span>
+	<span class="fragment fade-in">
+	<p> The second consists of two blocks and the third a single block:</p>
+	\[
+	 J = \begin{bmatrix}2&0&0\\0&2&1\\0&0&2\end{bmatrix} = \begin{bmatrix}J_1(2)&\\&J_2(2)\end{bmatrix}\qquad J = \begin{bmatrix}2&1&0\\0&2&1\\0&0&2\end{bmatrix} = J_3(2)
+	\]
+	</span>
+
+	
+			
+	</section>
+	
+	<!-- ################################################### -->
+    <!-- ################################################### -->
+	<section>
+		<h2 style="color:#00FF00">Lecture 2 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+			<ul>
+				<li>similarity transformations for diagonalisable matrices</li>
+				<li>introduction to Jordan Normal Forms (JNFs)</li>												
+			</ul><br>
+			<li>After this lecture you should </li>
+			<ul>
+				<li>be able to use the algebraic and geometric multiplicities of a matrix to determine whether or not it is diagonalisable</li>						
+				<li>be able to diagonalise a matrix (if possible) given knowledge of its eigenvalues and eigenvectors</li>
+				<li>be aware that in the case when a matrix is not diagonalisable one can still simplify the matrix using the so-called JNF</li>
+			</ul><br>					
+		</ul>			
+	</section>
+	<!-- ################################################### -->
+ <!-- ################################################### -->
+    </div>
+ </div>
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <script src="reveal.js/lib/js/head.min.js"></script>
+ <script src="reveal.js/js/reveal.js"></script>
+ <script>
+ // Full list of configuration options available here:
+ // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+          // width: 960,
+          // height:700,
+          controls: true,
+          progress: true,
+          history: true,
+          center: true,
+          theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+          // default/cube/page/concave/zoom/linear/fade/none
+          transition: Reveal.getQueryHash().transition || 'slide',
+
+          //// Optional libraries used to extend on reveal.js
+          dependencies: [
+            // { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            // { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; }},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+          ]
+        });
+        Reveal.configure({
+          keyboard: {
+            32: null // don't do anything when SPACE is pressed (i.e. disable a reveal.js default binding) document.body.style.cursor = 'none';
+          }
+        });
+        </script>
+		<!-- ################################################### -->
+        <!-- ################################################### -->
+        </div>
+        </div>
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+</body>
+</html>

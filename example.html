@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+      <!-- ################################################### -->
+      <!-- ################################################### -->
+      <!-- ################################################### -->
+      <!-- ################################################### -->
+      <!-- ################################################### -->
+      <!-- ################################################### -->
+      <!-- ################################################### -->
+      <!-- ################################################### -->
+      <section>
+        <h1>Advanced Calculus</h1>
+        <h2>Lecture 12</h2>
+        <p style="font-size:48px">Jonathan Crofts</p>        
+        <p>Nottingham Trent University</p>
+      </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+      <section>
+		<h1>Advanced Calculus L12</h2>
+		<br>
+		<h3>
+		<ul>			
+			<li><b>Functions of a complex variable</b></li>
+			<br>
+			<li>Curves and regions in the complex plane</li>
+			<br>
+			<li>Differentiation: definition, Cauchy-Riemann equations and harmonic functions</li>											
+			<br>
+			<li>Examples</li>										
+		</ul>
+		</h3>
+	</section>
+    <!-- ################################################### -->
+    <!-- ################################################### -->
+    <section>
+		<section  align="left">					
+			<h2>Functions of a complex variable</h2>					
+			<p>Functions of a complex variable work in an analogous way to functions which operate on real numbers</p>
+			
+			<textBox touch-action="none">
+            <boxTitle>
+              <h3>Definition 12.1</h3>
+            </boxTitle>
+			A function of a complex variable $f(z)$ (where $z=x+iy$) maps $z$ onto another variable $w=u+iv$. In general, we write
+            <p >
+              \[w = f(z)=u(x,y)+iv(x,y)\]
+            </p>
+          </textBox>
+		 		  
+			<p>Examples include</p>
+					
+			\[
+			 f(z) = z^2 = (x+iy)^2 = (x^2-y^2)+i2xy \implies u=x^2-y^2 \text{ and } v=2xy
+			\]	
+						
+			
+			<p>And 			
+			\[
+			f(z) = \bar{z} = x-iy \implies u=x \text{ and } v=-y
+			\]</p>
+			
+		</section>
+						
+		
+		<section align="left">
+		 <p>Note that all the standard theorems of continuity of functions apply in the complex case</p>
+		 
+		 <p>For example, if two functions $f_1$ and $f_2$ are continuous on a complex domain $X$ then</p>
+		 
+		 \[
+		  f_1+f_2, \quad f_1f_2, \quad \frac{f_1}{f_2}
+		 \]
+		 <p>are continuous in $X$ whenever they are well defined.</p>
+		 
+		 <textBox touch-action="none">
+            <boxTitle>
+              <h3>Note</h3>
+            </boxTitle>
+			<p>This means that familiar functions such as</p>
+			\[
+			\sin{z}, ~\cos{z}, ~e^z, ~\cosh{z}, ~z^n+z^{n-1}+\cdots+z+c, ~~etc.
+			\]
+			<p>(plus composite functions) are continuous</p>
+            </p>
+          </textBox>
+		  
+		</section>
+	</section>
+	 <!-- ################################################### -->
+      <!-- ################################################### -->
+      <section>
+		<h1>Advanced Calculus L12</h2>
+		<br>
+		<h3>
+		<ul>			
+			<li>Functions of a complex variable</li>
+			<br>
+			<li><b>Curves and regions in the complex plane</b></li>
+			<br>
+			<li>Differentiation: definition, Cauchy-Riemann equations and harmonic functions</li>											
+			<br>
+			<li>Examples</li>										
+		</ul>
+		</h3>
+	</section>
+    <!-- ################################################### -->
+    <!-- ################################################### -->
+	<section>
+	<section align=left>
+	<h2>Curves and regions in the complex plane</h2>
+	
+	<p>The equation of a circle of radius $r$ centered at $z_0=(x_0,y_0)$ in the complex plane
+	is given by
+	\[
+	|z-z_0|=r
+	\]
+	</p>
+	
+	<p>To see this note </p>
+	\[
+	|z-z_0|^2=(x-x_0)^2+(y-y_0)^2=r^2
+	\]
+	<p>which is the familiar formula for a circle in Cartesian coordinates</p>
+	
+	<p>Employing the exponetial form of a complex number the above may be written as 
+	\[
+	 z = z_0 + re^{i\theta}, \theta\in[0,2\pi)
+	\]
+	</p>
+	<p>
+	<p>By a simple extension annular regions can be written:	</p>
+	\[
+	a \leq |z-z_0| \leq b
+	\]
+	</p>
+	</section>
+	<section align=left>
+	<p><h3>Example 12.1</h3> Parameterise the following curves:</p>
+	
+	<p><b>1.</b> The circle given by
+	\[
+	|z-(1+i)|=2
+	\]
+	</p>
+	
+	<br> <p><b>Solution</b></p>
+	
+	<p class="fragment">We can rewrite the above equation as
+	
+	<br><br>
+	
+	\[
+	 (x-1)^2+(y-i)^2 = 4
+	\]
+	
+	<br>
+	
+	from which it should be clear that the curve C is the circle of radius 4 centered at $(1,i)$	
+	</p>
+			
+	<img
+                style="margin:0px;padding:0px;border: 3px solid black;position:absolute;top:0px;left:750px"				
+                height="300"
+                src="figures/Circle12p1.png" 
+				class="fragment">
+				
+	<p class="fragment fade-in">Or in exponential form: $\displaystyle ~~\color{red}{\boxed{\color{black}{z(t) = 1+i +2e^{it}, \quad t\in[0,2\pi)}}}$</p>
+	</section>
+	<section align=left>
+	<p><b>2.</b> The straight line passing through the points $2-i$ and $3+2i$</p>
+	
+	<p class="fragment"> The equation for the straight line is found as follows
+	
+	<br><br>
+	
+	\[
+	 \begin{align*}
+	 z(t) &=2-i + t\left((3+2-)-(2-i)\right)\\
+	 &= 2-i + t(1+3i)
+	 \end{align*}
+	\]
+	
+	Here $t\in [0, 1]$
+	</p>
+	
+	<span class="fragment fade-in" style=" color:red">This is akin to finding the vector equation of a line (see the figure)</span>
+	
+		<img
+                style="margin:0px;padding:0px;border: 3px solid black;position:absolute;top:200px;left:850px"				
+                height="350"
+                src="figures/Line12p1.png" 
+				class="fragment">
+				
+	<p class="fragment fade-in">More generally, the straight line passing through the points <br>$z_1$ and $z_2$ is given by
+	\[
+	 z(t) = z_1+t(z_2-z_1)\quad t \in [0,1]
+	\]
+	</p>
+	</section>
+	
+	</section>
+	</section>
+	<!-- ################################################### -->
+    <!-- ################################################### -->
+	      <section>
+		<h1>Advanced Calculus L12</h2>
+		<br>
+		<h3>
+		<ul>			
+			<li>Functions of a complex variable</li>
+			<br>
+			<li>Curves and regions in the complex plane</li>
+			<br>
+			<li><b>Differentiation: definition, Cauchy-Riemann equations and harmonic functions</b></li>											
+			<br>
+			<li>Examples</li>										
+		</ul>
+		</h3>
+	</section>
+    <!-- ################################################### -->
+    <!-- ################################################### -->
+	<section>
+				<section  align="left">					
+				<h2>Differentiation</h2>					
+					<textBox touch-action="none">
+            <boxTitle>
+              <h3>Definition 12.2</h3>
+            </boxTitle>
+			If $f(z)$ is a complex function, then $f$ is said to be differentiable at the point $z$ if
+            <p >
+              \[\lim_{\Delta z\to 0}\frac{f(z+\Delta z)-f(z)}{\Delta z}\]
+            </p>
+			exists and is <em>independent</em> of the manner that $\Delta z$ approaches zero
+          </textBox>
+		  
+		  <p class="fragment fade-in"> Alternatively
+		  \[
+		   \left.\frac{\mathrm{d}f}{\mathrm{d}z}\right|_{z=z_0} = \lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}
+		  \]
+		  </p>
+		  
+		  <p class="fragment fade-in" style="color:red">These definitions are equivalent</p>
+		  <p class="fragment fade-in">Note that it is important to stress that $f'$ does not depend on the path of approach</p>
+				</section>
+								
+				<section  align="left">						
+					<p>Let us consider two possible approaches</p>
+					
+					<p><b>1.</b> $z\to z_0$ along the line $z=x+iy_0$:</p>
+					
+					<br>
+					
+					<p class="fragment fade-in">
+					\[
+					\begin{align*}
+					\left.\frac{\mathrm{d}f}{\mathrm{d}z}\right|_{z=z_0}&=\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}\\
+					&=\lim_{x\to x_0}\frac{u(x,y_0)+iv(x,y_0)-u(x_0,y_0)-iv(x_0,y_0)}{x-x_0}\\
+					&=\lim_{x\to x_0}\left\{\frac{u(x,y_0)-u(x_0,y_0)}{x-x_0} +i\frac{v(x,y_0)-v(x_0,y_0)}{x-x_0}\right\}\\
+					&= \color{red}{\boxed{\color{black}{\frac{\partial u}{\partial x}+i\frac{\partial v}{\partial x}}}}
+					\end{align*}
+					\]
+					</p>
+				</section>	
+				
+				<section  align="left">						
+					<p><b>1.</b> $z\to z_0$ along the line $z=x+iy_0 \implies$ $\color{red}{\boxed{\color{black}{\frac{\partial u}{\partial x}+i\frac{\partial v}{\partial x}}}}$</p>
+					
+					<p class="fragment fade-in"><b>2.</b> $z\to z_0$ along the line $z=x_0+iy$:</p>
+					
+					<br>
+					
+					<p class="fragment fade-in">
+					\[
+					\begin{align*}
+					\left.\frac{\mathrm{d}f}{\mathrm{d}z}\right|_{z=z_0}&=\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}\\
+					&=\lim_{y\to y_0}\frac{u(x_0,y)+iv(x_0,y)-u(x_0,y)-iv(x_0,y_0)}{i(y-y_0)}\\
+					&=\lim_{y\to y_0}\left\{-i\frac{u(x_0,y)-u(x_0,y_0)}{y-y_0} +\frac{v(x_0,y)-v(x_0,y_0)}{y-y_0}\right\}\\
+					&= \color{red}{\boxed{\color{black}{\frac{\partial v}{\partial y}-i\frac{\partial u}{\partial y}}}}
+					\end{align*}
+					\]
+					</p>
+					
+					<p class="fragment fade-in" style=color:red>Importantly these two expressions are equivalent</p>
+				</section>	
+				
+				<section  align="left">						
+					<h2>Cauchy-Riemann equations</h2>
+					<p> Equating the two expressions from the previous slide gives</p>
+					
+					\[
+					 \left.\frac{\mathrm{d}f}{\mathrm{d}z}\right|_{z=z_0} = \frac{\partial u}{\partial x}+i\frac{\partial v}{\partial x} = \frac{\partial v}{\partial y}-i\frac{\partial u}{\partial y}
+					\]
+					
+					<p>which upon equating real and imaginary parts give the famed <em>Cauchy-Riemann equations</em></p>
+					
+					\[\color{red}{\boxed{\color{black}{
+					\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}, \quad \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}
+					}}}
+					\]
+					
+					<br>
+					
+					<textBox touch-action="none">
+            <boxTitle>
+              <h3>Note</h3>
+            </boxTitle>
+			<ul>
+			 <li>If a function is complex differentiable then it satisfies the CR equations</li>
+			 <li>In the case that the functions $u, v$ have continuous derivatives the converse is true</li>
+			</ul>
+          </textBox>
+				</section>	
+				
+				<section  align="left">						
+			<h2>Additional definitions/nomenclature</h2>
+			<textBox touch-action="none">
+            <boxTitle>
+              <h3>Definition 12.3</h3>
+            </boxTitle>
+			A complex function $f$ is said to be <em>analytic</em> (a.k.a. <em>holomorphic</em>) on a region $R$
+			if it is differentiable at every point in $R$. If $f(z)$ is analytic at every point in $\mathbb{C}$ then it is called <em>entire</em>
+          </textBox>
+		  
+		  <p style="color:red" class="fragment fade-in"> Note that if a function is holomorphic then it can be represented (locally at least) as a Taylor series</p>
+		  
+		  <span class="fragment fade-in">
+		  <textBox touch-action="none">
+            <boxTitle>
+              <h3>Definition 12.4</h3>
+            </boxTitle>
+			A function $\phi(x,y)$ is said to be <em>harmonic</em> if it satisfies Laplace's equation
+			\[
+			 \nabla^2\phi = 0; \quad \nabla^2 \equiv \frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}
+			\]
+          </textBox></span>
+				</section>	
+				
+			</section>	
+			<!-- ################################################### -->
+    <!-- ################################################### -->
+	      <section>
+		<h1>Advanced Calculus L12</h2>
+		<br>
+		<h3>
+		<ul>			
+			<li>Functions of a complex variable</li>
+			<br>
+			<li>Curves and regions in the complex plane</li>
+			<br>
+			<li>Differentiation: definition, Cauchy-Riemann equations and harmonic functions</li>											
+			<br>
+			<li><b>Examples</b></li>										
+		</ul>
+		</h3>
+	</section>
+	<!-- ################################################### -->
+ <!-- ################################################### -->
+	<section>
+		<section align="left">
+		<h3>Example 12.2</h3>
+		<p>Show that the function $f(z) = \bar{z} = x-iy$ is nowhere analytic in the complex plane</p>
+		
+		<br> <p><b>Solution</b></p>
+		
+		<p class="fragment fade-in">
+		By the CR equations we have 
+		
+		\[
+		 u_x=v_y \implies 1=-1
+		\]
+		
+		and
+		\[
+		v_x=-u_y\implies 0=0
+		\]
+		
+		Clearly these conditions are not satisfied anywhere on $\mathbb{C}$ so the function $f$ is nowhere differentiable
+		</p>
+		</section>
+		<section align="left">
+		<h3>Example 12.3</h3> 
+		
+		<p>Show that the following function is harmonic:</p>
+		
+		\[
+		 u(x,y) = 3xy^2+2xy-x^3
+		\]
+		
+		</p> We need to show that it satisfies Laplace's equation, <em>i.e.</em> $u_{xx}+u_{yy}=0$</p>
+		
+		<br> <p><b>Solution</b></p>
+		
+		<p class="fragment fade-in">This follows since
+		
+		\[
+		 u_x = 3y^2+2y-3x^2 \quad \text{and} \quad u_{xx} = -6x
+		\]
+		
+		and 
+		
+		\[
+		u_y = 6xy + 2x \quad \text{and} \quad u_{yy} = 6x
+		\]
+
+		which sum to zero, <em>i.e.</em>
+		\[
+		 u_{xx}+u_{xx} = -6x + 6x = 0
+		\]
+		</p>
+		
+		</section>
+	</section>
+				<!-- ################################################### -->
+    <!-- ################################################### -->
+	      <section>
+		<h1>Advanced Calculus L12</h2>
+		<br>
+		<h3>
+		<ul>			
+			<li>Functions of a complex variable</li>
+			<br>
+			<li>Curves and regions in the complex plane</li>
+			<br>
+			<li>Differentiation: definition, Cauchy-Riemann equations and harmonic functions</li>											
+			<br>
+			<li>Examples</li>										
+		</ul>
+		</h3>
+	</section>
+			 <!-- ################################################### -->
+ <!-- ################################################### -->
+    </div>
+ </div>
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <script src="reveal.js/lib/js/head.min.js"></script>
+ <script src="reveal.js/js/reveal.js"></script>
+ <script>
+ // Full list of configuration options available here:
+ // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+          // width: 960,
+          // height:700,
+          controls: true,
+          progress: true,
+          history: true,
+          center: true,
+          theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+          // default/cube/page/concave/zoom/linear/fade/none
+          transition: Reveal.getQueryHash().transition || 'slide',
+
+          //// Optional libraries used to extend on reveal.js
+          dependencies: [
+            // { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            // { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; }},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+          ]
+        });
+        Reveal.configure({
+          keyboard: {
+            32: null // don't do anything when SPACE is pressed (i.e. disable a reveal.js default binding) document.body.style.cursor = 'none';
+          }
+        });
+        </script>
+		<!-- ################################################### -->
+        <!-- ################################################### -->
+        </div>
+        </div>
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+</body>
+</html>

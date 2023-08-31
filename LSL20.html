@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 20</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L20</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>System and transfer functions</li>
+			</span>
+			<br>
+			<li>Examples</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>System and transfer functions</h2>					
+					
+			<p>Consider an input-output system of the form</p>					
+						
+			\[
+			\begin{align*}
+			\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t}&=A\mathbf{x}+B\mathbf{u}\\
+			\mathbf{y}&=C\mathbf{x}
+			\end{align*}
+			\]
+			<p>Then assuming $\mathbf{x}(0)=\mathbf{0}$ we can take Laplace transforms to obtain</p>			
+			\[
+			 \begin{align*}
+			s\bar{\mathbf{x}}&=A\bar{\mathbf{x}}+B\bar{\mathbf{u}}\\
+			\bar{\mathbf{y}}&=C\bar{\mathbf{x}}
+			\end{align*}
+			\]
+			<p>Rearranging the first equation as $\displaystyle (sI_n-A)\bar{\mathbf{x}}+B(-\bar{\mathbf{u}})$ we can write</p>
+			\[
+			 \begin{bmatrix}sI_n-A&B\\-C&0\end{bmatrix}\begin{bmatrix}\bar{\mathbf{x}}\\-\bar{\mathbf{u}}\end{bmatrix} = \begin{bmatrix}\mathbf{0}\\\bar{\mathbf{y}}\end{bmatrix}
+			\]
+		</section>
+		
+		<section  align="left">		
+		<p>Thus by transforming the original system we have a system of linear equations to solve for the state vector $\mathbf{x}$ and output $\mathbf{y}$
+		 (after inverting the LT!)</p>
+		\[
+			 \begin{bmatrix}sI_n-A&B\\-C&0\end{bmatrix}\begin{bmatrix}\bar{\mathbf{x}}\\-\bar{\mathbf{u}}\end{bmatrix} = \begin{bmatrix}\mathbf{0}\\\bar{\mathbf{y}}\end{bmatrix}
+		\]
+		<p>We call the matrix</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		P(s) = \begin{bmatrix}sI_n-A&B\\-C&0\end{bmatrix}
+		}}}
+		\]
+		<p>the <em>state-space system matrix</em></p>
+		<span class="fragment fade-in">
+		<p>It follows that</p>
+		\[
+		\bar{\mathbf{x}} = (sI_n-A)^{-1}B\bar{\mathbf{u}}\qquad\text{and}\qquad \bar{\mathbf{y}} =C(sI_n-A)^{-1}B\bar{\mathbf{u}}
+		\]
+		</span>
+		</section>
+		
+		<section  align="left">		
+		<p>The function </p>
+		\[
+		\color{red}{\boxed{\color{white}{
+			 G(s) = C(sI_n-A)^{-1}B
+			 }}}
+		\]
+		<p>is called the <em>transfer function</em></p>
+		
+		<span class="fragment fade-in">
+		<p>Knowledge of the transfer function enables us to determine the output $\mathbf{y}$ from the equation</p>
+		\[
+		\color{#00FF00}{\boxed{\color{white}{
+		\begin{align*}
+			 \bar{\mathbf{y}} &= C(sI_n-A)^{-1}B\bar{\mathbf{u}}\\ &= G(s)\bar{\mathbf{u}}
+			 \end{align*}
+			 }}}
+		\]
+		<p>That is, if we know the Laplace transform of the input $\mathbf{u}(t)$ then we can compute the output $\mathbf{y}(t)$</p>
+		</span>
+		
+		<p class="fragment fade-in">Hopefully an example or two should help...</p>
+		</section>
+	</section>
+	
+	
+		  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L20</h1>
+		<br>
+		<ul>
+			<li>System and transfer functions</li>
+			
+			<br>
+					<span style="color: #00FF00"> 
+			<li>Examples</li>			
+			</span>
+		</ul>
+	</section>	
+	
+			
+	<section>
+		<section  align="left">										
+		<h3>Example 20.1</h3>
+		<font size="5">
+		<p>Derive the state-space system matrix and transfer function of the following system</p>
+		\[
+		\begin{align*}
+		\frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}x^{(1)}\\x^{(2)}\\x^{(3)}\end{bmatrix} &=\begin{bmatrix}6&-2&-5\\-1&-1&1\\8&-2&-7\end{bmatrix}\begin{bmatrix}x^{(1)}\\x^{(2)}\\x^{(3)}\end{bmatrix}
+		+\begin{bmatrix}2\\0\\3\end{bmatrix}u\\
+		y&= \begin{bmatrix}1&-2&0\end{bmatrix}\begin{bmatrix}x^{(1)}\\x^{(2)}\\x^{(3)}\end{bmatrix}
+		\end{align*}
+		\]
+		<p>Additionally, use the transfer function to determine the output $y(t)$ for an input of $\displaystyle u(t)=2e^{-3t}$</p>
+		
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		\[
+		P(s) = \begin{bmatrix}sI_n-A&B\\-C&0\end{bmatrix} = 
+		\color{red}{\boxed{\color{white}{
+		\begin{bmatrix}s-6&2&5&|&2\\1&s+1&-1&|&0\\-8&2&s+7&|&3\\-&-&-&|&-\\-1&2&0&|&0\end{bmatrix}}}}
+		\]
+		</span>
+					</font>
+		</section>
+		<section  align="left">	
+		<font size="5">		
+			<p>To compute </p>
+			\[
+			 G(s) = C(sI_3-A)^{-1}B
+			\]
+			<p>we need to invert $\displaystyle sI_3-A$</p>
+			
+			<span class="fragment fade-in">
+			<p>Co-factor expansion gives</p>
+			\[
+			\begin{align*}
+			 \begin{bmatrix}s-6&2&5\\1&s+1&-1\\-8&-2&s+7\end{bmatrix}^{-1} &= \frac{1}{\Delta}\begin{bmatrix}(s+1)(s+7)-2&*&-2-5(s+1)\\-(s+7-8)&*&-(6-s-5)\\*&*&*\end{bmatrix}\\
+			 &=\frac{1}{\Delta}\begin{bmatrix}(s^2+8s+9&*&-5s-7)\\1-s&*&s-1\\*&*&*\end{bmatrix}
+			 \end{align*}
+			\]
+			</span>
+			
+			<span class="fragment fade-in">
+			<p>Where</p>
+			\[
+			\begin{align*}
+			\Delta = \begin{vmatrix}s-6&2&5\\1&s+1&-1\\-8&2&s+7\end{vmatrix} &= (s-6)\begin{vmatrix}s+1&-1\\2&s+7\end{vmatrix}
+			-2\begin{vmatrix}1&-1\\-8&s+7\end{vmatrix}+5\begin{vmatrix}1&s+1\\-8&2\end{vmatrix}\\
+			&= \color{red}{\boxed{\color{white}{s^3+2s^2-s-2 = (s+2)(s+1)(s-1)}}}
+			\end{align*}
+			\]
+			</span>
+			</font>
+		</section>
+		
+		<section  align="left">									
+		<p>Thus</p>
+		\[
+		\begin{align*}
+		 G(s) &= \frac{1}{(s+2)(s+1)(s-1)}\begin{bmatrix}1&-2&0\end{bmatrix}\begin{bmatrix}(s^2+8s+9&*&-5s-7)\\1-s&*&s-1\\*&*&*\end{bmatrix}\begin{bmatrix}2\\0\\3\end{bmatrix}\\
+		 &=\frac{1}{(s+2)(s+1)(s-1)}\begin{bmatrix}1&-2&0\end{bmatrix}\begin{bmatrix}2s^2+s-3\\s-1\\*\end{bmatrix}\\
+		 &=\frac{2s^2-s-1}{(s+2)(s+1)(s-1)} = \color{red}{\boxed{\color{white}{\frac{2s+1}{(s+2)(s+1)}}}}
+		 \end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>To determine the ouptut $y(t)$ we must solve</p>
+		\[
+		 \bar{y} = G(s)\bar{u}
+		\]
+		<p>Or upon noting that $\displaystyle \mathcal{L}\left[2e^{-3t}\right] = \frac{2}{s+3}$</p>
+		\[
+		 \bar{y} = \frac{2s+1}{(s+2)(s+1)}\cdot\frac{2}{(s+3)} = \frac{4s+2}{(s+1)(s+2)(s+3)}
+		\]
+		</span>
+		</section>
+		
+		<section  align="left">									
+		<p>We can rewrite using partial fractions (exercise) as</p>
+		\[
+		\begin{align*}
+		\bar{y} &= \frac{4s+2}{(s+1)(s+2)(s+3)}\\
+		&=\frac{-1}{s+1}+\frac{6}{s+2}-\frac{5}{s+3}
+		\end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Inverting we obtain</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		 y(t) = -e^{-t}+6e^{-2t}-5e^{-3t}
+		 }}}
+		\]
+		</span>
+		<br>
+		<span  class="fragment fade-in">
+		<p>Here we have used the fact that </p>
+		\[
+		\mathcal{L}\left[ae^{bt}\right] = \frac{a}{s-b}\qquad \text{or}\qquad \mathcal{L}^{-1}\left[\frac{a}{s-b}\right]=ae^{bt}
+		\]
+		</span>
+		</section>
+	</section>
+			
+			
+	<section>
+		<section  align="left">									
+		
+		<h3>Example 20.2</h3> 		
+		<p>Suppose we have the discrete time system</p>
+		\[
+		 \begin{align*}
+		 \mathbf{x}_{k+1}&=A\mathbf{x}_k+Bu_k\\
+		 y_k&=C\mathbf{x}_k
+		 \end{align*}
+		\]
+		<p>with</p>
+		\[
+		A=\begin{bmatrix}6&-2&-5\\-1&-1&1\\8&-2&-7\end{bmatrix} \qquad B=\begin{bmatrix}2\\0\\3\end{bmatrix} \qquad C=\begin{bmatrix}1&-2&0\end{bmatrix}
+		\]
+		<p>as in the previous example</p>
+		
+		<p>Derive the state-space system matrix and transfer function for this system and use them to determine the output $y_k$ for input $\displaystyle u_k=2(-3)^k$</p>
+						
+		</section>
+		
+		<section  align="left">									
+		<h3>Solution</h3>		
+		<p>As in the continuous case</p>
+		\[
+		P(z) =  \begin{bmatrix}zI_n-A&B\\-C&0\end{bmatrix} = 
+		\color{red}{\boxed{\color{white}{
+		\begin{bmatrix}z-6&2&5&|&2\\1&z+1&-1&|&0\\-8&2&z+7&|&3\\-&-&-&|&-\\-1&2&0&|&0\end{bmatrix}}}}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>The transfer function takes the same form as that in Example 39.1:</p>
+		\[
+		\color{#00FF00}{\boxed{\color{white}{
+		G(z) = \frac{2z+1}{(z+1)(z+2)}
+		}}}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>Thus to find $y_k$ we should solve</p>
+		\[
+		\bar{y} = G(z)\bar{u}
+		\]
+		<p>and invert the result</p>
+		</span>
+		</section>
+		<section  align="left">	
+		<p>Recalling</p>
+		\[
+		z\left[b(a)^k\right]  = \frac{bz}{z-a}\quad \implies \quad z\left[2(-3)^k\right]  = \frac{2z}{z+3}
+		\]		
+		
+		<span class="fragment fade-in">
+		<p>So that</p>
+		\[
+		\begin{align*}
+		\bar{y} = \frac{2z+1}{(z+1)(z+2)}\cdot\frac{2z}{z+3} &=\frac{4z+2}{(z+1)(z+2)(z+3)}\\
+		&=z\left[\frac{-1}{z+1}+\frac{6}{z+2}-\frac{5}{z+3}\right] = \frac{-z}{z+1}+\frac{6z}{z+2}-\frac{5z}{z+3}
+		\end{align*}
+		\]
+		<p>(again leaving partial fractions as an exercise)</p>
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>Inverting gives the solution</p>
+		\[
+		\color{#00FF00}{\boxed{\color{white}{
+		 y_k = -(-1)^k+6(-2)^k-5(-3)^k
+		 }}}
+		\]
+		</span>
+		</section>
+	</section>
+	
+	<section>
+		<h2 style="color:#00FF00">Lecture 20 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>system and transfer functions for continuous systems</li>													
+						<li>examples (cts systems)</li>
+					</ul><br>
+					<li>After this lecture you should </li>
+					<ul>
+						<li>be able to construct system matrices and transfer functions</li>												
+						<li>know how to use properties of the Laplace transform to solve controllability problems via the transfer function</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 14</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L14</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Inhomogeneous systems of difference equations</li>
+			</span>
+			<br>
+			<li>Examples</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>Inhomogeneous systems of difference equations</h2>					
+					
+			<p>Recall that the homogeneous system of difference equations</p>					
+			\[
+			 \mathbf{x}_{k+1} = A\mathbf{x}_k:\quad \mathbf{x}_0=\mathbf{c}
+			\]
+			<p>Has solution</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			\mathbf{x}_k = A^k\mathbf{x}_0 = A^k\mathbf{c}
+			}}}
+			\]
+			
+			<span class="fragment fade-in">
+			<p>This solution can be obtained inductively as follows:</p>
+			\[
+			\mathbf{x}_1=A\mathbf{x}_0,\quad \mathbf{x}_2=A\mathbf{x}_1=A^2\mathbf{x}_0, \quad \text{etc.}
+			\]			
+			</span>
+						
+		</section>
+		<section  align="left">		
+		<p>Similarly, for an inhomogeneous system of the form</p>
+		\[
+		 \mathbf{x}_{k+1} = A\mathbf{x}_k + \mathbf{f}_k:\quad \mathbf{x}_0=\mathbf{c}
+		\]
+		<p>We can proceed inductively as follows</p>
+		\[
+		\begin{align*}
+		k=0\implies \mathbf{x}_1&=A\mathbf{x}_0+\mathbf{f}_0\\
+		k=1\implies \mathbf{x}_2&=A\mathbf{x}_1+\mathbf{f}_1\\
+		&=A^2\mathbf{x}_0+A\mathbf{f}_0+\mathbf{f}_1\\
+		k=2\implies \mathbf{x}_3&=A\mathbf{x}_2+\mathbf{f}_2\\
+		&=A(A^2\mathbf{x}_0+A\mathbf{f}_0+\mathbf{f}_1)+\mathbf{f}_2\\
+		&=A^3\mathbf{x}_0+A^2\mathbf{f}_0+A\mathbf{f}_1+\mathbf{f}_2\\
+		&\vdots\\
+		\mathbf{x}_k&=A^k\mathbf{x}_0+A^{k-1}\mathbf{f}_0+A^{k-2}\mathbf{f}_1+\cdots+A\mathbf{f}_{k-2}+\mathbf{f}_{k-1}
+		\end{align*}
+		\]
+				
+		</section>
+		
+		<section  align="left">		
+		<p>Thus giving us the solution</p>
+		
+		\[
+		\color{red}{\boxed{\color{white}{
+		\begin{align*}		
+		\mathbf{x}_k&=A^k\mathbf{x}_0+\sum_{r=0}^{k-1}A^r\mathbf{f}_{k-1-r}\\
+		&=A^k\mathbf{x}_0+\sum_{r=0}^{k-1}A^{{k-1-r}}\mathbf{f}_r		
+		\end{align*}
+		}}}
+		\]
+		
+		<span class="fragment fade-in">
+		<h3>Note</h3>
+		<ol>
+			<li>As with ODEs the two different forms come in useful</li>
+			<li class="fragment fade-in">We can also derive this result using transform methods</li>
+		</ol>
+		</span>
+		</section>
+	</section>
+			
+	<section>
+		<section  align="left">										
+		<p><em>z-transforms</em> may be considered a 'discrete' version of the Laplace transform</p>
+		
+		<p>Applying z-transforms to the equation</p> 		
+		\[
+		\mathbf{x}_{k+1} = A\mathbf{x}_k+\mathbf{f}_k:\quad \mathbf{x}_0=\mathbf{c}
+		\]		
+		<p>We obtain </p>
+		\[
+		z\bar{\mathbf{x}}-z\mathbf{x}_0 = A\bar{\mathbf{x}}+\bar{\mathbf{f}}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Here the bars denotes z-transforms <em>i.e.</em> $\displaystyle \bar{\mathbf{x}}=z[\mathbf{x}]$ and $\displaystyle \bar{\mathbf{f}}=z[\mathbf{f}]$</p>
+		
+		<p>And we have used the fact that</p>
+		\[
+		 z\left[\mathbf{x}_{k+1}\right] = z\bar{\mathbf{x}}-z\mathbf{x}_0 \quad\text{and}\quad z\left[A\mathbf{x}\right] = Az\left[\mathbf{x}\right] = A\bar{\mathbf{x}}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>Rearranging the above gives</p>
+		\[
+		 \begin{align*}
+		 \bar{\mathbf{x}} &=\left(zI_n-A\right)^{-1}\left(z\mathbf{x}_0+\bar{\mathbf{f}}\right)\\
+		 &=\color{red}{\boxed{\color{white}{
+		 \left(zI_n-A\right)^{-1}z\mathbf{x}_0+\left(zI_n-A\right)^{-1}\bar{\mathbf{f}}}}}
+		 \end{align*}
+		\]
+		</span>
+		</section>
+		<section  align="left">											
+			<p>Let us look at the two terms on the right independently</p>
+			
+			<p>Starting with the first term:</p>
+			\[
+			 \begin{align*}
+			 \left(zI_n-A\right)^{-1}&=\frac{1}{z}\left(I_n-\frac{1}{z}A\right)^{-1}\\
+			 &=\frac{1}{z}\sum_{r=0}^\infty \left(\frac{1}{z}A\right)^r
+			 \end{align*}
+			\]
+			
+			<span class="fragment fade-in">
+			<p>Therefore</p>
+			\[
+			\left(zI_n-A\right)^{-1}z\mathbf{x}_0 = \sum_{r=0}^\infty\frac{1}{z^r}A^r\mathbf{x}_0 
+			\]
+			</span>
+			
+			<span class="fragment fade-in">
+			<p>Whose inverse transform is</p>
+			\[
+			\sum_{r=0}^\infty \delta_{k,r}A^r\mathbf{x}_0 = \color{#00FF00}{\boxed{\color{white}{A^k\mathbf{x}_0}}}
+			\]
+			
+			<img style="margin:0px;padding:0px;position:absolute;top:400px;left:800px"				
+				height="200"					
+				src="figures/ZTransDelta.png">
+			</span>
+								
+		</section>
+		<section  align="left">									
+		<p>The second term can be written</p>
+		\[
+		\begin{align*}
+		 \left(zI_n-A\right)^{-1}\bar{\mathbf{f}}&=\sum_{r=0}^\infty\frac{1}{z^{r+1}}A^r\bar{\mathbf{f}}\\
+		 &=\sum_{r=0}^\infty A^r\frac{1}{z^{r+1}}\bar{\mathbf{f}}
+		 \end{align*}
+		\]
+		<p>Whose inverse transform is</p>
+		\[
+		\sum_{r=0}^\infty A^r\mathbf{f}_{k-r-1}\theta\left(k-r-1\right)=\color{#00FF00}{\boxed{\color{white}{\sum_{r=0}^{k-1}A^r\mathbf{f}_{k-r-1}}}}
+		\]
+		
+		<img style="margin:0px;padding:0px;position:absolute;top:475px;left:300px"				
+				height="225" class="fragment fade-in"					
+				src="figures/ZTransHeavi.png">
+		
+		</section>
+		
+		<section  align="left">									
+		<p>Putting this all together we obtain our earlier result</p> 
+		<p>We can take inverse z-transforms of the equation</p>
+		\[
+		\bar{\mathbf{x}} = \left(zI_n-A\right)^{-1}z\mathbf{x}_0+\left(zI_n-A\right)^{-1}\bar{\mathbf{f}}
+		\]
+		<p>To get</p>
+		\[
+		\begin{align*}
+		z^{-1}\left[\bar{\mathbf{x}}\right] &= z^{-1}\left[\left(zI_n-A\right)^{-1}z\mathbf{x}_0+\left(zI_n-A\right)^{-1}\bar{\mathbf{f}}\right]\\
+		\mathbf{x}_k &= z^{-1}\left[\left(zI_n-A\right)^{-1}z\right]\mathbf{x}_0+z^{-1}\left[\left(zI_n-A\right)^{-1}\bar{\mathbf{f}}\right]\\
+		&=\color{red}{\boxed{\color{white}{A^k\mathbf{x}_0+\sum_{r=0}^{k-1}A^r\mathbf{f}_{k-r-1}}}}
+		\end{align*}		
+		\]
+		<p>As before</p>
+		</section>
+	</section>
+			
+  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L14</h1>
+		<br>
+		<ul>			
+			<li>Inhomogeneous systems of difference equations</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Examples</li>			
+			</span>
+		</ul>
+	</section>	
+
+	<section>
+		<section  align="left">										
+		<h3>Example 14.1</h3>
+		<p>Consider</p>
+		\[
+		A = \begin{bmatrix}2&1&1\\-1&0&-1\\3&5&4\end{bmatrix}=HJH^{-1}
+		\]
+		<p>Where</p>
+		\[
+		H=\begin{bmatrix}1&-1&1\\0&1&-1\\-1&-1&2\end{bmatrix}\quad H^{-1}=\begin{bmatrix}1&1&0\\1&3&1\\1&2&1\end{bmatrix}\quad J=\begin{bmatrix}1&&\\&2&\\&&3\end{bmatrix}
+		\]
+		<p>Solve</p>
+		\[
+		\mathbf{x}_{k+1}=A\mathbf{x}_k + \mathbf{f}_k:\quad \mathbf{x}_0=\mathbf{c}
+		\]
+		<p>With</p>
+		\[
+		\mathbf{f}=\begin{bmatrix}1&0&0\end{bmatrix}^T\quad\text{and}\quad\mathbf{c}=\begin{bmatrix}0&-1&2\end{bmatrix}^T
+		\]
+		</section>
+		
+		<section  align="left">										
+		<h3>Solution</h3>
+		<p>We need to start by computing $A^k$:</p>
+		\[
+		\begin{align*}
+		A^k&=HJ^kH^{-1}\\
+		&= \begin{bmatrix}1&-1&1\\0&1&-1\\-1&-1&2\end{bmatrix}\begin{bmatrix}1&&\\&2^k&\\&&3^k\end{bmatrix}\begin{bmatrix}1&1&0\\1&3&1\\1&2&1\end{bmatrix}\\
+		&= \begin{bmatrix}1&-1&1\\0&1&-1\\-1&-1&2\end{bmatrix}\begin{bmatrix}1&1&0\\2^k&3\cdot 2^k&2^k\\3^k&2\cdot 3^k&3^k\end{bmatrix} = 
+		\begin{bmatrix}1-2^k+3^k&1-3\cdot 2^k+2\cdot 3^k&3^k-2^k\\2^k-3^k&3\cdot 2^k-2\cdot 3^k&2^k-3^k\\
+		2\cdot 3^k-2^k-1&4\cdot 3^k-3\cdot 2^k-1&2\cdot 3^k-2^k\end{bmatrix}
+		\end{align*}
+		\]
+		<span class="fragment fade-in">
+		<p>Thus</p>
+		\[
+		A^k\mathbf{x}_0 = \begin{bmatrix}1-2^k+3^k&1-3\cdot 2^k+2\cdot 3^k&3^k-2^k\\2^k-3^k&3\cdot 2^k-2\cdot 3^k&2^k-3^k\\
+		2\cdot 3^k-2^k-1&4\cdot 3^k-3\cdot 2^k-1&2\cdot 3^k-2^k\end{bmatrix}\begin{bmatrix}0\\-1\\2\end{bmatrix}=\color{red}{\boxed{\color{white}{
+		\begin{bmatrix}2^k-1\\-2^k\\1+2^k\end{bmatrix}}}}
+		\]
+		</span>
+		</section>
+		<section  align="left">										
+		<p>Now</p>
+		\[
+		\begin{align*}
+		\sum_{r=0}^{k-1} A^r\mathbf{f}_{k-r-1} &= \sum_{r=0}^{k-1} \begin{bmatrix}1-2^r+3^r&1-3\cdot 2^r+2\cdot 3^r&3^r-2^r\\2^r-3^r&3\cdot 2^r-2\cdot 3^r&2^r-3^r\\
+		2\cdot 3^r-2^r-1&4\cdot 3^r-3\cdot 2^r-1&2\cdot 3^r-2^r\end{bmatrix}\begin{bmatrix}1\\0\\0\end{bmatrix}\\
+		&=\sum_{r=0}^{k-1} \begin{bmatrix}1-2^r+3^r\\2^r-3^r\\2\cdot 3^r-2^r-1\end{bmatrix}\\
+		&=\begin{bmatrix}\sum 1-\sum2^r+\sum3^r\\\sum 2^r-\sum 3^r\\2\sum 3^r-\sum 2^r-\sum 1\end{bmatrix} = \color{red}{\boxed{\color{white}{\begin{bmatrix}k-(2^k-1)+\frac{1}{2}(3^k-1)\\
+		2^k-1-\frac{1}{2}(3^k-1)\\3^k-1-(2^k-1)-k\end{bmatrix}}}}
+		\end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>The final result follows since</p>
+		\[
+		\color{#00FF00}{\boxed{\color{white}{
+		\sum_{r=0}^{k-1}1=k,\quad \sum_{r=0}^{k-1}2^r=\frac{1-2^k}{1-2} = 2^k-1,\quad\text{and}\quad \sum_{r=0}^{k-1}3^r=\frac{1-3^k}{1-3}=\frac{1}{2}(3^k-1)
+		}}}
+		\]
+		</span>
+		</section>
+		<section  align="left">										
+		<p>We are now in a position to put this all together</p>
+		\[		
+		 \begin{align*}
+		 \mathbf{x}_k &=A^k\mathbf{x}_0+\sum_{r=0}^{k-1}A^r\mathbf{f}_{k-r-1}\\
+		 &=\begin{bmatrix}2^k-1\\-2^k\\1+2^k\end{bmatrix}+\begin{bmatrix}\frac{1}{2}+k-2^k+\frac{1}{2}3^k\\
+		2^k-\frac{1}{2}-\frac{1}{2}3^k\\3^k-2^k-k\end{bmatrix}\\
+		&=\color{#00FF00}{\boxed{\color{white}{ \begin{bmatrix}-\frac{1}{2}+k+\frac{1}{2}3^k\\
+		-\frac{1}{2}-\frac{1}{2}3^k\\1-k+3^k\end{bmatrix}}}}
+		 \end{align*}		 
+		\]
+		</section>
+	</section>
+
+	<section>
+		<h2 style="color:#00FF00">Lecture 14 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>inhomogeneous systems of difference equations</li>													
+						<li>examples</li>
+					</ul><br>
+					<li>After this lecture you should </li>
+					<ul>
+						<li>be able to solve systems of inhomogeneous difference equations</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

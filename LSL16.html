@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 16</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L16</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>The controllability matrix</li>
+			</span>
+			<br>
+			<li>Introduction to observability theory</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>The Controllability Matrix</h2>					
+					
+			<p>Recall from Lecture 15 that a system of the form</p>					
+					
+			\[
+			\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+B\mathbf{u}(t):\quad \mathbf{x}(0)=\mathbf{x}_0
+			\]
+			<p>Is controllable if and only if no non-zero solutions of the equation</p>
+			\[
+			 \mathbf{x}^Te^{At}B = 0
+			\]
+			<p>exist</p>
+			
+			
+			<span class="fragment fade-in">
+			<p>Consider now the <em>controllability matrix</em></p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			 G = \begin{bmatrix}B&AB& A^2B&\ldots&A^{n-1}B\end{bmatrix}\in\mathbb{R}^{n\times np}
+			 }}}
+			\]
+			<p>Recall that $\displaystyle A\in\mathbb{R}^{n\times n}$ and $B\in\mathbb{R}^{n\times p}$</p>
+			</span>
+			
+			<p class="fragment fade-in">The maximum rank of this matrix is $n$ but let us suppose it is less...</p>
+		</section>
+		
+		<section  align="left">		
+		<p>If $G$ has rank less than $n$ then we can find a non-zero vector $\mathbf{x}_1^T$ such that</p>		
+		\[
+		 \mathbf{x}_1^TG = \mathbf{x}_1^T\begin{bmatrix}B&AB& A^2B&\ldots&A^{n-1}B\end{bmatrix} = 0
+		\]
+		<p>Clearly $\displaystyle \mathbf{x}_1^Te^{At}B=0$ and the system under consideration is <em>not</em> controllable</p>
+		
+		<h3>Note</h3>
+		<p>This follows since by Cayley_hamilton we have that</p>
+		\[
+		 e^{At} = \sum_{r=0}^{n-1}c_rA^r \implies \mathbf{x}_1^Te^{At}B=0
+		\]
+		
+		<p class="fragment fade-in" style="color: red"><b>Thus if $G$ does not have full rank then the system fails to be controllable</b></p>
+		</section>
+		
+		<section  align="left">		
+		<p>Alternatively, suppose the system is not controllable</p>		
+		
+		<p>Then there exists a non-zero vector $\displaystyle \mathbf{x}_1\in\mathbb{R}^n$ such that</p>
+		\[
+		 \mathbf{x}_1^Te^{At}B = \mathbf{x}_1^T\sum_{r=0}^\infty \frac{t^r}{r!}A^rB=0
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Looking at individual powers of $t$ we see that</p>
+		\[
+		\mathbf{x}_1^TA^rB=0, \quad \forall r\in\mathbb{Z}^+
+		\]		
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>And so in particular</p>
+		\[
+		\mathbf{x}_1^TG = \mathbf{x}_1^T\begin{bmatrix}B&AB& A^2B&\ldots&A^{n-1}B\end{bmatrix} = 0
+		\]		
+		<p>And so $G$ is not of full rank</p>
+		</span>
+		<p class="fragment fade-in" style="color:red"><b>It follows that the ODE system is controllable if and only if the matrix $G$ is of full rank</b></p>
+		</section>
+	</section>
+			
+	<section>
+		<section  align="left">										
+		<h3>Example 16.1</h3>
+		<p>By computing the controllability matrix $G$ deduce whether the system</p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+Bu(t)
+		\]
+		<p>With</p>
+		\[
+		A = \begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}\quad B=\begin{bmatrix}0\\1\\0\end{bmatrix}
+		\]		
+		<p>Is controllable</p>
+		
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		<font size="5">
+		\[
+		 AB = \begin{bmatrix}1\\-2\\5\end{bmatrix}  \quad A^2B=A(AB) = \begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}\begin{bmatrix}1\\-2\\5\end{bmatrix} =\begin{bmatrix}3\\-2\\3\end{bmatrix}
+		 \implies \color{red}{\boxed{\color{white}{G=\begin{bmatrix}0&1&3\\1&-2&-2\\0&5&3\end{bmatrix}}}}
+		\]
+		</font>
+		</span>
+		</section>
+		<section  align="left">											
+		<p>To deduce controllability we compute $|G|$</p>	
+		\[
+		\begin{align*}
+		|G| &=\begin{vmatrix}0&1&3\\1&-2&-2\\0&5&3\end{vmatrix}\\
+		&=-1\begin{vmatrix}1&3\\5&3\end{vmatrix}=12
+		\end{align*}
+		\]
+		
+		<p class="fragment fade-in">Therefore the system <em>is</em> controllable</p>
+		</section>
+		
+	</section>
+			
+	
+	<section  align="left">									
+		<h3>Example 16.2</h3>
+		<p>By computing the controllability matrix $G$ deduce whether the system</p>
+		<font size="5">
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+Bu(t)
+		\]
+		</font>
+		<p>With</p>
+		<font size="5">
+		\[
+		A = \begin{bmatrix}0&1&0\\0&0&1\\0&1&0\end{bmatrix}\quad B=\begin{bmatrix}0\\1\\1\end{bmatrix}
+		\]		
+		</font>
+		<p>Is controllable</p>
+		
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		<font size="5">
+		\[
+		 AB = \begin{bmatrix}1\\1\\1\end{bmatrix}  \quad A^2B=A(AB) = \begin{bmatrix}0&1&0\\0&0&1\\0&1&0\end{bmatrix}\begin{bmatrix}1\\1\\1\end{bmatrix} =\begin{bmatrix}1\\1\\1\end{bmatrix}
+		 \implies \color{red}{\boxed{\color{white}{G=\begin{bmatrix}0&1&1\\1&1&1\\1&1&1\end{bmatrix}}}}
+		\]
+		</font>
+		</span>
+		<p class="fragment fade-in">Clearly the system is <em>not</em> controllable as rows 2 and 3 are not linearly independent</p>
+	</section>
+		
+		
+
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L16</h1>
+		<br>
+		<ul>			
+			<li>The controllability matrix</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Introduction to observability theory</li>			
+			</span>
+		</ul>
+	</section>				
+
+	<section>
+		<section  align="left">									
+				
+		<p>Related to the idea of controllability is that of <em>observability</em></p>
+		
+		<p>Suppose that for a given system of ODEs</p>
+		\[
+		 \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+B\mathbf{u}(t):\quad \mathbf{x}(0)=\mathbf{x}_0 \qquad(*)
+		\]
+		<p>We cannot observe $\mathbf{x}$ directly, but instead can observe the vector $\displaystyle \mathbf{y}=C\mathbf{x}$ for
+		 some matrix $C\in\mathbb{R}^{q\times n}$</p>
+		 
+		 <span class="fragment fade-in">
+		 <p>Then we say</p>
+		<textBox touch-action="none">
+            <boxTitle>
+              <h3>Definition 16.1 (observability)</h3>
+            </boxTitle>
+			<p>The system (*) is <em>observable</em> on the interval $[0, t_f]$ if knowledge of $\mathbf{x}(0), \mathbf{u}(t)$ and 
+			$\mathbf{y} \forall t\in[0, t_f]$ is sufficient to determine $\mathbf{x}(t_f)$ uniquely</p>
+          </textBox>				
+		 </span>
+		</section>
+	
+		<section  align="left">									
+		<p>Importantly, it can be shown that the system (*) is observable if and only if the <em>observability matrix</em></p> 
+		\[
+		\color{red}{\boxed{\color{white}{
+		\theta = \begin{bmatrix}C\\CA\\\vdots\\CA^{n-1}\end{bmatrix}\in\mathbb{R}^{nq\times n}
+		}}}
+		\]
+		<p>Is of full rank</p>
+		
+		<p>Recall that $\displaystyle C\in \mathbb{R}^{q\times n}$ and $A\in\mathbb{R}^{n\times n}$</p>
+		</section>
+	
+	</section>
+			
+	
+	<section  align="left">									
+		<h3>Example 16.3</h3>
+		<font size="5">
+		<p>Let </p>
+		\[
+		 A=\begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}\quad C=\begin{bmatrix}1&0&0\end{bmatrix}
+		\]
+		<p>Then the observed variable is </p>
+		\[
+		 y = C\mathbf{x} = \begin{bmatrix}1&0&0\end{bmatrix}\begin{bmatrix}x^{(1)}\\x^{(2)}\\x^{(3)}\end{bmatrix}=x^{(1)}
+		\]
+		<p><em>i.e.</em> we only have knowledge of the first variable</p>
+		
+		<span class="fragment fade-in">
+		<p>The observability matrix is given by</p>
+		\[
+		\theta = \begin{bmatrix}C\\CA\\CA^2\end{bmatrix} = \begin{bmatrix}1&0&0\\0&1&1\\2&3&1\end{bmatrix}\implies |\theta| = 1\cdot \begin{vmatrix}1&1\\3&1\end{vmatrix}=2
+		\]
+		</span>
+		<p class="fragment fade-in">Thus despite having access to only one variable the system <em>is</em> observable</p>
+		</font>
+	</section>
+	
+	<section>	
+		<section  align="left">									
+		<h3>Example 16.4</h3>
+		<p>Show that a system of the form</p>
+		<font size="5">
+		\[
+		\begin{align*}
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t}&=A\mathbf{x}+Bu\\
+		y&=C\mathbf{x}
+		\end{align*}
+		\]
+		</font>
+		<p>For which</p>
+		<font size="5">
+		\[
+		A=\begin{bmatrix}1&-1&0\\1&0&1\\0&1&k\end{bmatrix}\quad B=\begin{bmatrix}0\\0\\1\end{bmatrix}\quad C=\begin{bmatrix}-1&1&0\end{bmatrix}
+		\]
+		</font>
+		<p>Is controllable whatever value the constant $k$ takes and observable for all values of $k$ except one, which is to be determined</p>
+		
+		<h3>Solution</h3>
+		<font size="5">
+		\[
+		AB=\begin{bmatrix}0\\1\\k\end{bmatrix}\quad A^2B=\begin{bmatrix}1&-1&0\\1&0&1\\0&1&k\end{bmatrix}\begin{bmatrix}0\\1\\k\end{bmatrix}=\begin{bmatrix}-1\\k\\1+k^2\end{bmatrix}
+		\implies \color{red}{\boxed{\color{white}{G=\begin{bmatrix}0&0&-1\\0&1&k\\1&k&1+k^2\end{bmatrix}}}}
+		\]
+		</font>
+		</section>
+		
+		<section  align="left">									
+		<p>It is straightforward to see that</p>
+			\[
+			\begin{align*}
+			G=\begin{vmatrix}0&0&-1\\0&1&k\\1&k&1+k^2\end{vmatrix}&=-1\begin{vmatrix}1&k\\k&1+k^2\end{vmatrix}\\
+			&=-1(1+k^2-k^2)=1
+			\end{align*}
+			\]
+		<p>The system is controllable independent of $k$</p>
+		
+		<span class="fragment fade-in">
+		<p>Now</p>
+		<font size="5">
+			\[
+			CA=\begin{bmatrix}-1&1&0\end{bmatrix}\begin{bmatrix}1&-1&0\\1&0&1\\0&1&k\end{bmatrix}=\begin{bmatrix}0&1&1\end{bmatrix}\quad CA^2=CA(A)=\begin{bmatrix}0&1&1\end{bmatrix}\begin{bmatrix}1&-1&0\\1&0&1\\0&1&k\end{bmatrix}
+			=\begin{bmatrix}1&1&1+k\end{bmatrix}
+			\]
+			</font><br>
+			\[
+		\implies \color{red}{\boxed{\color{white}{\theta=\begin{bmatrix}-1&1&0\\0&1&1\\1&1&1+k\end{bmatrix}}}}
+			\]
+		</span>
+		</section>
+		
+		<section  align="left">									
+				<p>Finally, we need to compute the determinant of $\theta$ to check for what values of $k$ the system is observable</p>
+				\[
+				 \begin{align*}
+				 |\theta|=\begin{vmatrix}-1&1&0\\0&1&1\\1&1&1+k\end{vmatrix}&=-1\begin{vmatrix}1&1\\1&1+k\end{vmatrix}-\begin{vmatrix}0&1\\1&1+k\end{vmatrix}\\
+				 &=-(k)-(-1)\\
+				 &=\color{red}{\boxed{\color{white}{1-k}}}
+				 \end{align*}
+				\]
+				
+			<p class="fragment fade-in">Thus the system is observable except when $k=1$</p>	
+		</section>
+	</section>
+
+	<section>
+		<h2 style="color:#00FF00">Lecture 16 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>the controllability matrix</li>													
+						<li>introduction to observability</li>
+					</ul><br>
+					<li>After this lecture you should </li>
+					<ul>
+						<li>be able to compute the controllability matrix for a system and use it to determine whether the system is controllable</li>												
+						<li>be aware of the concept of Observability and how it relates to Controllability</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 3</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L3</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Linear algebra background</li>
+			</span>
+			<br>
+			<li>Cayley-Hamilton theorem</li>
+			<br>			
+			<li>Minimal polynomial</li><br>			
+		</ul>
+	</section>		
+			
+			<section>
+				<section  align="left">					
+					
+					<p>Let us start by recalling some basic facts from linear algebra</p>
+
+					<ul>
+					<span class="fragment fade-in">
+						<li type="1"> <p>The <em>characteristic poloynomial</em> $\displaystyle \chi_A(\lambda)$ is given by the $n$th degree polynomial</p>
+						\[
+						\color{red}{\boxed{\color{white}{
+						\begin{align*}						
+						\chi_A(t)&=\left|A-t I_n\right|\\
+						&=t^n+a_1t^{n-1}+\cdots+a_{n-1}t +a_n						
+						\end{align*}
+						}}}
+						\]
+						</li></span>
+						<span class="fragment fade-in">
+						<li type="1"><p>If </p>
+						\[
+						 A\mathbf{u}=\lambda\mathbf{u}\quad \lambda\in\mathbb{R}, A\in\mathbb{R}^{n\times n}\quad \text{and}\quad \mathbf{0}\neq \mathbf{u}
+						\]
+						<p>then $\lambda$ is an <em>eigenvalue</em> of $A$ and $\mathbf{u}$ is an <em>eigenvector</em> of $A$</p>						
+						</li>
+						</span>
+						<br>
+						<span class="fragment fade-in">
+						<li type="1"><p>The eigenvalues of $A$ are the roots of the characteristic polynomial, <em>i.e.</em> solutions of the equation $\displaystyle \chi_A(\lambda)=0$</p></li>
+						</span>
+					</ul>
+				</section>
+								
+				<section  align="left">												
+
+					<ol start="4">					
+						<li type="1" start="4"> <p>The <em>algebraic multiplicity (AM)</em> of an eigenvalue $\lambda_i$ is the number of times $(t-\lambda_i)$ occurrs as a factor of 
+						$\displaystyle\chi_A(t)$</p>
+						
+						<p>For example</p>
+						\[
+						\chi_A(t) = (t-2)^2(t-1)(t+3)^3
+						\]
+						<p>has 3 distinct eigenvalues $\lambda_1=2$, $\lambda_2=1$ and $\lambda_3=-3$ with respective AMs of 2, 1 and 3</p>
+						</li>
+						
+						<span class="fragment fade-in">						
+						<li type="1"><p>The <em>geometric multiplicity (GM)</em> of an eigenvalue $\lambda_i$ is the dimension of the corresponding eigenspace, <em>i.e.</em> the number of 
+						free parameters needed to describe an eigenvector</p>								
+						</li>
+						
+						</span>			
+						<span class="fragment fade-in">						
+						<li type="1"><p>$A$ is <em>diagonalisable</em> iff we have that the AM=GM separately for <em>all</em> eigenvalues of $A$, <em>i.e.</em> there exists an invertible 
+						matrix $P$ such that </p>
+						\[
+						P^{-1}AP = D = \begin{bmatrix}\lambda_1&&\\&\ddots&\\&&\lambda_n\end{bmatrix}
+						\]						
+						</li>
+						</span>						
+					</ol>
+				</section>
+				
+				<section  align="left">					
+				<p>Recall from last weeks lecture that the matrix </p>
+				\[
+				 A = \begin{bmatrix}1&-1\\1&3\end{bmatrix}
+				\]
+				<p>is not invertible</p>
+				
+				<span class="fragment fade-in">		
+				<p>This follows since</p>
+				\[
+				\chi_A(t) = (t-2)^2 \quad \text{and}\quad \Biggl \{ \alpha\begin{bmatrix}-1\\1\end{bmatrix}: \alpha\in\mathbb{R} \Biggr \}
+				\]
+				<p>so that $AM=2\neq 1=GM$</p>
+				</span>
+				<p style="color:red" class="fragment fade-in"><b>It does however have a JNF</b></p>
+				</section>
+				
+				<section  align="left">					
+				<ol start="7">					
+					<li type="1"> <p>For any invertible matrix $Q$, the expression $\displaystyle A=QBQ^{-1}$ is called a <em>similarity transformation</em>
+					and the matrices $A$ and $B$ are said to be <em>similar</em></p>
+				</ol>
+				
+				<br><br>
+				<h3>Note</h3>
+				<br>
+				<ul>
+					<li class="fragment fade-in">From 6. we have that a matrix $A$ is similar to a diagonal matrix $D$ iff $AM=GM$ separately for <em>all</em> eigenvalues</li>
+					<br>
+					<li class="fragment fade-in">From the previous lecture we know that there always exists a similarity transformation $P$ such that $\displaystyle A=PJP^{-1}$</li>
+					<br>
+					<li class="fragment fade-in">Here $J$ is the <b style="color:red">Jordan normal form</b> of the matrix $A$</li>
+				</ul>
+			
+			</section>
+		</section>
+			 
+		<section>
+			
+			<section  align="left">						
+				<h3>Example 3.1</h3>
+				<p>The matrices </p>
+				\[
+				A_1 = \begin{bmatrix}1&0\\0&1\end{bmatrix}\quad \text{and}\quad A_2 = \begin{bmatrix}1&1\\0&1\end{bmatrix}
+				\]
+				<p>have the same characteristic polynomial given by</p>
+				\[
+				\chi_{A_1}(t) = \chi_{A_2}(t) = (t-1)^2
+				\]
+				<p>which implies $\lambda=1$ has AM=2 in both cases</p>				
+				<p class="fragment fade-in" style="color:red"><b>What about the GM?</b></p>
+				
+				<span class="fragment fade-in">
+				<p>The eigenspace of the matrix $A_1$ is calculated as </p>
+				\[
+				 \left(A_1-I_2\right)\mathbf{u}=0\implies \begin{bmatrix}0&0\\0&0\end{bmatrix}\begin{bmatrix}u^{(1)}\\u^{(2)}\end{bmatrix} = \mathbf{0}
+				\]
+				</span>
+				<p class="fragment fade-in"> and so the eigenspace is given by $\mathbb{R}^2$, <em>i.e.</em> 
+				$\color{#00FF00}{\boxed{\color{white}{\displaystyle \Biggl \{ \alpha\begin{bmatrix}1\\0\end{bmatrix}+\beta\begin{bmatrix}0\\1\end{bmatrix}: \alpha, \beta \in\mathbb{R} \Biggr \}}}}$</p>
+			</section>	
+						
+			<section  align="left">						
+			<p>The eigenspace of the matrix $A_2$ is calculated as </p>
+			\[
+				 \left(A_2-I_2\right)\mathbf{u}=0\implies \begin{bmatrix}0&1\\0&0\end{bmatrix}\begin{bmatrix}u^{(1)}\\u^{(2)}\end{bmatrix} = \mathbf{0} \implies u^{(2)}=0
+			\]
+			<span class="fragment fade-in">
+			<p>and so the eigenspace is given by</p>
+			\[
+			\Biggl \{ \alpha\begin{bmatrix}1\\0\end{bmatrix}: \alpha\in\mathbb{R} \Biggr \}
+			\]
+			</span>
+			<p class="fragment fade-in"> From the previous slides we see that for the matrix $A_1$ the eigenvalue $\lambda =1$ has $AM=2=GM$ and so $A_1$ is (trivially) diagonalisable</p> 
+			<p class="fragment fade-in"> For the matrix $A_2$ the eigenvalue $\lambda =1$ has $AM=2\neq 1=GM$ and so $A_2$ is <em>not</em> diagonalisable</p> 
+			
+			<b style="color:red" class="fragment fade-in">Of course in this simple example these observations could be deduced immediately; however, this will not typically be the case</b>
+			</section>	
+								
+		</section>		
+		
+		<!-- ################################################### -->
+        <!-- ################################################### -->
+		<section align="left">
+		<h1>Linear Systems L3</h1>
+		<br>
+		<ul>			
+			<li>Linear algebra background</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Cayley-Hamilton theorem</li>
+			</span>
+			<br>			
+			<li>Minimal polynomial</li><br>			
+		</ul>
+		</section>		
+		<!-- ################################################### -->
+        <!-- ################################################### -->
+	
+		<section  align="left">						
+			<h2>Cayley-Hamilton Theorem</h2>
+								<textBox touch-action="none" >
+			<boxTitle>
+				<h3>Theorem 3.1 &emsp;(Cayley-Hamilton Theorem)</h3>
+			</boxTitle>			
+			<p>A square matrix $A\in\mathbb{R}^{n\times n}$ satisfies its own characteristic equation, <em>i.e.</em></p>
+			\[
+			 \chi_A(A) = 0
+			\]
+			
+			</textBox>
+			<p class="fragment fade-in">The proof of this theorem lies outside the scope of the current course</p>
+			
+			<span class="fragment fade-in">
+			<h3>Example 3.2</h3>
+			
+			<div style="width: 50%; float:left;">  
+			<p>Let $\displaystyle A=\begin{bmatrix}1&1\\2&1\end{bmatrix}$ then</p>			
+			\[
+			\begin{align*}
+			\chi_A(t)&=\begin{vmatrix}1-t &-1\\-2&1-t\end{vmatrix}\\&=(t-1)^2-2 =\color{red}{\boxed{\color{white}{ t^2-2t-1}}}
+			\end{align*}
+			\]
+        </div>  
+  
+        <div class="fragment fade-in" style="width:50%; float:left;">  
+		\[
+		\implies\quad
+		\color{#00FF00}{\boxed{\color{white}{
+		 \begin{align*}
+		 \chi_A(A)&=\begin{bmatrix}1&1\\2&1\end{bmatrix}^2-2\begin{bmatrix}1&1\\2&1\end{bmatrix}-\begin{bmatrix}1&0\\0&1\end{bmatrix}\\
+		 &=\begin{bmatrix}3&2\\04&3\end{bmatrix}-\begin{bmatrix}2&2\\4&2\end{bmatrix}-\begin{bmatrix}1&0\\0&1\end{bmatrix}\\&=\begin{bmatrix}0&0\\0&0\end{bmatrix}
+		 \end{align*}
+		 }}}
+		\]
+        </div>  
+			</span>
+		</section>				
+		
+		<section>
+			<section  align="left">						
+			<p>We can sometimes use the C-H theorem to compute powers of a matrix</p>
+			
+			<h3>Example 3.3</h3>
+			<p>For the matrix $\displaystyle A=\begin{bmatrix}1&2\\3&4\end{bmatrix}$ we have </p>
+			\[
+			\chi_A(t) = \begin{vmatrix}1-t&-2\\-3&4-t\end{vmatrix} = t^2-5t-2
+			\]
+			<span class="fragment fade-in">
+			<p>So that</p>
+			\[
+			 A^2-5A-2I_2=0 \implies A^2=5A+2I_2
+			\]
+			<p>Now...</p>
+			</span>
+			</section>
+			
+			<section  align="left">						
+			<p>Using this result we can work out any power of $A$ in term sof $A$ and $I_2$</p>
+			
+			<p>Since $\displaystyle\color{#00FF00}{\boxed{\color{white}{A^2=5A+2I_2}}}$ we have that</p>
+			\[
+			\begin{align*}
+			A^3&=(5A+2I_2)A = 5A^2+2A = 5(5A+2I_2)+2A = 27A+10I_2\\
+			A^4&= A^3A=(27A+10I_2)A = 27A^2+10A = 27(5A+2I_2)+10A = 145A+54I_2
+			\end{align*}			
+			\]
+			<p><em>etc.</em></p>
+			
+			<span class="fragment fade-in">
+			<p>We can even work out the inverse of the matrix</p>
+			\[
+			A^2=5A+2I_2 \implies A^{-1}=\frac{A-5I_2}{2}
+			\]
+			</span>
+			<span class="fragment fade-in">
+			<p>Let's check this</p>
+			\[
+			 A^{-1}=\frac{1}{2}\begin{bmatrix}-2&2\\3&-1\end{bmatrix}\implies \frac{1}{2}\begin{bmatrix}-2&2\\3&-1\end{bmatrix}\begin{bmatrix}1&2\\3&4\end{bmatrix} =  \frac{1}{2}\begin{bmatrix}2&0\\0&2\end{bmatrix} = I_2
+			\]
+			<p>as required</p>
+			</span>
+			</section>
+		</section>
+		
+		<!-- ################################################### -->
+        <!-- ################################################### -->
+		<section align="left">
+		<h1>Linear Systems L3</h1>
+		<br>
+		<ul>			
+			<li>Linear algebra background</li>			
+			<br>			
+			<li>Cayley-Hamilton theorem</li>			
+			<br>
+			<span style="color: #00FF00"> 			
+			<li>Minimal polynomial</li><br>			
+			</span>
+		</ul>
+		</section>		
+		<!-- ################################################### -->
+        <!-- ################################################### -->
+		
+			
+		<section  align="left">						
+			<h2>Minimal Polynomial</h2>
+			<textBox touch-action="none" >
+			<boxTitle>
+				<h3>Definition 3.1 &emsp;(Minimal polynomial)</h3>
+			</boxTitle>			
+			<p>The <em>minimal polynomial</em> $\displaystyle m_A(t)$ of $A$ is the monic polynomial of least degree such that</p>
+			\[
+			m_A(A) = 0
+			\]
+			<p></p>
+			</textBox>
+			<br>
+			<span class="fragment fade-in">
+			<h3>Note</h3>
+			<ol>
+				<li><em>Monic</em> means that the coefficient of the highest power term of $m_A(t)$ is equal to 1</li>
+				<li>The minimal polynomial of $A$ is unique and divides the characteristic polynomial</li>
+				<li>This means that the factors of $m_A(t)$ are also factors of $\chi_A(t)$
+			</ol>
+			</span>
+			<br><br>
+			<b class="fragment fade-in" style="color:red">We can use this last fact to compute $m_A(t)$</b>
+		</section>
+			
+		<section  align="left">						
+			<h3>Example 3.4</h3>
+			<p>Consider $\displaystyle \chi_{A_2}(t)=(t-1)^2$ where $A_2$ is the matrix from Example 3.1</p>
+			<span class="fragment fade-in">
+			<p>Then we know $m_{A_2}(t)$ is either</p>
+			\[
+			 (t-1)^2\qquad \text{or} \qquad (t-1)
+			\]
+			</span>
+			<span class="fragment fade-in">
+			<p>Let's check</p>
+			\[
+			 A_2-I_2 = \begin{bmatrix}1&1\\0&1\end{bmatrix}-\begin{bmatrix}1&0\\0&1\end{bmatrix}=\begin{bmatrix}0&1\\0&0\end{bmatrix}\neq 0
+			\]
+			</span>
+			<span class="fragment fade-in">
+			<p>It follows that</p>
+			\[
+			 m_{A_2}(t) = (t-1)^2
+			\]
+			<p>In this instance $\color{#00FF00}{\boxed{\color{white}{m_{A_2}(t)=\chi_{A_2}(t)}}}$</p>
+				
+			</span>
+		</section>		
+		
+		<section>
+			<section  align="left">						
+				<h3>Example 3.5</h3>
+				<p>Find the minimal polynomial of the matrix $\displaystyle A_3 = \begin{bmatrix}1&1&0\\0&1&0\\0&0&1\end{bmatrix}$</p>
+				
+				<h3>Solution</h3>
+				<span class="fragment fade-in">		
+				<p>Since $A_3$ has eigenvalue $\lambda=1$ with AM=3 we have that</p>
+				\[
+				 \chi_{A_3}(t) = (t-1)^3
+				\]		
+				<p>And so $m_{A_3}(t)$ is either</p>
+				\[
+				 (t-1),\quad (t-1)^2\quad\text{or}\quad (t-1)^3
+				\]
+				</span>
+				<span class="fragment fade-in">		
+				<p>It should be clear that $A_3-I_3\neq 0$ and that $(A_3-I_3)^3=0$ (why?) and since</p>
+				\[
+				 (A_3-I_3)^2 = \begin{bmatrix}0&1&0\\0&0&0\\0&0&0\end{bmatrix}^2=0\implies \color{#00FF00}{\boxed{\color{white}{m_{A_3}(t) = (t-1)^2}}}
+				\]
+				</span>
+			</section>
+		</section>
+
+		<section>
+		<h2 style="color:#00FF00">Lecture 3 Review</h2>
+										
+		<br>
+		
+		<ul>			
+			<ul>						
+					<li>In this lecture we covered</li>
+					<ul>
+						<li>Linear algebra background</li>
+						<li>Cayley-Hamilton theorem</li>						
+						<li>Minimal polynomial</li>						
+					</ul><br>
+					<li>After this lecture you should </li>
+					<ul>
+						<li>recall the basics of linear algebra</li>
+						<li>know the Cayley-Hamilton theorem</li>						
+						<li>be able to compute the minimal polynomial and know how it relates to the Jordan structure of a matrix</li>						
+					</ul><br>					
+				</ul>			
+		</ul>
+		
+		</section>
+		<!-- ################################################### -->
+		<!-- ################################################### -->
+    </div>
+ </div>
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <script src="reveal.js/lib/js/head.min.js"></script>
+ <script src="reveal.js/js/reveal.js"></script>
+ <script>
+ // Full list of configuration options available here:
+ // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+          // width: 960,
+          // height:700,
+          controls: true,
+          progress: true,
+          history: true,
+          center: true,
+          theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+          // default/cube/page/concave/zoom/linear/fade/none
+          transition: Reveal.getQueryHash().transition || 'slide',
+
+          //// Optional libraries used to extend on reveal.js
+          dependencies: [
+            // { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            // { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; }},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+          ]
+        });
+        Reveal.configure({
+          keyboard: {
+            32: null // don't do anything when SPACE is pressed (i.e. disable a reveal.js default binding) document.body.style.cursor = 'none';
+          }
+        });
+        </script>
+		<!-- ################################################### -->
+        <!-- ################################################### -->
+        </div>
+        </div>
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+</body>
+</html>

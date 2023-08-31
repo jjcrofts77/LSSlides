@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 17</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L17</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Controllability and observability of discrete systems</li>
+			</span>
+			<br>
+			<li>Examples</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>Controllability and observability for discrete systems</h2>					
+			<font size="5">		
+			<p>Next, we briefly discuss controllability/observability for discrete systems of the form</p>					
+			\[
+			\begin{align*}
+			\mathbf{x}_{k+1}&=A\mathbf{x}_k+B\mathbf{u}_k\\
+			\mathbf{y}_{k+1}&=C\mathbf{x}_k
+			\end{align*}
+			\]
+			
+			<span class="fragment fade-in">
+			<p>Recall that we can solve for $\mathbf{x}_k$ as</p>
+			\[
+			 \mathbf{x}_k = A^k\mathbf{x}_0+\sum_{r=0}^{k-1}A^rB\mathbf{u}_{k-r-1}
+			\]
+			<p>Or, in the langauge of controllability</p>
+			\[
+			\mathbf{x}_f = A^n\mathbf{x}_0+\sum_{r=0}^{n-1}A^rB\mathbf{u}_{n-r-1}
+			\]
+			<p>For given $\mathbf{x}_0, \mathbf{x}_f$ and time $t_f=n$</p>
+			</span>
+			</font>
+		</section>
+		<section  align="left">		
+		<p>Now we can rearrange this to obtain</p>
+		\[
+		 \mathbf{x}_f-A^n\mathbf{x}_0 = \begin{bmatrix}B&AB&\ldots&A^{n-1}B\end{bmatrix}\begin{bmatrix}\mathbf{u}_{n-1}\\\mathbf{u}_{n-2}\\\vdots\\\mathbf{u}_0\end{bmatrix} = G\tilde{\mathbf{u}}
+		\]
+		<p>Where</p>
+		\[
+		\tilde{\mathbf{u}} = \begin{bmatrix}\mathbf{u}_{n-1}&\mathbf{u}_{n-2}&\vdots&\mathbf{u}_0\end{bmatrix}^T
+		\]
+		
+		<span class="fragment fade-in">
+		<p>The above system can be solved for any initial condition $\mathbf{x}_0$ provided the rank of $G$ is maximal <em>i.e.</em> </p>
+		\[\mathrm{rank}(G)=n
+		\]
+		<p class="fragment fade-in" style="color:red"><b>As for continuous systems a necessary and sufficient condition for controllability is that the controllability matrix be of full rank</b></p>
+		</section>
+	</section>
+			
+	<section>
+		<section  align="left">										
+		<h3>Example 17.1</h3>
+		<p>Let</p>
+		<font size="5">
+		\[
+		A=\begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}\qquad B=\begin{bmatrix}0\\1\\0\end{bmatrix}
+		\]
+		</font>
+		<p>Show that the system </p>
+		<font size="5">
+		\[
+		\mathbf{x}_{k+1}=A\mathbf{x}_k+B\mathbf{u}_k
+		\]
+		</font>
+		<p>is controllable and show that it can be taken from $\mathbf{x}_0=\mathbf{0}$ to $\displaystyle\mathbf{x}_f=\begin{bmatrix}5&-1&1\end{bmatrix}^T$ in three steps</p>
+		
+		<h3>Solution</h3>
+		<span class="fragment fade-in">			
+		<p>Start by computing $G$:</p>
+		<font size="5">
+		\[
+		 AB =\begin{bmatrix}1\\-2\\5\end{bmatrix} \quad A^2B = \begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}\begin{bmatrix}1\\-2\\5\end{bmatrix} = \begin{bmatrix}3\\-2\\3\end{bmatrix}
+		 \implies \color{red}{\boxed{\color{white}{G= \begin{bmatrix}0&1&3\\1&-2&-2\\0&5&3\end{bmatrix}}}}
+		\]
+		</font>
+		</section>
+		<section  align="left">														
+			\[
+			 \color{red}{\boxed{\color{white}{G= \begin{bmatrix}0&1&3\\1&-2&-2\\0&5&3\end{bmatrix}}}}
+			\]
+			<p>Computing the determinant</p>					
+			\[
+			 |G|=-1\begin{vmatrix}1&3\\5&3\end{vmatrix} = 12 \implies \text{the system is controllable}
+			\]
+			
+			
+			<span class="fragment fade-in">
+			<p>To show the system can be controlled in three steps we must solve</p> 
+			\[
+			\mathbf{x}_f-A^n\mathbf{x}_0 = G\tilde{\mathbf{u}} \implies
+			\begin{bmatrix}5\\-1\\1\end{bmatrix} = \begin{bmatrix}0&1&3\\1&-2&-2\\0&5&3\end{bmatrix}\begin{bmatrix}u_{2}\\u_{1}\\u_0\end{bmatrix}
+			\]
+			<p>to find controls $\{u_0, u_1, u_2\}$ </p>
+			</span>
+			
+			<span class="fragment fade-in">
+			<p>To solve this system we consider the augmented matrix</p>
+			\[
+			\begin{bmatrix}0&1&3&|&5\\1&-2&-2&|&-1\\0&5&3&|&1\end{bmatrix}
+			\]
+			</span>
+						
+		</section>
+		<section  align="left">	
+		<font size="5">		
+		<p>Using row operations</p>
+		\[
+			\begin{bmatrix}0&1&3&|&5\\1&-2&-2&|&-1\\0&5&3&|&1\end{bmatrix}\longrightarrow\begin{bmatrix}1&-2&-2&|&-1\\0&1&3&|&5\\0&0&1&|&2\end{bmatrix}
+		\]
+		<p>Thus</p>
+		\[
+		u_0=2\qquad u_1=5-3u_0=-1 \qquad u_2=-1+2u_1+2u_0=1
+		\]
+		<p>So $\quad\color{red}{\boxed{\color{white}{\displaystyle \{u_0, u_1, u_2\} = \{2, -1, 1\}}}}$</p>
+		
+		<span class="fragment fade-in">
+		<p>To see this works</p>
+		\[
+		\begin{align*}
+		k=0&\quad \mathbf{x}_1=\begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}\mathbf{0}+2\begin{bmatrix}0\\1\\0\end{bmatrix}=\begin{bmatrix}0\\2\\0\end{bmatrix}\\
+		k=1&\quad \mathbf{x}_2=\begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}\begin{bmatrix}0\\2\\0\end{bmatrix}-\begin{bmatrix}0\\1\\0\end{bmatrix}=\begin{bmatrix}2\\-5\\10\end{bmatrix}\\
+		k=2&\quad \mathbf{x}_3=\begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}\begin{bmatrix}2\\-5\\10\end{bmatrix}+\begin{bmatrix}0\\1\\0\end{bmatrix}=\begin{bmatrix}5\\-1\\1\end{bmatrix}=\mathbf{x}_f \quad \text{as required}
+		\end{align*}
+		\]
+		</span>
+		</font>
+		</section>
+	</section>
+			
+	 <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L17</h1>
+		<br>
+		<ul>			
+			<li>Controllability and observability of discrete systems</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Examples</li>	
+			</span>			
+		</ul>
+	</section>				
+			
+	<section>
+		<section  align="left">									
+		
+		<h3>Example 17.2</h3> 
+		<p>Determine the general form of $\mathbf{u}_0$, $\mathbf{u}_1$ and $\mathbf{u}_2$ if a system of 
+		difference equations of the form $\displaystyle \mathbf{x}_{k+1}=A\mathbf{x}_k+B\mathbf{u}_k$ where</p>
+		\[
+		 A=\begin{bmatrix}1&1&1\\-1&0&-1\\0&0&1\end{bmatrix}\qquad B=\begin{bmatrix}0&0\\1&1\\1&0\end{bmatrix}
+		\]
+		<p>is to be controlled from $\mathbf{x}_0=\mathbf{0}$ to $\displaystyle\mathbf{x}_3=\begin{bmatrix}1&1&1\end{bmatrix}^T$</p>
+		
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		<p>Start by computing $G$:</p>
+		<font size="5">
+		\[
+		 AB =\begin{bmatrix}1&1&1\\-1&0&-1\\0&0&1\end{bmatrix}\begin{bmatrix}0&0\\1&1\\1&0\end{bmatrix}= \begin{bmatrix}2&1\\-1&0\\1&0\end{bmatrix} \qquad 
+		 A^2B = \begin{bmatrix}1&1&1\\-1&0&-1\\0&0&1\end{bmatrix}\begin{bmatrix}2&1\\-1&0\\1&0\end{bmatrix} = \begin{bmatrix}2&1\\-3&-1\\1&0\end{bmatrix}		 		 
+		\]
+		</font>
+		</span>
+		</section>
+		
+		<section  align="left">									
+		<p>Thus</p>
+		\[
+		 
+		 \color{red}{\boxed{\color{white}{G= \begin{bmatrix}0&0&2&1&2&1\\1&1&-1&0&-3&-1\\1&0&1&0&1&0\end{bmatrix}}}}
+		\]
+		<p>Using row operations</p>
+		\[
+		 \begin{bmatrix}0&0&2&1&2&1\\1&1&-1&0&-3&-1\\1&0&1&0&1&0\end{bmatrix}\longrightarrow
+		 \begin{bmatrix}1&0&1&0&1&0\\0&1&-2&0&-4&1\\0&0&2&1&2&1\end{bmatrix}
+		\]
+		<p>We see that the matrix $G$ has full rank <em>i.e.</em></p>		
+		\[
+		\mathrm{rank}(G)=3
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Thus we need to solve </p>
+		\[
+		\color{red}{\boxed{\color{white}{\mathbf{x}_f-A^3\mathbf{x}_0 = G\tilde{\mathbf{u}}:\qquad \tilde{\mathbf{u}}=\begin{bmatrix}\mathbf{u}_2&\mathbf{u}_1&\mathbf{u}_0\end{bmatrix}^T\quad \mathbf{u}_i\in\mathbb{R}^2}}}
+		\]
+		<p>to determine the controls $\displaystyle \{\mathbf{u}_0, \mathbf{u}_1, \mathbf{u}_2\}$</p>
+		</span>
+		</section>
+		
+		<section  align="left">									
+		<p>Thus we need to solve</p>
+		\[
+		\mathbf{x}_f=G\tilde{\mathbf{u}}\quad \implies \quad \begin{bmatrix}1\\1\\1\end{bmatrix} = \begin{bmatrix}0&0&2&1&2&1\\1&1&-1&0&-3&-1\\1&0&1&0&1&0\end{bmatrix}\begin{bmatrix}u_2^{(1)}\\u_2^{(2)}\\u_1^{(1)}\\u_1^{(2)}\\u_0^{(1)}\\u_0^{(2)}\end{bmatrix}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Looking at the augmented matrix</p>
+		\[
+		\begin{bmatrix}0&0&2&1&2&1&|&1\\1&1&-1&0&-3&-1&|&1\\1&0&1&0&1&0&|&1\end{bmatrix}\longrightarrow\begin{bmatrix}1&0&1&0&1&0&|&1\\0&1&-2&0&-4&-1&|&0\\0&0&2&1&2&1&|&1\end{bmatrix}
+		\]
+		<p>We have 3 equations and 6 unknowns so we set </p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		 u_0^{(2)}=2\alpha\quad u_0^{(1)}=\beta \quad u_1^{(2)}=2\gamma
+		 }}}
+		\]
+		<p>and solve for the remaining variables</p>
+		</span>
+		</section>
+		
+		<section  align="left">			
+		\[
+		\color{red}{\boxed{\color{white}{
+		 u_0^{(2)}=2\alpha\quad u_0^{(1)}=\beta \quad u_1^{(2)}=2\gamma
+		 }}}
+		\]
+		<p>So that</p>
+		<font size="5">
+		\[
+		\begin{align*}
+		 u_1^{(1)} &= \frac{1}{2}-\alpha-\beta-\gamma\\
+		 u_2^{(2)} &= 2\alpha+4\beta+2u_1^{(1)}\\
+		 &= 2\alpha+4\beta+2\left(\frac{1}{2}-\alpha-\beta-\gamma\right)= 1+2\beta-2\gamma\\
+		 u_2^{(1)}& = 1-\beta-u_1^{(1)}\\
+		 &=1-\beta-\left(\frac{1}{2}-\alpha-\beta-\gamma\right) = \frac{1}{2}+\alpha+\gamma
+		 \end{align*}
+		\]
+		</font>
+		</font>
+		<span class="fragment fade-in">
+		<p>Thus</p>
+		<font size="5">
+		\[
+		\color{#00FF00}{\boxed{\color{white}{
+		\tilde{\mathbf{u}} = \begin{bmatrix}\frac{1}{2}+\alpha+\gamma\\1+2\beta-2\gamma\\\frac{1}{2}-\alpha-\beta-\gamma\\2\gamma\\\beta\\2\alpha\end{bmatrix}
+		}}}
+		\]
+		</font>
+		</span>
+		</section>
+		
+		<section  align="left">			
+		<p>Our controls are given by</p>
+		\[
+		\mathbf{u}_0=\begin{bmatrix}\beta\\2\alpha\end{bmatrix}\qquad \mathbf{u}_1=\begin{bmatrix}\frac{1}{2}-\alpha-\beta-\gamma\\2\gamma\end{bmatrix}
+		\qquad\mathbf{u}_2=\begin{bmatrix}\frac{1}{2}+\alpha+\gamma\\1+2\beta-2\gamma\end{bmatrix}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Lets test this</p>
+		\[
+		\begin{align*}
+		k=0&\quad \mathbf{x}_1=\begin{bmatrix}1&1&1\\-1&0&-1\\0&0&1\end{bmatrix}\mathbf{0}+\begin{bmatrix}0&0\\1&1\\1&0\end{bmatrix}\begin{bmatrix}\beta\\2\alpha\end{bmatrix}=\begin{bmatrix}0\\2\alpha+\beta\\\beta\end{bmatrix}\\
+		k=1&\quad \mathbf{x}_2=\begin{bmatrix}1&1&1\\-1&0&-1\\0&0&1\end{bmatrix}\begin{bmatrix}0\\2\alpha+
+		\beta\\\beta\end{bmatrix}+\begin{bmatrix}0&0\\1&1\\1&0\end{bmatrix}\begin{bmatrix}\frac{1}{2}-\alpha-\beta-\gamma\\2\gamma\end{bmatrix}=\begin{bmatrix}2\alpha+2\beta\\\frac{1}{2}-\alpha-2\beta+\gamma\\\frac{1}{2}-\alpha-\gamma\end{bmatrix}\\
+		k=2&\quad \mathbf{x}_3=\begin{bmatrix}1&1&1\\-1&0&-1\\0&0&1\end{bmatrix}\begin{bmatrix}2\alpha+2\beta\\\frac{1}{2}-\alpha-2\beta+\gamma\\\frac{1}{2}-\alpha-\gamma\end{bmatrix}+
+		\begin{bmatrix}0&0\\1&1\\1&0\end{bmatrix}\begin{bmatrix}\frac{1}{2}+\alpha+\gamma\\1+2\beta-2\gamma\end{bmatrix}=\begin{bmatrix}1\\1\\1\end{bmatrix}=\mathbf{x}_f 
+		\end{align*}
+		\]
+		<p>as required</p>
+		</span>
+		
+		<p class="fragment fade-in" style="color:red"><b>You should check the above working as an exercise</b></p>
+		</section>
+	</section>
+
+
+	<section>
+		<h2 style="color:#00FF00">Lecture 17 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>the observability matrix</li>													
+						<li>controllability and observability in discrete systems</li>
+					</ul><br>
+					<li>After this lecture you should</li>
+					<ul>
+						<li>be able to solve simple problems in controllability and observability</li>												
+						<li>be able to use the observability matrix to determine observability properties of a system</li>												
+						<li>know how to extend the ideas introduced to the discrete setting</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

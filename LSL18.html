@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 18</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L18</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Introduction to linear stability</li>
+			</span>
+			<br>
+			<li>Routh-Hurwitz criteria</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>Introduction to stability</h2>		
+			<font size="5">
+			<p>System stability is important for many reasons</p> 
+			<ul>
+				<li> In engineering, we need to know whether a structure will remain standing if it is hit by a strong gust of wind.</li> 
+				<li> In physics, we need to know whether a laser will continue to lase if it is perturbed by a small amount of noise</li> 
+				<li> And in biology, we need to know whether a population will remain stable or become extinct if it is subjected to a 
+				change in its environment</li>
+			</ul>			
+					
+			<p>In this course we restrict to questions of stability for equilibria of linear systems</p>											
+			
+			<span class="fragment fade-in">
+			
+			<p>For a linear system of the form</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}: \quad t \geq 0
+			}}}
+			\]
+			<p>an <em>equilibrium (or fixed) point</em> $x^*$ is a point satisfying the equation</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			 A\mathbf{x}^*=\mathbf{0}
+			 }}}
+			\]
+			<p>Such a point is stable if after a perutbation away from $\mathbf{x}^*$ the system returns to $\mathbf{x}^*$</p>
+			
+			<span>
+			</font>
+						
+		</section>
+		<section  align="left">		
+		<p>Let us place the previously discussed ideas of stability on firmer ground</p>
+		
+		<p>We call the unforced (or homogeneous) system the <em>free system</em></p>
+		
+		\[
+		\color{red}{\boxed{\color{white}{
+			\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}: \quad t \geq 0
+			}}}
+		\]
+		
+		<p>The obvious equilibrium point for the free system is the point $\mathbf{x}^*=\mathbf{0}$ and in fact this
+		is the only one we need consider</p>
+		
+		<span class="fragment fade-in">
+		<p>To see this, suppose $\mathbf{x}^*=\mathbf{u}$ is a non-zero equilibrium, then we can make the following change of coordinates:</p>
+		\[
+		\mathbf{y}=\mathbf{x}-\mathbf{u} \implies \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}\longrightarrow \frac{\mathrm{d}\mathbf{y}}{\mathrm{d}t}  = A\mathbf{y}
+		\]
+		<p>That is we can move the fixed point to the origin via a change of coordinates and analyse its stability as with the trivial fixed point</p>
+		</span>
+							
+		</section>
+		
+		<section  align="left">	
+		<span>
+		<textBox touch-action="none">
+            <boxTitle>
+              <h3>Definition 18.1 (stability)</h3>
+            </boxTitle>
+			<p>We say that the equilibrium solution $\mathbf{x}^*=\mathbf{0}$ of the free system is stable if given $\epsilon>0$ there exists a $\delta>0$ such that</p>            
+			\[
+			||\mathbf{x}(t)||<\epsilon \quad \forall t\geq 0
+			\]
+			<p>Provided $\displaystyle ||\mathbf{x}(0)||<\delta$</p>
+          </textBox>
+		</span>
+		
+		<div class="fragment fade-in">
+			<div style="float: left; width: 50%">
+			<img src="figures/LyapunovStab.png" style="position:absolute;top:400px;left:0px;border: 3px solid #00FF00" height="250">
+			</div>
+			<div class="r-stack" style="float: right; width: 50%">
+            <!-- Content for the second section -->            
+			
+			<br>
+			<ul>
+			<li><p>It is helpful to conisder what this means geometrically</p></li>
+			
+			<li><p>The solution $\mathbf{x}^*$ is stable if after a 'small' perturbation the solution remains 'nearby'</p></li>
+			
+			</ul>
+			
+			</div>
+		</div>
+		</section>
+		
+		<section  align="left">										
+		<p>There is a stronger form of stability</p>
+		
+		<img style="margin:0px;padding:0px;position:absolute;top:125px;left:0px"				
+				height="250"					
+				src="figures/StabVsAsym.png">
+				
+				<br><br><br><br><br><br><br><br><br>
+				<p>We say that the solution $\mathbf{x}^*$ is <em>asymptotically stable</em> if $\mathbf{x}(t)\to\mathbf{x}^*=\mathbf{0}$ whatever the initial perturbation</p>
+					
+		</section>
+		
+	</section>
+			
+	<section>
+		
+		<section  align="left">											
+		<h3>Example 18.1</h3>
+			<p>Let</p>
+			\[
+			 A = \begin{bmatrix}0&1\\-1&0\end{bmatrix}
+			\]
+			<p>Then clearly $\mathbf{x}^*=0$ is an equilibrium solution</p>
+			
+			<span class="fragment fade-in">
+			<p>Recalling that</p>
+			\[
+			 e^{At} = \begin{bmatrix}\cos{t}&\sin{t}\\-\sin{t}&\cos{t}\end{bmatrix}
+			\]
+			<p>Then for $\displaystyle \mathbf{x}(0)=\begin{bmatrix}x^{(1)}(0)&x^{(2)}(0)\end{bmatrix}^T$ we have</p>
+			\[
+			\begin{align*}
+			 \mathbf{x}(t) = e^{At}\mathbf{x}_0 &=\begin{bmatrix}\cos{t}&\sin{t}\\-\sin{t}&\cos{t}\end{bmatrix}\begin{bmatrix}x^{(1)}(0)\\x^{(2)}(0)\end{bmatrix}\\
+			 &=\begin{bmatrix}x^{(1)}(0)\cos{t}+x^{(2)}(0)\sin{t}\\-x^{(1)}(0)\sin{t}+x^{(2)}(0)\cos{t}\end{bmatrix}			 
+			\end{align*}						
+			\]
+			</span>
+			
+			
+		</section>
+		<section  align="left">									
+		 <p>It follows that</p>
+		 \[
+		  \begin{align*}
+		  ||\mathbf{x}(t)||_2^2 &= \left(x^{(1)}\cos{t}+x^{(2)}\sin{t}\right)^2+\left(-x^{(1)}\sin{t}+x^{(2)}\cos{t}\right)^2\\
+		  &=(x^{(2)})^2+(x^{(1)})^2\\
+		  &=||\mathbf{x}(0)||_2^2\\		  
+		  \end{align*}
+		 \]
+		 
+		 <br>
+		 <span class="fragment fade-in">
+		 <p>Recall that the 2-norm of a vector $\displaystyle \mathbf{x} = \begin{bmatrix}x^{(1)}&x^{(2)}&\ldots&x^{(n)}\end{bmatrix}^T$ is given by</p>
+		 \[
+		  ||\mathbf{x}||_2 = \sqrt{x^{(1)}+x^{(2)}+\cdots x^{(n)}}
+		 \]
+		 </span>
+		 
+		 <br>
+		 <p class="fragment fade-in">What this all means, is that solutions of our ODE lie on a cylinder of radius $\displaystyle ||\mathbf{x}_0||_2$, that is, the system is stable 
+		 but it is <em>not</em> asymptotically stable</p>
+		</section>
+	</section>
+	
+	<section>
+		<section  align="left">									
+		<p>Considerations of stability can be related to the eigenvalues of the matrix $A$</p>
+		
+		<p>To see this recall that the solution of the system</p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}:\quad \mathbf{x}(0)=\mathbf{x}_0
+		\]
+		<p>is given by</p>
+		\[
+		 \mathbf{x}(t)=e^{At}\mathbf{x}_0=He^{Jt}H^{-1}\mathbf{x}_0 \qquad \text{(here } A=HJH^{-1})
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Now for the Jordan matrix</p>
+		\[
+		 J = \begin{bmatrix}J_{n_1}&0&\cdots&0\\&J_{n_2}&\ddots&\vdots\\&&\ddots&0\\&&&J_{n_k}\end{bmatrix}\quad\text{with}\quad 
+		 J_{n_i} = \begin{bmatrix}\lambda_i&1&\cdots&0\\&\lambda_i&\ddots&\vdots\\&&\ddots&1\\&&&\lambda_i\end{bmatrix}
+		\]
+		<p>so that ...</p>
+		</span>
+		</section>
+		
+		<section  align="left">									
+		\[
+		e^{Jt} = \begin{bmatrix}e^{J_{n_1}t}&0&\cdots&0\\&e^{J_{n_2}t}&\ddots&\vdots\\&&\ddots&0\\&&&e^{J_{n_k}t}\end{bmatrix}
+		\]
+		<p>With $\displaystyle e^{J_{n_i}t}$ being either</p>
+		\[
+		e^{\lambda_it}\begin{bmatrix}1&0&\cdots&0\\&1&\ddots&\vdots\\&&\ddots&0\\&&&1\end{bmatrix}\in\mathbb{R}^{n_i\times n_i} \quad\text{or}\quad
+		e^{\lambda_it}\begin{bmatrix}1&t&\cdots&\frac{1}{(n_i-1)!}t^{n_i-1}\\&1&\ddots&\vdots\\&&\ddots&t\\&&&1\end{bmatrix}\in\mathbb{R}^{n_i\times n_i}
+		\]
+		
+		<p>It follows that we can write</p>
+		\[
+		 \mathbf{x}(t) = He^{Jt}H^{-1} = \sum_{i=1}^kP_i(t)e^{\lambda_it}
+		\]
+		<p>Where the $P_i(t)$ is a vector-valued function whose components are polynomials</p> 
+		</section>
+		
+		<section  align="left">									
+		\[
+		\color{red}{\boxed{\color{white}{
+		 \mathbf{x}(t) = He^{Jt}H^{-1} = \sum_{i=1}^kP_i(t)e^{\lambda_it}
+		 }}}
+		\]
+		
+		<br>
+		
+		<p>From the above result we can deduce the following:</p>
+		
+		<ol>
+			<li>If <em>any</em> eigenvalues of $A$ have positive real part then the free system is unstable</li><br>
+			<li class="fragment fade-in">If <em>all</em> eigenvalues of $A$ have negative real part then the free system is asymptotically stable or a. stable</li><br>
+			<li class="fragment fade-in">If all eigenvalues of $A$ have non-positive real part and any that have zero real part are simple (<em>i.e.</em> not repeated)
+			 then the system is stable</li>
+		</ol>
+		
+		<p class="fragment fade-in">This follows since exponential decay beats polynomial growth</p>
+		</section>
+	</section>
+	
+	<section>
+		<section  align="left">									
+		<h3>Example 18.2</h3>
+		<p>Suppose that $A=HJH^{-1}$ where $J$ is one of either</p>
+		<font size="5">
+		\[
+		\begin{bmatrix}-1&0&0\\0&-1&1\\0&0&-1\end{bmatrix}\qquad  \begin{bmatrix}i&&&\\&-i&&\\&&-2&\\&&&-1\end{bmatrix}\qquad  \begin{bmatrix}-1&0&0\\0&1&1\\0&0&1\end{bmatrix}
+		\]
+		</font>
+		<p>Determine the stability properties of a system of the form</p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}:\quad \mathbf{x}(0)=\mathbf{x}_0
+		\]
+		<p>in each case</p>
+	
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		
+		<font size="5">
+		\[
+		\begin{bmatrix}-1&0&0\\0&-1&1\\0&0&-1\end{bmatrix}\longrightarrow 
+		e^{Jt} = \begin{bmatrix}e^{-t}&0&0\\0&e^{-t}&te^{-t}\\0&0&e^{-t}\end{bmatrix}	\to 0 \quad\text{as}\quad t\to\infty	
+		\]
+		</font>
+		<p>All eigenvalues $\lambda_{1,2,3}=-1$ have negative real part so $\mathbf{x}^*=0$ is a. stable</p>
+		</span>
+		</section>
+		
+		<section  align="left">									
+		<p>Next</p>
+		\[
+		\begin{bmatrix}i&&&\\&-i&&\\&&-2&\\&&&-1\end{bmatrix}\longrightarrow 
+		e^{Jt} = \begin{bmatrix}e^{it}&0&0&0\\0&e^{-it}&0&0\\0&0&e^{-2t}&0\\0&0&0&e^{-t}\end{bmatrix}	\implies \text{stable but {\bf not} a. stable}
+		\]
+		</font>
+		<p>This follows since the $\displaystyle e^{\pm it}=\cos{t}\pm i\sin{t}$ terms are bounded (<em>i.e.</em> they do not grow (or shrink))</p>
+		
+		<br>
+		<span class="fragment fade-in">
+		<p>Finally</p>
+		\[
+		\begin{bmatrix}-1&0&0\\0&1&1\\0&0&1\end{bmatrix}\longrightarrow 
+		e^{Jt} = \begin{bmatrix}e^{-t}&0&0\\0&e^t&te^t\\0&0&e^t\end{bmatrix}	\implies \text{unstable}
+		\]
+		<p>The equilibrium solution is unstable since the $e^t$ terms tend to infinity as $t\to\infty$</p>
+		
+		<p> We have that $\lambda_{2,3}=1>0$</p>
+		</span>
+		</section>		
+	</section>		
+	
+	<!-- ################################################### -->
+    <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L18</h1>
+		<br>
+		<ul>			
+			<li>Introduction to linear stability</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Routh-Hurwitz criteria</li>			
+			</span>
+		</ul>
+	</section>				
+			
+
+	
+	<section  align="left">									
+		<h2>Routh-Hurwitz criteria</h2>
+		
+		<p>A useful test for determining whether a matrix has all eigenvalues with negative real part is the
+		<em>Routh-Hurwitz stability criteria</em></p>
+		
+		<span class="fragment fade-in">
+		<p>Suppose the characteristic polynomial is given by</p>
+		\[
+		\chi_A(t) t^n+a_1t^{n-1}+a_2t^{n-2}+\cdots+a_{n-1}t+a_n
+		\]
+		<p>Then we construct the <em>Routh-Hurwitz matrix</em> as follows</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		H = \begin{bmatrix}a_1&a_3&a_5&\ldots&a_{2n-1}\\1&a_2&a_4&\ldots&a_{2n-2}\\
+		0&a_1&a_3&\ldots&a_{2n-3}\\\vdots&&&&\vdots\\0&\ldots&0&\ldots&a_n\end{bmatrix}
+		}}}
+		\]
+		<p>Alongside the condition that $a_i=0$ for $i>n$</p>
+		</span>
+	</section>
+	
+	<section>
+		<section  align="left">									
+		<h3>Example 18.3</h3>
+		<p>If a matrix has characteristic polynomial</p>
+		\[
+		\chi_A(t) = t^4+8t^3+19t^2+33t+36
+		\] 		
+		<p>Then</p>
+		\[
+		 H =\begin{bmatrix}8&33&0&0\\1&19&36&0\\0&8&33&0\\0&1&19&36\end{bmatrix}
+		\]
+		<span class="fragment fade-in">
+		<p>And so</p>
+		<font size="5">
+		\[
+		\begin{align*}
+		 H_1&=8 \quad H_2=\begin{vmatrix}8&33\\1&19\end{vmatrix}=119\\
+		 H_3&=\begin{vmatrix}8&33&0\\1&19&36\\0&8&33\end{vmatrix} = 
+		 8\begin{vmatrix}19&36\\8&33\end{vmatrix}-33\begin{vmatrix}1&36\\0&33\end{vmatrix} = 1623
+		\end{align*}
+		\]
+		</font>
+		<p>And $H_4=36|H_3|>0 \implies$ the free system is a. stable</p>
+		</span>
+		</section>
+	
+		<section  align="left">											
+		<p>In fact, the characteristic polynomial can be factorised as</p>
+		\[
+		 \chi_A(t) = (t+3)(t+4)(t^2+t+3)
+		\]
+		<p>Which leads to</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		 \lambda_1=-3\quad\lambda_2=-4\quad\text{and}\quad \lambda_{3,4}=\frac{-1\pm\sqrt{11}i}{2}
+		 }}}
+		\]
+		
+		<br>
+		 <span class="fragment fade-in">
+		 <h3>Note</h3>
+		 <ol>
+		  <li>If any of the coefficients of the characteristic polynomial are non-positive then the free system is <em>not</em> a. stable</li>
+		  <li class="fragment fade-in"><p>In the case of a quadratic of the form</p>
+		  \[
+		   \chi_A(t)=t^2+at+b
+		  \]
+		  <p>the resulting eigenvalues have negative real part iff $a, b>0$</p>
+		  
+		  <p class="fragment fade-in" style="color:red"><b>It is left as an exercise to prove this</b></p>
+		  </li>
+		 </ol>
+		 </span>
+		
+		</section>
+	</section>
+		
+	
+	<section>
+		<h2 style="color:#00FF00">Lecture 18 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>introduction to stability</li>													
+						<li>Routh-Hurwitz stability criteria</li>
+					</ul><br>
+					<li>After this lecture you should</li>
+					<ul>
+						<li>be able to determine stability properties of both discrete and continuous systems</li>												
+						<li>be able to use the Routh-Hurwitz criteria to determine whether a matrix has all eigenvalues with strictly negative real parts</li>
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

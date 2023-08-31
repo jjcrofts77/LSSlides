@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 7</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L7</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Powers of a Jordan block</li>
+			<ul>
+				<li>Examples</li>
+			</ul>
+			</span>
+			<br>
+			<li>Introduction to systems of ODEs</li>
+			<br>
+			<li>Examples</li>
+		</ul>
+	</section>			
+			
+		
+	<section>
+		<section  align="left">		
+			<h2>Powers of a Jordan block</h2>
+			
+			<p>Consider the $n$ by $n$ Jordan block</p>
+			
+			\[
+			J_n(\lambda) = \begin{bmatrix}\lambda &1&0&\cdots &0&0\\
+			0& \lambda &1&\cdots &0&0\\
+			0&0&\lambda &\ddots &0&0\\
+			\vdots &\vdots&\vdots&\ddots&\ddots&\vdots\\ 
+			0&0&0&\cdots&\lambda&1\\ 
+			0&0&0&\cdots&0&\lambda\end{bmatrix} = \lambda I_n + K
+			\]
+			<p>where</p>
+			\[
+			 K = \begin{bmatrix}0&1&\cdots&0\\\vdots&\ddots&\ddots&0\\
+			 0&\cdots &0&1\\0&0&\cdots&0\end{bmatrix} = 
+			 \begin{bmatrix}0&I_{n-1}\\0&0\end{bmatrix}\in\mathbb{R}^{n\times n}
+			\]
+		</section>
+				
+		<section  align="left">									
+			<p>For such a block </p>
+			\[
+			\begin{align*}
+			 J_n^r &= \left(\lambda I_n+K\right)^r\\
+			 &=\lambda^rI_n+r\lambda^{r-1}K+\frac{r(r-1)}{2}\lambda^{r-2}K^2+\cdots+K^r\\
+			 &= \sum_{s=0}^r {r\choose s}\lambda^{r-s}K^s
+			\end{align*}
+			\]
+		<p>This follows via application of the <em>Binomial theorem</em></p> 	
+		\[
+		 (x+y)^n = \sum_{k=0}^n {n \choose k}x^{n-k}y^k\quad\text{where}\quad {n\choose k} = \frac{n!}{(n-k)!k!}
+		\]
+		<p>Now it can be shown that </p>
+		\[
+		 K^r = \begin{bmatrix}0&I_{n-r}\\0&0\end{bmatrix} \quad \text{(exercise)}
+		\]
+		<p>For $r < n $ and $\displaystyle K^r=0$ if $r\geq n$</p>
+
+		</section>
+		
+		<section  align="left">									
+		<p>Assuming $r\geq n$ we can rewrite: $\displaystyle\quad J_n^r(\lambda) = \sum_{s=0}^r {r\choose s}\lambda^{r-s}K^s = \sum_{s=0}^{n-1} {r\choose s}\lambda^{r-s}K^s$</p>
+		
+		<font size="5.5">
+		<p>And so</p>
+		\[
+		\begin{align*}
+		J_n^r(\lambda)&=\sum_{s=0}^{n-1} {r\choose s}\lambda^{r-s}K^s\\
+		&=\begin{bmatrix}1&&&\\&1&&\\&&\ddots&\\&&&1\end{bmatrix}\lambda^r+
+		\begin{bmatrix}
+		0 & 1 & \cdots & 0\\ 		
+		 \vdots& \ddots &\ddots & 0\\
+		0 & \cdots &0 & 1\\
+		0 & 0& \cdots &0
+		\end{bmatrix}{r \choose 1}\lambda^{r-1}+\cdots\\
+		&+\begin{bmatrix}0&\cdots&0&1\\ 0&\cdots&0&0\\\vdots&&\vdots&\vdots\\
+		0&\cdots&0&0\end{bmatrix}{r\choose n-1}\lambda^{r-n+1} = 
+		\color{red}{\boxed{\color{white}{
+		\begin{bmatrix}\lambda^r&{r\choose 1}\lambda^{r-1}&\cdots&\cdots&{r\choose n-1}\lambda^{r-n+1}\\
+		0&\lambda^r&{r\choose 1}\lambda^{r-1}&&\vdots\\
+		\vdots&&\ddots&\ddots&\vdots\\
+		\vdots&&&&{r\choose 1}\lambda^{r-1}&\\
+		0&\cdots&\cdots&0&\lambda^r
+		\end{bmatrix}		}}}
+		\end{align*}
+		\]
+		</font>
+		</section>
+								
+	</section>	
+			
+	<section>
+		<section  align="left">									
+			<h3>Example 7.1 </h3> 
+			<p>Let $n=4$ then</p>
+			\[
+				J_4(\lambda) = \begin{bmatrix}\lambda^r&{r\choose 1}\lambda^{r-1}&{r\choose 2}\lambda^{r-2}&{r\choose 3}\lambda^{r-3}\\
+				0&\lambda^r&{r\choose 1}\lambda^{r-1}&{r\choose 2}\lambda^{r-2}\\
+				0&0&\lambda^r&{r\choose 1}\lambda^{r-1}\\0&0&0&\lambda^r
+				\end{bmatrix}
+			\]
+			<span class="fragment fade-in">
+			<p>So, for example</p>
+			
+			\[
+			\left(J_4(2)\right)^5 = \begin{bmatrix}32&80&80&40\\0&32&80&80\\0&0&32&80\\0&0&0&32\end{bmatrix}
+			\]
+			</span>
+			<p class="fragment fade-in">This follows since $\displaystyle{5\choose 1}=5$ and $\displaystyle {5\choose 2}={5\choose 3}=10$</p>
+		</section>
+				
+					
+	</section>	
+	
+	<section  align="left">									
+		<p>Given these results we compute powers of Jordan matrices since if</p>
+		
+		\[
+		J = \begin{bmatrix}J_{n_1}&&&\\&J_{n_1}&&\\&&J_{n_1}&\\&&&J_{n_1}\end{bmatrix} \implies J^r = \begin{bmatrix}J_{n_1}^r&&&\\&J_{n_1}^r&&\\&&J_{n_1}^r&\\&&&J_{n_1}^r\end{bmatrix}
+		\]
+		<p><em>i.e.</em> we just compute the powers of the individual Jordan blocks</p>
+		
+		<span class="fragment fade-in">
+		<h3>Note</h3>
+		<p>From the above we observe the following properties</p>
+		</span>
+		<ol>
+		<li class="fragment fade-in">$\displaystyle \quad J^r\longrightarrow 0$ if $\displaystyle |\lambda|<1$</li><br>
+		<li class="fragment fade-in">$\displaystyle \quad J^r$ is unbounded if $\displaystyle |\lambda|>1$</li><br>
+		<li class="fragment fade-in">$\displaystyle \quad J^r$ is unbounded if $\displaystyle |\lambda|=1$ unless $n=1$</li>
+		</ol>
+		
+	</section>							
+		
+	<section>		
+		<section  align="left">									
+		
+		<h3>Example 7.2</h3>		
+		<p>Let</p>
+		\[
+		J = \begin{bmatrix}J_1(2)&&\\&J_2(3)&\\&&J_3(4)\end{bmatrix} = \begin{bmatrix}2&&&&&\\&3&1&&&\\&0&3&&&\\&&&4&1&0\\&&&0&4&1\\&&&0&0&4\end{bmatrix}
+		\]
+		<span class="fragment fade-in">
+		<p>Then since</p>
+		\[
+		 J_1(2)^3=8\quad J_2(3)^3=\begin{bmatrix}3&1\\0&3\end{bmatrix}^3=\begin{bmatrix}27&3\cdot 3^2\\0&27\end{bmatrix}=\begin{bmatrix}27&27\\0&27\end{bmatrix}
+		\]
+		<p>And</p>
+		\[
+		 J_3(4)^3=\begin{bmatrix}4&1&0\\0&4&1\\0&0&4\end{bmatrix}^3=\begin{bmatrix}64&3\cdot 4^2&3\cdot 4\\0&64&3\cdot 4^2\\0&0&64\end{bmatrix}
+		 =\begin{bmatrix}64&48&12\\0&64&48\\0&0&64\end{bmatrix}
+		\]
+		</span>
+		</section>
+		
+		<section  align="left">									
+		<p>We have that</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		J^3 = \begin{bmatrix}8&&&&\\&27&27&&\\&0&27&&\\&&64&48&12\\&&0&64&48\\&&0&0&64\end{bmatrix}
+		}}}		
+		\]
+		
+		<br>
+		<p>This will be extremely usefulwhen solving systems of difference equations later on in the course</p>
+		</section>
+	</section>		
+	 <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L7</h1>
+		<br>
+		<ul>
+			
+			<li>Powers of a Jordan block</li>
+			<ul>
+				<li>Examples</li>
+			</ul>			
+			<span style="color: #00FF00"> 
+			<br>
+			<li>Introduction to systems of ODEs</li></span>
+			<br>
+			<li>Examples</li>
+		</ul>
+	</section>	
+			
+	<section  align="left">													
+					
+		<h2>Linear Systems of ODEs</h2> 
+		<p>We wish to solve</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+				\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}\quad \mathbf{x}(0)=\mathbf{x}_0
+				}}}
+			\]
+		<p>As we know, one way to do this is via a similarity transformation, <em>i.e.</em> setting </p>	
+		\[
+		\mathbf{y}=H^{-1}\mathbf{x}\quad\text{where}\quad A = HJH^{-1}
+		\]
+		<p>So that</p>
+		\[
+		\frac{\mathrm{d}\mathbf{y}}{\mathrm{d}t} = J\mathbf{y} = 
+		\begin{bmatrix}J_{n_1}&&&\\&J_{n_2}&&\\&&\ddots&\\&&&J_{n_k}\end{bmatrix}
+		\mathbf{y}\quad \mathbf{y}(0)=H^{-1}\mathbf{x}_0
+		\]
+		
+		<br>
+		<b style="color:red">Here $J$ is a Jordan matrix</b>			
+	</section>
+					
+	<section>		
+				
+		<section  align="left">													
+		
+		<p>Alternatively, we could employ <em>Laplace transforms</em></p>
+		
+		<p>Recall that</p>
+		\[
+		 \mathcal{L}\left[\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t}\right] = s\bar{\mathbf{x}}-\mathbf{x}_0 \quad \text{and}\quad 
+		 \mathcal{L}\left[A\mathbf{x}\right]=A\bar{\mathbf{x}}
+		\]
+		<p>Thus our ODE becomes</p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}\quad \mathbf{x}(0)=\mathbf{x}_0 
+		\longrightarrow \color{red}{\boxed{\color{white}{s\bar{\mathbf{x}}-\mathbf{x}_0 = A\bar{\mathbf{x}} }}}
+		\]
+		
+		<p>Or</p>
+		\[
+		\begin{align*}
+		(sI_n-A)\bar{\mathbf{x}} &= \mathbf{x}_0\\
+		\implies &\color{#00FF00}{\boxed{\color{white}{\bar{\mathbf{x}}= (sI_n-A)^{-1}\mathbf{x}_0}}}
+		\end{align*}
+		\]
+		
+		
+		<br>
+		<b style="color:red">If we can determine the inverse transform of the RHS we are done</b>
+		</section>
+		
+		<section  align="left">			
+		<p>Pulling out a factor of $s$ gives</p>
+		\[
+		 (sI_n-A)^{-1} = \frac{1}{s}\left(I_n-\frac{1}{s}A\right)^{-1}
+		\]
+		<p>Which can be expanded to give</p>
+		\[
+		 \begin{align*}
+		 \frac{1}{s}\left(I_n-\frac{1}{s}A\right)^{-1}&=\frac{1}{s}\sum_{r=0}^\infty \left(\frac{1}{s}A\right)^r\\
+		 &=\sum_{r=0}^\infty \frac{1}{s^{r+1}}A^r
+		 \end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<h3>Note</h3>
+		<p>The above <em>power series</em> converges if <em>all</em> eigenvalues of $\displaystyle\frac{1}{s}A$ are less than one in modulus </p>
+		</span>
+		</section>
+		
+		<section  align="left">		
+		<p>Recalling that $\displaystyle \mathcal{L}\left[t^r\right] = \frac{r!}{s^{r+1}}$</p>
+
+		<p>We see that</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		\begin{align*}
+		\mathcal{L}^{-1}\left[(sI_n-A)^{-1}\right] &=\sum_{r=0}^\infty \frac{t^r}{r!}A^r\\
+		&= e^{At}
+		\end{align*}
+		}}}
+		\]
+		<p>This is the <em>matrix exponential</em></p>
+		
+		<span class="fragment fade-in">
+		<p>To see how we arrived at the above note that</p>
+		\[
+		 \begin{align*}
+		 \mathcal{L}^{-1}\left[\sum\frac{1}{s^{r+1}}A^r\right]&=\mathcal{L}^{-1}\left[\frac{1}{s}I_n\right]
+		 +\mathcal{L}^{-1}\left[\frac{1}{s^2}A\right]+\mathcal{L}^{-1}\left[\frac{1}{s^3}A^2\right]+\cdots\\
+		 &=\mathcal{L}^{-1}\left[\frac{1}{s}\right]I_n+\mathcal{L}^{-1}\left[\frac{1}{s^2}\right]A+\mathcal{L}^{-1}\left[\frac{2!}{s^3}\right]\frac{A^2}{2!}+\\
+		 &=I_n+At+A^2\frac{t^2}{2!}+\cdots
+		 \end{align*}
+		\]
+		</span>
+		</section>
+		
+		<section  align="left">												
+		<p>Putting this altogether we see that</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		 \mathbf{x}(t)=e^{At}\mathbf{x}(0)
+		 }}}
+		\]
+		<p>Which is the familiar exponential solution but for systems</p>
+		
+		<span class="fragment fade-in">
+			<p>The <em>matrix exponential</em> is an example of a <em>matrix function</em> and is defined as follows</p>
+			\[
+			\color{#00FF00}{\boxed{\color{white}{
+			\begin{align*}			
+			e^{At}&=I_n+At+\frac{A^2t^2}{2!}+\frac{A^3t^3}{3!}+\cdots\\
+			&=\sum_{r=0}^\infty \frac{A^rt^r}{r!}
+			\end{align*}
+			}}}
+			\]
+		</span>
+		</section>
+		
+		<section  align="left">												
+		<p>Importantly if $A$ is diagonalisable then</p>
+		\[
+		\begin{align*}
+		e^{At}=\sum_{r=0}^\infty \frac{A^rt^r}{r!}&=\sum_{r=0}^\infty PD^rP^{-1}\frac{t^r}{r!}\\
+		&=P\left(\sum_{r=0}^\infty \frac{D^rt^r}{r!}\right)P^{-1}\\
+		&=P\begin{bmatrix}\sum\frac{\lambda_1^rt^r}{r!}&&\\&\ddots & \\ &&\sum\frac{\lambda_n^rt^r}{r!}\end{bmatrix} P^{-1}\\
+		&=P\begin{bmatrix}e^{\lambda_1t}&&\\&\ddots&\\&&e^{\lambda_nt}\end{bmatrix} P^{-1} = Pe^{Dt}P^{-1}
+		\end{align*}
+		\]
+		
+		<p>Thus given the eigenvalue-eigenvector decomposition of a matrix it is a simple task to compute the matrix exponential</p>
+		</section>
+	</section>	
+	
+	
+		
+			
+	</section>
+	
+	<!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L7</h1>
+		<br>
+		<ul>
+			
+			<li>Powers of a Jordan block</li>
+			<ul>
+				<li>Examples</li>
+			</ul>			
+			
+			<br>
+			<li>Introduction to systems of ODEs</li>
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Examples</li></span>
+		</ul>
+	</section>	
+	
+	<section>
+	
+		<section align="left">
+		<h3>Example 7.3</h3>
+		<p>Using the matrix exponential solve the system</p>
+		\[
+		\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}\qquad \mathbf{x}(0)=\begin{bmatrix}1\\0\\0\end{bmatrix}
+		\]
+		<p>Where</p>
+		\[
+		A=\begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}=PDP^{-1}
+		\]
+		<p>With</p>
+		\[
+		P=\begin{bmatrix}1&-1&1\\0&1&-1\\-1&-1&2\end{bmatrix}\quad P^{-1}=\begin{bmatrix}1&1&0\\1&3&1\\1&2&1\end{bmatrix} 
+		\quad\text{and}\quad D=\begin{bmatrix}-1&0&0\\0&0&0\\0&0&1\end{bmatrix}
+		\]
+		</section>	
+		
+		<section align="left">
+		<h3>Solution</h3>
+		<p>We need to compute $e^{At}$</p>
+		
+		<span class="fragment fade-in">
+		\[
+		 \begin{align*}
+		  e^{At} &=Pe^{Dt}P^{-1}\\
+		  &=\begin{bmatrix}1&-1&1\\0&1&-1\\-1&-1&2\end{bmatrix}\begin{bmatrix}e^{-t}&&\\&1&\\&&e^{t}\end{bmatrix}\begin{bmatrix}1&1&0\\1&3&1\\1&2&1\end{bmatrix}\\
+		  &=\begin{bmatrix}1&-1&1\\0&1&-1\\-1&-1&2\end{bmatrix}\begin{bmatrix}e^{-t}&e^{-t}&0\\1&3&1\\e^t&2e^t&e^t\end{bmatrix} = 
+		  \color{red}{\boxed{\color{white}{
+		  \begin{bmatrix}e^{-t}-1+e^t&e^{-t}-3+2e^t&e^t-1\\1-e^t&3-2e^t&1-e^t\\2e^t-1-e^{-t}&4e^t-3-e^{-t}&2e^t-1\end{bmatrix}
+		  }}}
+		 \end{align*}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>Thus</p>
+		\[
+		 \mathbf{x}(t) = e^{At}\mathbf{x}_0 = \begin{bmatrix}e^{-t}-1+e^t&e^{-t}-3+2e^t&e^t-1\\1-e^t&3-2e^t&1-e^t\\2e^t-1-e^{-t}&4e^t-3-e^{-t}&2e^t-1\end{bmatrix}
+		 \begin{bmatrix}1\\0\\0\end{bmatrix}=
+		 \color{#00FF00}{\boxed{\color{white}{
+		 \begin{bmatrix}e^{-t}-1+e^t\\1-e^t\\2e^t-1-e^{-t}\end{bmatrix}
+		 }}}
+		\]
+		</span>
+		</section>	
+		
+		<section align="left">
+		<p>We plot the trajectories $x_1(t), x_2(t)$ and $x_3(t)$ below</p>
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00" height="350" src="figures/Ex7p3.png">
+				
+		<br>
+		<span class="fragment fade-in">
+		<p>The Matlab code for this figure is given below</p>
+		<pre><code data-trim data-noescape>
+		>> t = linspace(0,2,1001); 
+		>> plot(t,exp(-t)-1+exp(t))
+		>> hold on
+		>> plot(t,1-exp(t),'r')		
+		>> plot(t,2*exp(t)-1-exp(-t),'m')
+		>> xlabel('$t$','FontSize',24,'Interpreter','latex')
+		>> ylabel('$x_i(t)$','FontSize',24,'Interpreter','latex')		
+		>> box on		
+		</code></pre>
+		</span>
+		</section>	
+	
+	</section>
+	
+		<section>
+		<h2 style="color:#00FF00">Lecture 7 Review</h2>
+		<br>		
+		<ul>						
+					<li>In this lecture we covered</li>
+					<ul>
+						<li>powers of a Jordan block</li>
+						<li>introduction to systems of ODEs</li>						
+					</ul><br>
+					<li>After this lecture you should</li>
+					<ul>
+						<li>know how to compute the powers of a Jordan block</li>
+						<li>be able to solve systems of linear homogeneous ODEs</li>												
+					</ul><br>					
+				</ul>			
+			
+			</section>
+			
+	
+			
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

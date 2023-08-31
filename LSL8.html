@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 8</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L8</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>The matrix exponential</li>
+			</span>
+			<br>
+			<li>Examples</li>
+			<br>			
+			<li>Properties of the matrix exponential</li>			
+		</ul>
+	</section>
+			
+			
+					
+	<section>			
+		<section  align="left">						
+			<h2>The matrix exponential</h2>					
+			<p> Recall from last week that if $A$ is diagonalisable (<em>i.e.</em> $A=HDH^{-1}$) then</p>
+			\[
+			e^{At} = H\begin{bmatrix}e^{\lambda_1t}&&&\\&e^{\lambda_2t}&&\\&&\ddots&\\&&&e^{\lambda_nt}\end{bmatrix}H^{-1}
+			\]
+			
+			<p>Where $H$ is an invertible matrix and $D$ is the diagonal matrix given by</p>			
+			
+			\[
+			D = \begin{bmatrix}\lambda_1&&&\\&\lambda_2&&\\&&\ddots&\\&&&\lambda_n\end{bmatrix}
+			\]
+			<p>whose diagonal entries are the eigenvalues of $A$</p>
+		</section>	
+				
+		<section  align="left">									
+			<p>In the case were $A$ is <em>not</em> diagonalisable we can use the eigendecomposition to write</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			 e^{At} = \sum_{r=0}^\infty \frac{A^rt^r}{r!} = H\begin{bmatrix}e^{J_{n_1}(\lambda_1)t}&&&\\&e^{J_{n_2}(\lambda_2)t}&&\\&&\ddots&\\&&&e^{J_{n_k}(\lambda_k)t}\end{bmatrix}H^{-1}
+			 }}}
+			\]
+			<span  class="fragment fade-in">
+			<p>This follows since</p>
+			\[
+			e^{Jt} = \sum_{r=0}^\infty \frac{J^rt^r}{r!} = 
+			H\begin{bmatrix}\sum_{r=0}^\infty J_{n_1}(\lambda_1)^r\frac{t^r}{r!}&&&\\&\sum_{r=0}^\infty J_{n_2}(\lambda_2)^r\frac{t^r}{r!}&&\\&&\ddots&\\&&&\sum_{r=0}^\infty J_{n_k}(\lambda_k)^r\frac{t^r}{r!}\end{bmatrix}H^{-1}
+			\]
+			<p>And</p>
+			\[
+			 e^{J_{n_i}(\lambda_i)t} = \sum_{r=0}^\infty J_{n_i}(\lambda_i)^r\frac{t^r}{r!}, \quad i=1,\ldots, n_k
+			\]
+			</span>
+		</section>	
+											
+	</section>
+			
+	<section>
+		<section  align="left">						
+			<p>It follows that if we can compute the matrix exponential of a Jordan block then we can compute the matrix exponential of <em>any</em> matrix</p>
+			<span class="fragment fade-in">			
+			<p>To do this we need to use the fact that for <em>commutative</em> matrices $A, B$ (<em>i.e.</em> $AB=BA$) we have</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			 e^{At}e^{Bt} = e^{(A+B)t}
+			 }}}
+			\]
+			</span>
+			
+			<span class="fragment fade-in">			
+			<p>Let us start by writing </p>
+			<font size="5">
+			\[
+			 J_{n_i}(\lambda_i) = \lambda_i I_{n_i} +K_{n_i}
+			\]
+			<p>Where</p>
+			\[
+			 K_{n_i} = \begin{bmatrix}0&1&0&\cdots&\cdots&0\\0&0&1&\ddots&&\vdots\\
+			 0&0&0&1&\ddots&\vdots\\ \vdots&\ddots&0&0&1&0\\\vdots&&\ddots&0&0&1\\\
+			 0&\cdots&\cdots&0&0&0
+			 \end{bmatrix}\in\mathbb{R}^{n_i\times n_i}
+			\]
+			</font>
+			</span>
+			
+		</section>	
+				
+		<section  align="left">						
+		<p>Then using the result on the previous slide</p>
+		\[
+		\begin{align*}
+		e^{J_{n_i}(\lambda_i)t} &= e^{\left(\lambda_i I_{n_i}+K_{n_i}\right)t}\\
+		&=e^{\lambda_i t}e^{K_{n_i} t}
+		\end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Noting that</p>
+		\[
+		\begin{align*}
+		e^{K_{n_i} t}&=\sum_{r=0}^\infty \frac{t^r}{r!}k_{n_i}^r\\
+		&=\sum_{r=0}^{n-1} \frac{t^r}{r!}k_{n_i}^r
+		\end{align*}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>This follows since $K_{n_i}$ is <em>nilpotent</em></p> 
+		<p>Recall that $K_{n_i}^{r}=0$ for $r \geq n_i$</p>
+		</span>
+		
+		</section>	
+				
+		<section  align="left">		
+		
+		<p>Thus</p>			
+		<font size="5">
+		\[
+		\begin{align*}
+		 e^{K_{n_i}t}&= I_{n_i}+K_{n_i}t + K_{n_i}^2\frac{t^2}{2!}+\cdots +K_{n_i}^{n_i-1}\frac{t^{n_i-1}}{(n_i-1)!}\\
+		 &=\begin{bmatrix}1&0&0&\cdots&\cdots&0\\0&1&0&\ddots&&\vdots\\
+			 0&0&1&0&\ddots&\vdots\\ \vdots&\ddots&0&1&0&0\\\vdots&&\ddots&0&1&0\\\
+			 0&\cdots&\cdots&0&0&1
+			 \end{bmatrix}+
+		 \begin{bmatrix}0&t&0&\cdots&\cdots&0\\0&0&t&\ddots&&\vdots\\
+			 0&0&0&t&\ddots&\vdots\\ \vdots&\ddots&0&0&t&0\\\vdots&&\ddots&0&0&t\\\
+			 0&\cdots&\cdots&0&0&0
+			 \end{bmatrix}+\begin{bmatrix}0&0&\frac{t^2}{2!}&0&\cdots&0\\0&0&0&\ddots&\ddots&\vdots\\
+			 0&0&0&0&\ddots&0\\ \vdots&\ddots&0&0&0&\frac{t^2}{2!}\\\vdots&&\ddots&0&0&0\\\
+			 0&\cdots&\cdots&0&0&0
+			 \end{bmatrix}+\cdots\\
+			 &+~\begin{bmatrix}0&0&0&\cdots&\cdots&\frac{t^{n_i-1}}{(n_i-1)!}\\0&0&0&\ddots&&\vdots\\
+			 0&0&0&0&\ddots&\vdots\\ \vdots&\ddots&0&0&0&0\\\vdots&&\ddots&0&0&0\\\
+			 0&\cdots&\cdots&0&0&0
+			 \end{bmatrix} = \color{#00FF00}{\boxed{\color{white}{\begin{bmatrix}1&t&\frac{t^2}{2!}&\cdots&\cdots&\frac{t^{n_i-1}}{(n_i-1)!}\\0&1&t&\ddots&&\vdots\\
+			 0&0&1&t&\ddots&\vdots\\ \vdots&\ddots&0&1&t&\frac{t^2}{2!}\\\vdots&&\ddots&0&1&t\\\
+			 0&\cdots&\cdots&0&0&1
+			 \end{bmatrix}}}}
+		 \end{align*}
+		\]
+		</font>
+		</span>
+
+		</section>	
+		
+		<section  align="left">						
+		<p>Putting this all together</p>
+		
+		<br>
+		\[
+		\color{red}{\boxed{\color{white}{
+		 e^{J_{n_i}(\lambda_i)t} = e^{\lambda_i t}\begin{bmatrix}1&t&\frac{t^2}{2!}&\cdots&\cdots&\frac{t^{n_i-1}}{(n_i-1)!}\\0&1&t&\ddots&&\vdots\\
+			 0&0&1&t&\ddots&\vdots\\ \vdots&\ddots&0&1&t&\frac{t^2}{2!}\\\vdots&&\ddots&0&1&t\\\
+			 0&\cdots&\cdots&0&0&1
+			 \end{bmatrix}
+			 }}}
+		\]			
+		
+		</section>	
+		
+				
+	</section>
+			
+	<!-- ################################################### -->
+    <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L8</h1>
+		<br>
+		<ul>			
+			<li>The matrix exponential</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Examples</li>
+			</span>
+			<br>			
+			<li>Properties of the matrix exponential</li>			
+		</ul>
+	</section>
+			
+	<section>		
+		<section  align="left">		
+			<h3>Example 8.1</h3>			
+			<p>If</p>
+			\[
+			J = \begin{bmatrix}1&&&&&\\&-1&&&&\\&&-1&&&\\&&&-2&1&0\\&&&0&-2&1\\&&&0&0&-2\end{bmatrix} = \begin{bmatrix}J_1(1)&&&\\&J_1(-1)&&\\&&J_1(-1)&\\&&&J_3(-2)\end{bmatrix}
+			\]
+			<p>Then</p>
+			\[
+			e^{Jt} = \begin{bmatrix}e^{J_1(1)t}&&&\\&e^{J_1(-1)t}&&\\&&e^{J_1(-1)t}&\\&&&e^{J_3(-2)t}\end{bmatrix}
+			\]
+			<span class="fragment fade-in">
+			<p>Here</p>
+			\[
+			e^{J_1(1)t}=e^t\quad \text{and}\quad e^{J_1(-1)t}=e^{-t} \quad\text{(One by one blocks)}
+			\]
+			</span>
+		</section>
+			
+		<section  align="left">						
+						
+		<p>And, using the formula derived for the matrix exponential of a Jordan block</p>
+		\[
+		e^{J_3(-2)t} = \begin{bmatrix}e^{-2t}&te^{-2t}&\frac{t^2}{2!}e^{-2t}\\
+		0&e^{-2t}&te^{-2t}\\
+		0&0&e^{-2t}
+		\end{bmatrix}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>And so</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		 e^{Jt} = \begin{bmatrix}e^t&0&0&&&\\
+		 0&e^{-t}&0&&&\\
+		 0&0&e^{-t}&&&\\
+		 &&&e^{-2t}&te^{-2t}&\frac{t^2}{2!}e^{-2t}\\
+		 &&&0&e^{-2t}&te^{-2t}\\
+		 &&&0&0&e^{-2t}
+		 \end{bmatrix}
+		 }}}
+		\]
+		</span>
+								
+		</section>
+		
+	</section>
+			
+	<section>		
+		<section  align="left" id="Ex8p2">						
+	
+		<h3>Example 8.2</h3> 
+		<p>Suppose that $A$ is given by</p>
+		\[
+		 A = \begin{bmatrix}-2&1&-1\\0&0&-2\\-4&2&0\end{bmatrix}
+		\]
+		<p>And that $A=HJH^{-1}$, where</p>
+		\[
+		H = \begin{bmatrix}1&-1&0\\1&-2&0\\1&0&1\end{bmatrix}\quad H^{-1} = \begin{bmatrix}2&-1&0\\1&-1&0\\-2&1&1\end{bmatrix}\quad J = \begin{bmatrix}-2&0&0\\0&0&1\\0&0&0\end{bmatrix}
+		\]		
+		<p>Compute the matrix exponential of $A$</p>
+		</section>	
+			
+		<section  align="left" id="Ex8p2Sol">						
+	
+		<h3>Solution</h3>
+		<p>To start</p>
+		\[
+		 e^{Jt} = \begin{bmatrix}e^{-2t}&\\&e^{J_2(0)t}\end{bmatrix} = \begin{bmatrix}e^{-2t}&&\\&1&t\\&0&1\end{bmatrix}
+		\]
+		<span class="fragment fade-in">
+		<p>So that</p>
+		\[
+		\begin{align*}
+		 e^{At} &= H\begin{bmatrix}e^{-2t}&\\&e^{J_2(0)t}\end{bmatrix}H^{-1}\\ 
+		 &= \begin{bmatrix}1&-1&0\\1&-2&0\\1&0&1\end{bmatrix}\begin{bmatrix}e^{-2t}&&\\&1&t\\&0&1\end{bmatrix}\begin{bmatrix}2&-1&0\\1&-1&0\\-2&1&1\end{bmatrix} \\
+		 &=\begin{bmatrix}1&-1&0\\1&-2&0\\1&0&1\end{bmatrix}\begin{bmatrix}2e^{-2t}&-e^{-2t}&0\\1-2t&t-1&t\\-2&1&1\end{bmatrix} 
+		 = 
+		 \color{red}{\boxed{\color{white}{
+		 \begin{bmatrix}2e^{-2t}+2t-1&1-t-e^{-2t}&-t\\2e^{-2t}+4t-2&2-2t-e^{-2t}&-2t\\2(e^{-2t}-1)&1-e^{-2t}&1\end{bmatrix}
+		 }}}
+		\end{align*}
+		\]
+		</span>		
+					
+		</section>
+	</section>
+			
+	<!-- ################################################### -->
+    <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L8</h1>
+		<br>
+		<ul>			
+			<li>The matrix exponential</li>			
+			<br>			
+			<li>Examples</li>			
+			<br>	
+			<span style="color: #00FF00"> 			
+			<li>Properties of the matrix exponential</li>			
+			</span>
+		</ul>
+	</section>			
+			
+	<section  align="left">						
+				
+		<h2>Properties of the matrix exponential</h2> 
+		<p>Recall that the matrix exponential is given by</p>
+		\[
+		 \begin{align*}
+		 e^{At}&=I+At+\frac{A^2t^2}{2!}+\frac{A^3t^3}{3!}+\cdots\\
+		 &=\sum_{r=0}^\infty \frac{A^rt^r}{r!}
+		 \end{align*}
+		\]								
+		
+		<span class="fragment fade-in">	
+		<p>Some important properties of the matrix exponential are:</p>
+		<ol>
+			<li>If $\displaystyle A=HJH^{-1}$ then $\displaystyle e^{A}=e^{HJH^{-1}} = He^{J}H^{-1}$</li>
+			<br>
+			<li class="fragment fade-in">If $\displaystyle A\in\mathbb{R}^{n\times n}$ then $\displaystyle e^{At}\left|_{t=0}\right. = I_n$</li>
+			<br>
+			<li class="fragment fade-in">$\displaystyle e^{At}\mathbf{x}_0$ is the unique solution of $\displaystyle \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t}=A\mathbf{x} : \mathbf{x}(0)=\mathbf{x}_0$</li>
+		</ol>
+		</span>
+		
+		<p class="fragment fade-in" style="color: red"><b>The last property is of particular interest to us!</b></p>
+	</section>
+						
+			
+	<section>
+		<section  align="left">						
+				
+			<h3>Calculating the matrix exponential using Cayley-Hamilton</h3> 
+			<p>Let us consider the matrix from <a href="#/Ex8p2" style="color:white">Example 8.2</a>, that is</p>
+			\[
+			 A = \begin{bmatrix}-2&1&-1\\0&0&-2\\-4&2&0\end{bmatrix}
+			\]
+			<span class="fragment fade-in">
+			<p>	It can be shown that the characteristic polynomial of $A$ is given by</p>
+			\[
+			\chi_A(t) = t^2(t+2) = t^3+2t^2 \qquad(\text{Exercise})
+			\]
+			<p>From which it follows that</p>
+			\[
+			 \chi_A(A) = A63+2A^2=0\implies A^3=-2A^2
+			\]
+			</span>
+			<p class="fragment fade-in" style="color:red"><b>This is just CH theorem</b></p>
+		</section>
+	
+		<section  align="left">		
+			<p>Now, since $\displaystyle A^3=-2A^2$ we have that</p>
+			\[
+			 \begin{align*}
+			  A^4 &=-2A^3 = 4A^2,\quad A^5=4A^3=-8A^2,\\
+			  A^6 &=-8A^3=16A^2,\quad A^7=16A^3=-32A^2,...
+			 \end{align*}
+			\]
+			
+			<span class="fragment fade-in">
+			<p>Thus</p>
+			\[
+			\begin{align*}
+			e^{At}&= I_n+At+\frac{A^2t^2}{2!}+\frac{A^3t^3}{3!}+\frac{A^4t^4}{4!}+\frac{A^5t^5}{5!}+\frac{A^6t^6}{6!}+\cdots\\
+			&= I_n+At+\frac{A^2t^2}{2!}+\frac{(-2A^2)t^3}{3!}+\frac{(4A^2)t^4}{4!}+\frac{(-8A^2)t^5}{5!}+\frac{(16A^2)t^6}{6!}+\cdots\\
+			&=I_n+At+A^2\left(\frac{t^2}{2}-\frac{2t^3}{3!}+\frac{4t^4}{4!}-\frac{8t^5}{5!}+\cdots\right)\\
+			&=\color{red}{\boxed{\color{white}{I_n+At+A^2\left(\frac{1}{4}e^{-2t}-\frac{1}{4}+\frac{t}{2}\right)}}}
+			\end{align*}
+			\]
+			</span>			
+		</section>
+		
+		<section  align="left">		
+			<p>Thus</p>
+			\[
+			 e^{At} = I_n+At+A^2\left(\frac{1}{4}e^{-2t}-\frac{1}{4}+\frac{t}{2}\right)
+			\]
+			<p>And since</p>
+			\[
+			 A^2=\begin{bmatrix}8&-4&0\\8&-4&0\\8&-4&0\end{bmatrix}
+			\]
+						
+			<p>We have that</p>
+			\[
+			\begin{align*}
+			 e^{At}&=\begin{bmatrix}1&&\\&1&\\&&1\end{bmatrix}+\begin{bmatrix}-2&1&-1\\0&0&-2\\-4&2&0\end{bmatrix}t+
+			 \left(\frac{1}{4}e^{-2t}-\frac{1}{4}+\frac{t}{2}\right)\begin{bmatrix}8&-4&0\\8&-4&0\\8&-4&0\end{bmatrix}\\
+			 &=\begin{bmatrix}2e^{-2t}+2t-1&1-t-e^{-2t}&-t\\2e^{-2t}+4t-2&2-2t-e^{-2t}&-2t\\2(e^{-2t}-1)&1-e^{-2t}&1\end{bmatrix}
+			\end{align*}
+			\]
+			<p>Which agrees with our calculations in <a href="#/Ex8p2Sol" style="color:white">Example 8.2</a></p>			
+		</section>
+		
+	</section>
+		
+	<section>
+		<h2 style="color:#00FF00">Lecture 8 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+			<ul>
+				<li>matrix exponentials</li>
+				<li>properties of the matrix exponential</li>												
+			</ul><br>
+			<li>After this lecture you should</li>
+			<ul>
+				<li>know how to compute the exponential of a matrix</li>						
+				<li>understand the main properties of the matrix exponential</li>
+			</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

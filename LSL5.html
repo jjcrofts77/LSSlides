@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 5</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L5</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Jordan normal forms (Ctd)</li>			
+			<br>
+			<ul>
+			<li>The 3 by 3 case</li>
+			</ul>
+			</span>
+			<br>			
+			<li>Example</li>			
+		</ul>
+	</section>		
+			
+	<section>
+		<section  align="left">					
+			<h2>Jordan normal forms (Ctd)</h2>					
+					
+			<p>Just as for the 2 by 2 case there are several cases to work through</p>
+			<h3>Case 1</h3>
+			
+			\[
+			 \chi_A(t) = (t-\lambda_1)(t-\lambda_2)(t-\lambda_3)
+			\]
+			<p>In this case we have 3 distinct eigenvalues and so $A$ is diagonalisable</p>
+			
+			<p>Thus</p>
+			\[
+			J = \begin{bmatrix}\lambda_1 & 0 & 0\\ 0 & \lambda_2 & 0\\ 0 & 0 &\lambda_3\end{bmatrix}
+			\]
+			<br>
+			<b style="color:red" class="fragment fade-in">The AM=1=GM for each eigenvalue</b>
+						
+					
+		</section>
+				
+	</section>
+			
+	<section>
+		<section  align="left">															
+			<h3>Case 2</h3>
+			\[
+			 \chi_A(t) = (t-\lambda_1)(t-\lambda_2)^2
+			\]
+			<br>
+			<span  class="fragment fade-in">
+			<ol>
+			<li>Start by finding an eigenvector $\mathbf{u}_1$ such that $A\mathbf{u}_1=\lambda_1 \mathbf{u}_1$</li>
+			<li class="fragment fade-in">Next we need to find eigenvectors corresponding to $\lambda_2$</li>
+			<li class="fragment fade-in">There are 2 cases</li>
+			</ol>
+			</span>
+			<br><br>
+			<span  class="fragment fade-in">
+			<h3>sub-case a</h3>
+			\[
+			 \mathrm{dim}\left(\mathrm{Ker}\left[A-\lambda_2 I_3\right]\right) = 2
+			\]
+			<p>In this case the AM=2=GM and so the matrix is diagonalisable, that is</p>
+			\[
+			 J = \begin{bmatrix}\lambda_1&0&0\\0&\lambda_2&0\\0&0&\lambda_2\end{bmatrix}=
+			 \begin{bmatrix}J_1(\lambda_1)&0&0\\0&J_1(\lambda_2)&0\\0&0&J_1(\lambda_2)\end{bmatrix}
+			\]
+			<p>We can find 2 linearly independent eigenvectors corresponding to $\lambda_2$</p>
+			</span>
+				
+		</section>
+		
+		<section  align="left">	
+		<h3>sub-case b</h3>
+			\[
+			 \mathrm{dim}\left(\mathrm{Ker}\left[A-\lambda_2 I_3\right]\right) = 1
+			\]
+			<p>In this case the GM=1<2=AM and so the matrix is <em>not</em> diagonalisable</p>
+			<p>Its Jordan form is</p>
+			\[
+			 J = \begin{bmatrix}\lambda_1&0&0\\0&\lambda_2&1\\0&0&\lambda_2\end{bmatrix} = \begin{bmatrix}J_1(\lambda_1)&0\\0&J_2(\lambda_2)\end{bmatrix}
+			\]
+			<span class="fragment fade-in">
+			<p>We need to solve</p>
+			\[
+			\begin{align*}
+			(A-\lambda_2 I_3)\mathbf{u} &= 0\\
+			(A-\lambda_2 I_3)\mathbf{v} &= \mathbf{u}
+			\end{align*}
+			\]
+			<p>to find a generalised  eigenvector $\mathbf{v}$ and related eigenvector $\mathbf{u}$</p>
+			</span>
+			<p class="fragment fade-in">We then set $\displaystyle P=\begin{bmatrix}\mathbf{u}_1&\mathbf{u}&\mathbf{v}\end{bmatrix}\implies P^{-1}AP= J$</p>
+			
+			<p style="color:red" class="fragment fade-in"><b>The order of the vectors in the matrix $P$ is important here</b></p>
+			</section>
+			<section align="left">
+			 <h3>Note</h3>
+			 <p>As noted on the previous slide the order of the vectors</p>
+			 \[
+			  P = \begin{bmatrix}\mathbf{u}_1&\mathbf{u}&\mathbf{v}\end{bmatrix}
+			 \]
+			 <p>is important</p>			 
+			 <span class="fragment fade-in">
+			 <p>For the above ordering we get </p>
+			 \[
+			 P^{-1}AP = J = \begin{bmatrix}\lambda_1&0&0\\0&\lambda_2&1\\0&0&\lambda_2\end{bmatrix} = \begin{bmatrix}J_1(\lambda_1)&0\\0&J_2(\lambda_2)\end{bmatrix}
+			 \]
+			 </span>
+			 <span class="fragment fade-in">
+			 <p>However, we coud have ordered the vectors as $\displaystyle P = \begin{bmatrix}\mathbf{u}&\mathbf{v}&\mathbf{u}_1\end{bmatrix}$ in which case</p>
+			 \[
+			 P^{-1}AP = J = \begin{bmatrix}\lambda_2&1&0\\0&\lambda_2&0\\0&0&\lambda_1\end{bmatrix} = \begin{bmatrix}J_2(\lambda_2)&0\\0&J_1(\lambda_1)\end{bmatrix}
+			 \]
+			 </span>
+			 <p class="fragment fade-in" style="color:red"><b>Any other ordering is incorrect</b></p>
+			 </section>
+		</section>
+			
+		<section>
+			<section  align="left">					
+				<h3>Case 3</h3>
+			\[
+			 \chi_A(t) = (t-\lambda)^3
+			\]
+			<br>
+			<span  class="fragment fade-in">
+			<ol>
+			<li>Start by finding as many eigenvectors as possible</li>			
+			<li class="fragment fade-in">There are 3 cases</li>
+			</ol>
+			</span>
+			<br><br>
+			<span  class="fragment fade-in">
+			<h3>sub-case a</h3>
+			\[
+			 \mathrm{dim}\left(\mathrm{Ker}\left[A-\lambda I_3\right]\right) = 3
+			\]
+			<p>In this case the AM=3=GM and so</p>
+			\[
+			 (A-\lambda I_3)\mathbf{u}=0\quad \forall\mathbf{u}\in\mathbb{R}^{3}
+			\]
+			<p>Therefore</p>
+			\[
+			(A-\lambda I_3)=0\implies A = \begin{bmatrix}\lambda&0&0\\0&\lambda&0\\0&0&\lambda\end{bmatrix}
+			=\begin{bmatrix}J_1(\lambda)&0&0\\0&J_1(\lambda)&0\\0&0&J_1(\lambda)\end{bmatrix}=J
+			\]
+			</span>
+			</section>							
+			
+			<section align="left">
+			<h3>sub-case b</h3>
+			\[
+			 \mathrm{dim}\left(\mathrm{Ker}\left[A-\lambda I_3\right]\right) = 2
+			\]
+			<span class="fragment fade-in">
+			<p>In this instance we know that $J$ will take the form </p>
+			\[
+			J = \begin{bmatrix}\lambda&0&0\\0&\lambda&1\\0&0&\lambda\end{bmatrix}
+			\]
+			<p>and since the largest Jordan block is of dimension 2 we have that </p>
+			\[
+			\displaystyle m_A(t)=(t-\lambda)^2
+			\]
+			</span>
+			<span class="fragment fade-in">
+			<p>Thus</p>
+			\[
+			\mathrm{Ker}\left[(A-\lambda I_3)^2\right] = \mathbb{R}^3
+			\]
+			<p>We can find two eigenvectors and so also need to find a generalised eigenvector</p>
+			</span>
+			</section>
+			
+			
+			<section  align="left">									
+			<p>To find the generalised eigenvector $\mathbf{v}$ we simultaneously solve </p>
+			\[
+			\begin{align*}
+			 (A-\lambda I_3)\mathbf{u}&=\mathbf{0}\\
+			 (A-\lambda I_3)\mathbf{v}&=\mathbf{u}
+			\end{align*}
+			\]
+			<p>Recall $\mathbf{u}$ is a related eigenvector</p>
+			
+			<span class="fragment fade-in">
+			<p>To finish we need to find a second eigenvector, which can be any vector 
+			$\mathbf{w}\in\mathrm{Ker}\left[A-\lambda I_3\right]$ that is linearly independent of $\mathbf{u}$ 
+			(<em>i.e.</em> not a multiple of $\mathbf{u}$)</p>
+			</span>
+			
+			<span class="fragment fade-in">
+			<p>We then construct $P$ as</p>
+			\[
+			\begin{align*}
+			 P &= \begin{bmatrix}\mathbf{w}&\mathbf{u}&\mathbf{v}\end{bmatrix}\\\\
+			 &\implies 
+			 \color{#00FF00}{\boxed{\color{white}{
+			 P^{-1}AP =  \begin{bmatrix}\lambda &0&0\\0&\lambda & 1\\0&0&\lambda\end{bmatrix}
+			=\begin{bmatrix}J_1(\lambda)&0\\0&J_2(\lambda)\end{bmatrix}=J}}}
+			 \end{align*}
+			\]
+			</span>
+			<p class="fragment fade-in" style="color:red"><b>Remember that the order of the vectors matters here</b></p>
+			</section>
+			
+			<section align="left">
+			<h3>sub-case c</h3>
+			\[
+			 \mathrm{dim}\left(\mathrm{Ker}\left[A-\lambda I_3\right]\right) = 1
+			\]
+			<span class="fragment fade-in">
+			<p>To start compute</p>
+			\[
+			\mathrm{Ker}\left[(A-\lambda I_3)^2\right]
+			\]
+			<p>And recall by the CH theorem that</p>
+			\[
+			 \mathrm{Ker}\left[(A-\lambda I_3)^3\right] = \mathbb{R}^3
+			\]
+			</span>
+			
+			<span class="fragment fade-in">
+			<p>We need to solve</p>
+			\[
+			\begin{align*}
+			 (A-\lambda I_3)\mathbf{u}&=\mathbf{0}\\
+			 (A-\lambda I_3)\mathbf{v}&=\mathbf{u}\\
+			 (A-\lambda I_3)\mathbf{w}&=\mathbf{v}
+			\end{align*}
+			\]
+			</span>
+			
+			<p class="fragment fade-in">So that $\displaystyle P=\begin{bmatrix}\mathbf{u}&\mathbf{v}&\mathbf{w}\end{bmatrix}\implies
+			\color{red}{\boxed{\color{white}{
+			P^{-1}AP=\begin{bmatrix}\lambda &1&0\\0&\lambda &1\\0&0&\lambda \end{bmatrix}=J_3(\lambda)=J}}}$</p>
+			</section>
+										
+		</section>
+			
+		<!-- ################################################### -->
+		<!-- ################################################### -->
+		<section align="left">
+		<h1>Linear Systems L5</h1>
+		<br>
+		<ul>
+				
+			<li>Jordan normal forms (Ctd)</li>
+			
+			<br>
+			<ul>
+			<li>The 3 by 3 case</li>
+			</ul>
+			<br>
+			<span style="color: #00FF00"> 			
+			<li>Example</li>			
+			</span>
+		</ul>
+		</section>			
+			
+		<section>
+			<section  align="left">					
+				<h2>Example 5.1</h2>					
+				Compute the JNF of the matrix
+				\[
+				 A = \begin{bmatrix}-3&-1&1\\-1&-3&1\\-2&-2&0\end{bmatrix} 
+				\]
+				
+				<h3>Solution</h3>
+				<span class="fragment fade-in">
+				\[
+				\begin{align*}
+				 \chi_A(t) &= \left|tI_3-A\right|\\
+				 &=\begin{vmatrix}t+3&1&-1\\1&t+3&-1\\2&2&t\end{vmatrix}\\
+				 &=(t+3)\begin{vmatrix}t+3&-1\\2&t\end{vmatrix}-\begin{vmatrix}1&-1\\2&t\end{vmatrix}-\begin{vmatrix}1&t+3\\2&2\end{vmatrix}\\
+				 &= \color{red}{\boxed{\color{white}{t^3+6t^2+12t+8 = (t+2)^3}}}
+				\end{align*}
+				\]
+				</span>
+				<p class="fragment fade-in">We see that $\lambda=-2$ with AM=3</p>
+			</section>
+				
+			<section  align="left">										
+				<p>This is case 3</p>
+				
+				<p>We start by computing the eigenspace</p>
+				\[
+				\mathrm{Ker}\left[(A+2I_3)\right]
+				\]
+				<p>That is we solve</p>
+				\[
+				 (A+2I_3)\mathbf{u}=0
+				\]
+				<span class="fragment fade-in">
+				<p>Since</p>
+				\[
+				 (A+2I_3) = \begin{bmatrix}-1&-1&1\\-1&-1&1\\-2&-2&2\end{bmatrix}\longrightarrow \begin{bmatrix}1&1&-1\\0&0&0\\0&0&0\end{bmatrix}
+				\]
+				<p>We have one equation with three unknowns</p>
+				\[
+				 \begin{bmatrix}1&1&-1\\0&0&0\\0&0&0\end{bmatrix}\begin{bmatrix}u^{(1)}\\u^{(2)}\\u^{(3)}\end{bmatrix}\implies u^{(1)}+u^{(2)}-u^{(3)}=0
+				\]				
+				</span>
+			</section>
+			
+			<section  align="left">				
+			<p>Setting $u^{(3)}=\alpha$ and $u^{(2)}=\beta$ gives $u^{(1)}=\alpha-\beta$ so that</p>
+			\[
+			 \mathbf{u} = \begin{bmatrix}\alpha-\beta\\\beta\\\alpha\end{bmatrix}
+			\]
+			<span class="fragment fade-in">
+			<p>And so the eigenspace is given by</p>
+			\[
+			\Biggl \{ \alpha\begin{bmatrix}1\\0\\1\end{bmatrix}+\beta\begin{bmatrix}-1\\1\\0\end{bmatrix} : \alpha,\beta\in\mathbb{R} \Biggr \}
+			\]
+			<p>The eigenvalue $\lambda=-2$ has GM=2<3=AM</p>
+			</span> 
+			<span class="fragment fade-in">
+			<p>Since we only have two eigenvectors we need to find a generalised eigenvector, that is, solve</p>
+			\[
+			 (A+2I_3)^2\mathbf{v} = 0 \quad\text{but}\quad (A+2I_3)^2 = 0 \implies (A+2I_3)^2\mathbf{v}=0\quad \forall \mathbf{v}\in\mathbb{R}^3
+			\]
+			</span>
+			</section>
+			
+			<section  align="left">	
+			<p>Recalling that a generalised eigenvector $\mathbf{v}$ must come with a related eigenvector $\mathbf{u}$, <em>i.e.</em></p>
+			\[
+			 \begin{align*}
+			 (A+2I_3)\mathbf{u}&=\mathbf{0}\\
+			 (A+2I_3)\mathbf{v}&=\mathbf{u}
+			 \end{align*}
+			\]
+			<p>And that $\mathbf{v}$ must not be an eigevector, we choose $\mathbf{v}\in\mathbb{R}^3$ such that it does not lie in our eigenspace</p>
+			
+			<span class="fragment fade-in">
+			<p>For example</p>
+			\[
+			 \mathbf{v} = \begin{bmatrix}1\\0\\0\end{bmatrix}\qquad \text{(clearly } \begin{bmatrix}1\\0\\0\end{bmatrix}\neq 
+			 \alpha\begin{bmatrix}1\\0\\1\end{bmatrix}+\beta\begin{bmatrix}-1\\1\\0\end{bmatrix})
+			\]
+			</span>
+			<span class="fragment fade-in">
+			<p>The related eigenvector is given by</p>
+			\[
+			\mathbf{u} = \begin{bmatrix}-1&-1&1\\-1&-1&1\\-2&-2&2\end{bmatrix}\begin{bmatrix}1\\0\\0\end{bmatrix} = \begin{bmatrix}-1\\-1\\-2\end{bmatrix}
+			\]
+			</span>
+			</section>
+			
+			<section  align="left">	
+			<p>Finally, we need another eigenvector which is linearly independent of $\mathbf{u}$ (not a multiple)</p>
+			
+			<p>The easiest way to do this is to just choose one of the basis vectors from our eigenspace, say</p>
+			\[
+			\mathbf{w}=\begin{bmatrix}1&0&1\end{bmatrix}^T
+			\]
+			<span class="fragment fade-in">
+			<p>So that $P$ becomes</p>
+			\[
+			 P = \begin{bmatrix}\mathbf{w}&\mathbf{u}&\mathbf{v}\end{bmatrix} =  \begin{bmatrix}1&-1&1\\0&-1&0\\1&-2&0\end{bmatrix}
+			\]
+			</span>
+			<span class="fragment fade-in">
+			<p>It is left as an exercise to show that</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			P^{-1}AP = \begin{bmatrix}-2&0&0\\0&-2&1\\0&0&-2\end{bmatrix} = \begin{bmatrix}J_1(-2)&0\\0&J_2(-2)\end{bmatrix} = J
+			}}}
+			\]
+			</span>
+			</section>
+			
+		</section>
+		
+		<section>
+			<h2 style="color:#00FF00">Lecture 5 Review</h2>
+			<br>
+				
+			<ul>						
+				<li>In this lecture we covered</li>
+				<ul>
+					<li>JNFs: the 3 by 3 case</li>
+										
+				</ul><br>
+				<li>After this lecture you should be </li>
+				<ul>
+					<li>able to compute the Jordan normal form of a 3 by 3 matrix</li>					
+				</ul><br>					
+			</ul>			
+				
+		</section>
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+    </div>
+ </div>
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <!-- ################################################### -->
+ <script src="reveal.js/lib/js/head.min.js"></script>
+ <script src="reveal.js/js/reveal.js"></script>
+ <script>
+ // Full list of configuration options available here:
+ // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+          // width: 960,
+          // height:700,
+          controls: true,
+          progress: true,
+          history: true,
+          center: true,
+          theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+          // default/cube/page/concave/zoom/linear/fade/none
+          transition: Reveal.getQueryHash().transition || 'slide',
+
+          //// Optional libraries used to extend on reveal.js
+          dependencies: [
+            // { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            // { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; }},
+            { src: 'reveal.js/plugin/math/math.js', async: true }
+          ]
+        });
+        Reveal.configure({
+          keyboard: {
+            32: null // don't do anything when SPACE is pressed (i.e. disable a reveal.js default binding) document.body.style.cursor = 'none';
+          }
+        });
+        </script>
+		<!-- ################################################### -->
+        <!-- ################################################### -->
+        </div>
+        </div>
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+</body>
+</html>

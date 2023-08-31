@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+  
+      <style>
+        .container {
+            display: flex;
+        }
+        
+        .half {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
+  
+  
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 11</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L11</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Further examples of Markov processes</li>
+			</span>
+			<br>
+			<li>Long-term behaviour of Markov processes</li>		
+			<ul>
+			<li>Examples</li>			
+			</ul>
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>Markov processes (ctd)</h2>					
+			<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:100px;left:150px"				
+			height="150" src="figures/StateDiagram.png">		
+			
+			<br><br><br><br>
+			<p>Recall that a <em>Markov process</em> on $n$ states</p>					
+			\[
+			\{S_1, S_2,\ldots, S_n\}
+			\]
+						
+			<p>is completely determined by the transition matrix</p>
+			\[
+			 P = \begin{bmatrix}p_{11}&p_{12}&\cdots&p_{1n}\\p_{21}&&&p_{2n}\\\vdots&&&\vdots\\p_{n1}&p_{n2}&\cdots&p_{nn}\end{bmatrix}
+			\]
+			<p>whose entries give the probabilities of moving between states $i$ and $j$</p>
+			
+		</section>
+		<section  align="left">		
+		<p>Recall from Lecture 10 the simple Markov process given by</p>
+		\[
+		 P=\begin{bmatrix}0&1\\1&0\end{bmatrix}
+		\]
+		<p>So that the state diagram is</p>
+		
+		<img style="margin:0px;padding:0px;border: 3px solid #00FF00;position:absolute;top:200px;left:375px"				
+			 height="150" src="figures/StateDiagram2Node.png">		
+		
+		<br><br><br>
+		<p class="fragment fade-in">This system does <em>not</em> settle down to a constant vector in the long term, in fact it oscillates
+		between the two states</p>
+		
+		<span  class="fragment fade-in">
+		<p>This is because the matrix $P$ does not have a dominant eigenvalue</p>
+		<p>Its eigenvalues are $\lambda_{1,2}=\pm 1$</p>
+		</span>
+				
+		</section>
+	</section>
+			
+	<section>
+		<section  align="left">										
+		<p>There is a condition on the transition matrix that ensures that $\lambda=1$ is the dominant eigenvalue and so ensures convergence of the sequence</p>		
+		\[
+		\mathbf{x}_{k+1}=P^T\mathbf{x}_k
+		\]
+					<br>
+		<span class="fragment fade-in">
+		<textBox touch-action="none">
+            <boxTitle>
+              <h3>Definition 11.1</h3>
+            </boxTitle>
+			<p>We say that a matrix $P$ is <em>regular</em> if there exists an integer $\displaystyle r\in\mathbb{Z^+}$ such that $P^r$ has elements that are all positive <em>i.e.</em> $P^r_{ij} > 0 ~\forall i, j$</p>            
+          </textBox>
+		  </span>
+		  <span class="fragment fade-in">
+		  <p>Clearly the matrix $\displaystyle P=\begin{bmatrix}0&1\\1&0\end{bmatrix}$ from our previous example is not regular since</p>
+		  \[
+		  \begin{align*}
+		  P^2 &= \begin{bmatrix}1&0\\0&1\end{bmatrix} = I_2\\
+		  P^3 &= \begin{bmatrix}0&1\\1&0\end{bmatrix} = P\quad\text{etc.}\quad \text{(at least 2 entries equal zero)}
+		  \end{align*}
+		  \]
+		  </span>
+		</section>
+		
+		<section  align="left">
+
+		<p>From the previous slide it should be clear that</p>
+		\[
+		  \begin{align*}
+		  P^r &= \begin{bmatrix}1&0\\0&1\end{bmatrix} = I_2 \quad \text{$r$ even}\\
+		  P^r &= \begin{bmatrix}0&1\\1&0\end{bmatrix} = P\quad\text{$r$ odd}
+		  \end{align*}
+		 \]
+		 <p>Proving that $P$ is <em>not</em> regular</p>
+		
+		<span class="fragment fade-in">
+		<textBox touch-action="none">
+            <boxTitle>
+              <h3>Theorem 11.1</h3>
+            </boxTitle>
+			<p>If the transition matrix $P$ is regular then the sequence $\mathbf{x}_0, \mathbf{x}_1, \mathbf{x}_2,\ldots$ (resulting from $\mathbf{x}_{k+1}=P^T\mathbf{x}_k$)
+			converges to a constant vector for almost all initial vectors $\mathbf{x}_0$</p>            
+         </textBox>
+		 </span>
+		 
+		 <span class="fragment fade-in">
+		 <p>As we shall see, it is often convenient to use the state diagram to deduce whether a transition matrix is regular or not</p>
+		 </span>
+		  
+		</section>
+		
+	</section>
+			
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L11</h1>
+		<br>
+		<ul>			
+			<li>Further examples of Markov processes</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Long-term behaviour of Markov processes</li>					
+			<ul>
+			<li>Examples</li>			
+			</ul>
+			</span>
+		</ul>
+	</section>		
+			
+	<section>
+		<section  align="left">									
+		
+		<h3>Example 11.1</h3> 
+		<p>Let</p>
+		\[
+		 P = \begin{bmatrix}0.2&0.8\\0.6&0.4\end{bmatrix}
+		\]
+		<p>Then $P$ is clearly regular, just choose $r=1$</p>
+				
+		<span class="fragment fade-in">
+		<p>Its characteristic polynomial is given by</p>
+		\[
+		\begin{align*}
+		\chi_{P}(t)&=|P-tI_2|\\
+		&=t^2-0.6t-0.4\\
+		&=(t-1)(t+0.4)=0
+		\end{align*}
+		\]
+		<p><em>i.e.</em> the eigenvalues are $1$ and $0.4$</p>
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>Thus the system converges to a constant vector given by the left eigenvector of $P^T$ corresponding to the eigenvalue $\lambda=1$</p>		
+		
+		</section>
+		
+		<section  align="left">									
+		<p>To find the <em>equilibrium solution</em> of our problem we solve</p>
+		\[
+		 (P^T-I_2)\mathbf{u}=0
+		\]
+		<p>Or</p>
+		\[
+		 \begin{bmatrix}
+		 -0.8&0.6\\0.8&-0.6
+		 \end{bmatrix}\mathbf{u}=\mathbf{0}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Which solves to give</p>
+		\[
+		\Biggl \{ \alpha\begin{bmatrix}3\\4\end{bmatrix}: \alpha\in\mathbb{R} \Biggr \}
+		\]
+		<p>And so the equilibrium (or steady state) solution is given by</p>
+		\[
+		\color{#00FF00}{\boxed{\color{white}{
+		 \mathbf{x}^*=\begin{bmatrix}\frac{3}{7}\\\frac{3}{7}\end{bmatrix}
+		 }}}
+		\]
+		</span>
+		<p class="fragment fade-in" style="color:red"><b>Remember to normalise to obtain a probability vector</b></p>
+		</section>
+	</section>
+
+
+	<section>
+		<section  align="left">									
+		
+		<h3>Example 11.2</h3> 
+		<p>Which of the following matrices are regular?</p>
+		\[
+		 P_1 = \begin{bmatrix}1&0\\\frac{1}{2}&\frac{1}{2}\end{bmatrix}\quad P_2 = 
+		 \begin{bmatrix}\frac{2}{5}&0&\frac{3}{5}&0\\0&\frac{4}{9}&0&\frac{5}{9}\\\frac{1}{2}&0&\frac{1}{2}&0\\0&\frac{1}{3}&0&\frac{2}{3}\end{bmatrix}
+		 \quad P_3 = \begin{bmatrix}\frac{1}{4}&\frac{3}{4}&0\\\frac{1}{3}&0&\frac{2}{3}\\0&\frac{4}{7}&\frac{3}{7}\end{bmatrix}
+		\]
+						
+		<h3>Solution</h3>
+		
+		<p class="fragment fade-in">Perhaps the easiest way to tell is to draw the state diagrams</p>		
+		
+		<span class="fragment fade-in">
+		<ul>
+			<li>Recall that $\displaystyle \left(P^r\right)_{ij}$ gives the probability of moving betweens states $i$ and $j$</li>
+			<li>$\displaystyle \left(P_1^r\right)_{12} = 0~\forall r$</li>
+			<li>We say state 1 is an <em>absorbing state</em></li>
+			<li>$P$ is <em>not</em> regular
+		</ul>
+		<img style="margin:0px;padding:0px;border: 3px solid red;position:absolute;top:450px;left:650px"				
+				height="175"					
+				src="figures/Ex11p2_P1.png">
+		</span>
+		</section>
+		
+		<section  align="left">									
+			
+		<div class="container">
+			<div class="half">
+            <!-- Content for the first section -->
+				<p>$P_2:$</p>
+		
+			<img style="margin:0px;padding:0px;border: 3px solid red"				
+				height="350"					
+				src="figures/Ex11p2_P2.png">
+			</div>
+			<div class="half">
+            <!-- Content for the second section -->            
+			<ul>
+				<li> $P_2$ is <em>not</em> regular since
+				\[
+				\left(P^r\right)_{12}=\left(P^r\right)_{14}=\left(P^r\right)_{32}=\left(P^r\right)_{34}=0 \forall r
+				\]
+				</li>
+				<br>
+				<li class="fragment fade-in">The nodes are partitioned into two sets 
+				\[
+				C_1 = \{1,3\}\quad\text{and}\quad C_2=\{2,4\}
+				\]
+				called <em>communicating classes</em>
+				</li><br>
+				<li class="fragment fade-in">For the transition matrix to be regular we must have only one communicating class</li>
+				<br>
+				<li class="fragment fade-in">In other words, there must be a non-zero probability of moving between any two states</li>
+				</ul>
+			</div>
+		</div>
+		
+		</section>
+		
+		<section  align="left">									
+			
+		<div class="container">
+			<div class="half">
+            <!-- Content for the first section -->
+				<p>$P_2:$</p>
+		
+			<img style="margin:0px;padding:0px;border: 3px solid red"				
+				height="350"					
+				src="figures/Ex11p2_P3.png">
+			</div>
+			<div class="half">
+            <!-- Content for the second section -->            
+			<ul>
+				<li> $P_3$ <em>is</em> regular</li>
+				<br>
+				<li class="fragment fade-in">This is not so obvious from the state diagram
+				</li><br>				
+				<li class="fragment fade-in">Instead, computing powers of $P$ we see that
+				\[
+				P_3^2 =   \begin{bmatrix}\frac{1}{4}&\frac{3}{4}&0\\\frac{1}{3}&0&\frac{2}{3}\\0&\frac{4}{7}&\frac{3}{7}\end{bmatrix}\begin{bmatrix}\frac{1}{4}&\frac{3}{4}&0\\\frac{1}{3}&0&\frac{2}{3}\\0&\frac{4}{7}&\frac{3}{7}\end{bmatrix}
+				>0
+				\]
+				</li>
+				<br>
+				<li class="fragment fade-in"><em>i.e.</em> there is a non-zero probability of moving between any two states in two steps</li>
+				</ul>
+			</div>
+		</div>
+		
+		</section>
+	</section>
+	
+	<section>
+		<section  align="left">									
+		
+		<h3>Example 11.3</h3> 
+		<p>A certain Markov process is governed by the transistion matrix</p>
+		\[		 
+		 P = \begin{bmatrix}0.8&0&0.2&0\\0.2&0.6&0&0.2\\0&0&1&0\\0&0&0.4&0.6\end{bmatrix}		 
+		\]
+		<p>(a) If there are initially 200 elements in each of the four states, how many elements will be in each state after one transition?</p>		
+		<p>(b) By drawing the state diagram corresponding to $P$, or otherwise, explain what eventually happens to an element that is initially in state 4</p>		
+		<p>(c) For each state $i=1, 2, 3$ and 4, calculate the probability of an element moving from state 4 to state $i$ after $n$ transitions</p>		
+		</section>
+					
+		<section  align="left">		
+		<h3>Solution</h3>		
+		<p>(a)</p>
+		\[
+		 \mathbf{x}_1 = P^T\mathbf{x}_0 = \begin{bmatrix}0.8&0.2&0&0\\0&0.6&0&0\\0.2&0&1&0.4\\0&0.2&0&0.6\end{bmatrix}\begin{bmatrix}200\\200\\200\\200\end{bmatrix}=
+		 \color{#00FF00}{\boxed{\color{white}{\begin{bmatrix}200\\120\\320\\160\end{bmatrix}}}}
+		\]
+		<br>
+		<span class="fragment fade-in">
+		<div class="container">
+			<div class="half">
+            <!-- Content for the first section -->
+				<p>(b) &emsp; Looking at the state diagram we see that an element in the fourth state can either move to the third state or stay in the fourth.</p>
+				<p class="fragment fade-in"> An element in the third state remains there since it is an absorbing state</p>
+				<p class="fragment fade-in">Thus, an element in the fourth state moves to the third state and stay there</p>
+			</div>
+			<div class="half">
+            <!-- Content for the second section -->            
+			
+			<img style="margin:0px;padding:0px;border: 3px solid red"				
+				height="375" align="right"
+				src="figures/Ex11p3.png">
+			
+			</div>
+		</div>
+		</span>
+		</section>
+		<section  align="left">									
+		
+		<p>(c) &emsp; For $i=1,2$ there is zero probability of an element moving from state 4 to state $i$, because state 3 is absorbing</p>
+		
+		<p class="fragment fade-in">For $i=4$ the only way to stay in state 4 after $n$ transtions is for the element to stay in state 4 for each individual transition. This occurs
+with probability $\left(0.6\right)^n$		</p>
+		
+		<p class="fragment fade-in">For $i=3$ note that the probabilities must add up to 1 over all 4 states giving a probability of $1-\left(0.6\right)^n$</p>
+		
+		<br><br><br><br><br>
+				
+		</section>
+	</section>
+
+	<section>
+		<h2 style="color:#00FF00">Lecture 11 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>further examples of Markov processes</li>													
+						<li>regular matrices</li>
+						<li>Long-term behaviour of Markov processes and equilibrium solutions</li>
+					</ul><br>
+					<li>After this lecture you should </li>
+					<ul>
+						<li>be confident in applying the taught methods to solve problems concerning Markov processes</li>												
+						<li>be able to determine whether a matrix is regular or not</li>												
+						<li>be able to comment on the long-term behaviour of a Markov model</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

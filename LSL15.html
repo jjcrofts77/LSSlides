@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+  
+        <style>
+        .container {
+            display: flex;
+        }
+        
+        .half {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
+  
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 15</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L15</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Introduction to controllability theory</li>
+			</span>
+			<br>
+			<li>Examples</li>			
+		</ul>
+	</section>				
+			
+											
+	<section>
+		<section  align="left">					
+			<h2>Introduction to controllability theory</h2>					
+					
+			<p>Recall that we previously found that the equation</p>					
+			\[
+			 \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+\mathbf{f}(t): \quad \mathbf{x}(0)=\mathbf{x}_0
+			\]
+						
+			<p>Has solution</p>
+			\[
+			\color{red}{\boxed{\color{white}{
+			\mathbf{x}(t) = e^{At}\mathbf{x}_0+\int_0^te^{A(t-\tau)}\mathbf{f}(\tau)\mathrm{f}\tau
+			}}}
+			\]
+			<span class="fragment fade-in">
+			<p>Now, suppose we consider the following form of inhomogeneity</p>
+			\[
+			\mathbf{f}(t) = B\mathbf{u}(t) \quad\text{where}\quad B\in\mathbb{R}^{n\times p}
+			\]
+			<p>And</p>
+			\[
+			 \mathbf{u}(t)=\begin{bmatrix}u^{(1)}(t)&u^{(2)}(t)&\ldots&u^{(p)}(t)\end{bmatrix}^T\in\mathbb{R}^p
+			\]
+			<p>Then...</p>
+			</span>
+			
+		</section>
+		<section  align="left">		
+		<p>...The system of ODEs becomes</p>
+			\[
+			 \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+B\mathbf{u}(t): \quad \mathbf{x}(0)=\mathbf{x}_0
+			\]
+		<p>And the solution</p>				
+		\[
+		 \begin{align*}
+		 \mathbf{x}(t_f)&=e^{At_f}\mathbf{x}_0+\int_0^{t_f}e^{A(t_f-\tau)}B\mathbf{u}(\tau)\mathrm{d}\tau\\
+		 &=e^{At_f}\mathbf{x}_0+\int_0^{t_f}e^{A\tau}B\mathbf{u}(t_f-\tau)\mathrm{d}\tau
+		 \end{align*}
+		\]
+		<br>
+		<span class="fragment fade-in">
+		<p>We say that the function $\mathbf{u}(t)$ is a <em>control function</em> and the aim is to choose it so
+		that we can 'control' the system from a point $\mathbf{x}_0$ at time $t=0$ to a point $\mathbf{x}_f$ at time $t=t_f$</p>
+		
+		<img style="margin:0px;padding:0px;position:absolute;top:0px;left:750px"				
+		height="350"					
+		src="figures/Control.png">		
+		</span>		
+		</section>
+		
+		<section  align="left">										
+		<div>
+			<div style="float: left; width: 50%">
+			<p>Real-world controllability problems include, for example:</p>
+			<ul>
+				<li class="fragment fade-in" data-fragment-index="1">autonomous vehicles</li><br>
+				<li class="fragment fade-in" data-fragment-index="2">altitude control in satelite communication</li><br>
+				<li class="fragment fade-in" data-fragment-index="3">seizure termination in epilepsy</li><br>
+				<li class="fragment fade-in">other computer systems</li>			
+			</ul>
+				
+			<br>	
+			<p class="fragment fade-in" style="color:red"><b>What is $\mathbf{x}_0$ and $\mathbf{x}_f$ in the above examples?</b></p>
+			</div>
+			<div class="r-stack" style="float: right; width: 50%">
+            <!-- Content for the second section -->            
+			
+			<img class="fragment" data-fragment-index="1" src="figures/Vehicles.png" style="position:absolute;top:0px;left:500px;border: 3px solid #00FF00" height="250">
+			<img class="fragment" data-fragment-index="2" src="figures/Satellite.png" style="position:absolute;top:200px;left:450px;border: 3px solid red" height="250">
+			<img class="fragment" data-fragment-index="3" src="figures/Epillepsy.png" style="position:absolute;top:350px;left:600px;border: 3px solid yellow" height="250">
+			</div>
+		</div>
+		
+		</section>
+	</section>
+			
+	
+	<section  align="left">										
+		<textBox touch-action="none">
+            <boxTitle>
+              <h3>Definition 15.1 (controllability)</h3>
+            </boxTitle>
+			<p>Given $t_f\in\mathbb{R}$ and $\mathbf{x}_0, \mathbf{x}_f\in\mathbb{R}^n$ a system of the form</p>            
+			\[
+			\frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t} = A\mathbf{x}+B\mathbf{u}(t):\quad \mathbf{x}(0)=\mathbf{x}_0
+			\]
+			<p>is said to be <em>controllable</em> on the interval $[0, t_f]$ if there exists a <em>control</em> $\mathbf{u}(t)$
+			defined on $[0, t_f]$ such that if $\mathbf{x}(0)=\mathbf{x}_0$ then $\mathbf{x}(t_f)=\mathbf{x}_f$</p>
+          </textBox>
+			
+			<br>
+			<p class="fragment fade-in" style="color:red"><b>Over the next few lectures we shall derive conditions for such a system to be controllable</b></p>
+	</section>
+	
+	<section>
+		<section  align="left">										
+		<p>It can be shown that a system is controllable on $[0, t_f]$ iff the following matrix is <em>nonsingular</em></p>
+		\[
+		 W(0,t_f) = \int_0^{t_f}e^{A\tau}BB^Te^{A^T\tau}\mathrm{d}\tau
+		\]
+		
+		<span class="fragment fade-in">
+		<p>To see this suppose that $W$ is nonsingular and set </p>
+		\[
+		\mathbf{u}(t) = B^Te^{A^T(t_f-t)}W^{-1}(0,t_f)\left[\mathbf{x}_f-e^{At_f}\mathbf{x}_0\right]
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>Substituting this into the solution of our ODE gives</p>
+		<font size="5">
+		\[
+		\begin{align*}
+		\mathbf{x}_f &=e^{At_f}\mathbf{x}_0+\int_0^{t_f}e^{A(t_f-\tau)}B\mathbf{u}(t_f-\tau)\mathrm{d}\tau\\
+		&=e^{At_f}\mathbf{x}_0+\int_0^{t_f}e^{A(t_f-\tau)}BB^Te^{A^T(t_f-\tau)}W^{-1}(0,t_f)\left[\mathbf{x}_f-e^{At_f}\mathbf{x}_0\right]\mathrm{d}\tau\\
+		&= e^{At_f}\mathbf{x}_0+\color{red}{\boxed{\color{white}{\int_0^{t_f}e^{A(t_f-\tau)}BB^Te^{A^T(t_f-\tau)}\mathrm{d}\tau}}}\color{white}{
+		\cdot W^{-1}(0,t_f)\left[\mathbf{x}_f-e^{At_f}\mathbf{x}_0\right]}
+		\end{align*}
+		\]
+		</font>
+		<p>The integral in the red box looks a lot like $\displaystyle W(0,t_f)$ ...</p>
+		</span>
+		</section>
+		
+		<section  align="left">		
+		<p>Let $\xi=t_f-\tau$</p>
+		<p>Then we can rewrite the integral</p>
+		\[
+		\int_0^{t_f}e^{A(t_f-\tau)}BB^Te^{A^T(t_f-\tau)}\mathrm{d}\tau = \int_0^{t_f}e^{A\xi}BB^Te^{A^T\xi}\mathrm{d}\xi=W(0,t_f)
+		\]
+		
+		<span class="fragment fade-in">
+		<p>This means we can write the RHS of the last equation on the previous slide as</p>
+		<font size="5">
+		\[
+		\begin{align*}
+		e^{At_f}\mathbf{x}_0+\int_0^{t_f}e^{A(t_f-\tau)}BB^Te^{A^T(t_f-\tau)}\mathrm{d}\tau
+		\cdot W^{-1}(0,t_f)\left[\mathbf{x}_f-e^{At_f}\mathbf{x}_0\right] &= e^{At_f}\mathbf{x}_0+W(0,t_f)W^{-1}(0,t_f)\left[\mathbf{x}_f-e^{At_f}\mathbf{x}_0\right]\\
+		&=e^{At_f}\mathbf{x}_0+\mathbf{x}_f-e^{At_f}\mathbf{x}_0\\
+		&=\mathbf{x}_f
+		\end{align*}		
+		\]
+		</font>
+		<p>Which gives the required result</p>			
+		</span>
+		
+		<p class="fragment fade-in">Thus if $W(0,t_f)$ is nonsingular (<em>i.e.</em> invertible) then we can control the system of ODEs</p>
+		</section>
+		
+		<section  align="left">	
+		<p>To show controllability implies nonsingularity of $W(0,t_f)$	we suppose instead that $W(0, t_f)$ is singular</p>
+		
+		<span class="fragment fade-in">
+		<p>For a singular matrix we can always find non-zero solutions to the equation</p>
+		\[
+		 \mathbf{x}_1^TW(0,t_f)=\mathbf{0}
+		\]
+		<p>So that</p>
+		\[
+		 \mathbf{x}_1^TW(0,t_f)\mathbf{x}_1=0
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>And</p>
+		\[
+		 \begin{align*}
+		 \mathbf{x}_1^TW(0,t_f)\mathbf{x}_1&=\mathbf{x}_1^T\int_0^{t_f}e^{A\tau}BB^Te^{A^t\tau}\mathrm{d}\tau\mathbf{x}_1\\
+		 &=\int_0^{t_f}\left(\mathbf{x}_1^Te^{A\tau}B\right)\cdot\left(B^Te^{A^t\tau}\mathbf{x}_1\right)\mathrm{d}\tau\\
+		 &=\int_0^{t_f}\left(B^Te^{A^t\tau}\mathbf{x}_1\right)^T\cdot\left(B^Te^{A^t\tau}\mathbf{x}_1\right)\mathrm{d}\tau = \int_0^{t_f}||B^Te^{A^T\tau}\mathbf{x}_1||^2\mathrm{d}\tau
+		 \end{align*}
+		\]
+		</span>
+		</section>
+		
+		<section  align="left">	
+		<p>Now since</p>
+		\[
+		\int_0^{t_f}||B^Te^{A^T\tau}\mathbf{x}_1||^2\mathrm{d}\tau = 0
+		\]
+		<p>We deduce that</p>
+		\[
+		 B^Te^{A^T\tau}\mathbf{x}_1 = \mathbf{x}_1^Te^{A\tau}B =  0
+		\]
+		<span class="fragment fade-in">
+		<p>Now if a system is controllable we can take it from $0$ at time $t=0$ to $\mathbf{x}_1$ at time $t=t_f$ so that</p>
+		\[
+		\mathbf{x}(t_f) = \mathbf{x}_1=e^{At_f}\cdot\mathbf{0}+\int_0^{t_f}e^{A\tau}B\mathbf{u}(t_f-\tau)\mathrm{d}\tau =\int_0^{t_f}e^{A\tau}B\mathbf{u}(t_f-\tau)\mathrm{d}\tau
+		\]
+		<p>Thus</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		\begin{align*}
+		\mathbf{x}_1^T\mathbf{x}_1 =\mathbf{x}_1^T\int_0^{t_f}e^{A\tau}B\mathbf{u}(t_f-\tau)\mathrm{d}\tau&=\int_0^{t_f}\mathbf{x}_1^Te^{A\tau}B\mathbf{u}(t_f-\tau)\mathrm{d}\tau\\
+		&=0 \implies \text{a contradiction since $\mathbf{x}_1$ was assumed non-zero}
+		\end{align*}
+		}}}
+		\]
+		</span>
+		</section>
+	</section>
+		
+			
+		  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L15</h1>
+		<br>
+		<ul>			
+			<li>Introduction to controllability theory</li>			
+			<br>
+			<span style="color: #00FF00"> 
+			<li>Examples</li>			
+			</span>
+		</ul>
+	</section>				
+			
+	<section>
+		<section  align="left">									
+		
+		<h3>Example 15.1</h3> 
+		<p>Show that the system</p>
+		\[
+		 \frac{\mathrm{d}}{\mathrm{d}t}\begin{bmatrix}x^{(1)}\\x^{(2)}\end{bmatrix} = \begin{bmatrix}1&-1\\1&-1\end{bmatrix}\begin{bmatrix}x^{(1)}\\x^{(2)}\end{bmatrix}+\begin{bmatrix}1\\0\end{bmatrix}u
+		\]
+		<p>Is controllable</p>
+		
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		<p>Note that it is sometimes easier to check that no non-zero solutions of the equation</p>
+		\[
+		 \mathbf{x}^Te^{At}B=0
+		\]
+		<p>exist. This is equivalent to showing that $W(0,t_f)$ is non-singular</p>
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>Thus we need to compute $e^{At}$, where</p>
+		\[
+		 A = \begin{bmatrix}1&-1\\1&-1\end{bmatrix}
+		\]		
+		</span>
+		</section>
+		
+		<section  align="left">									
+		<p>The characteristic polynomial of $A$ is</p>
+		\[
+		\chi_A(t) = \begin{vmatrix}1-t&-1\\1&-1-t\end{vmatrix} = (1-t)(-1+-t)+1 = t^2
+		\]
+		
+		<span class="fragment fade-in">
+		<p>To find the eigenvectors we solve</p>
+		\[
+		A\mathbf{u}=\mathbf{0}\implies \begin{bmatrix}1&-1\\1&-1\end{bmatrix}\mathbf{u}=\mathbf{0}\quad\text{or}\quad \begin{bmatrix}1&-1\\0&0\end{bmatrix}\mathbf{u}=\mathbf{0}
+		\]
+		<p>So that the eigenspace is given by</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		\Biggl \{ \alpha\begin{bmatrix}1\\1\end{bmatrix}: \alpha\in\mathbb{R} \Biggr \}
+		}}}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>To find a generalised eigenvector we choose any vector not in the eigenspace <em>e.g.</em> $\displaystyle \mathbf{v}=\begin{bmatrix}0&-1\end{bmatrix}^T$ which has related eigenvector</p>
+		\[
+		 \mathbf{u} = \begin{bmatrix}1&-1\\1&-1\end{bmatrix}\begin{bmatrix}0\\-1\end{bmatrix} = \begin{bmatrix}1\\1\end{bmatrix}\implies 
+		 \color{#00FF00}{\boxed{\color{white}{
+		 H =\begin{bmatrix}1&0\\1&-1\end{bmatrix} = H^{-1} \quad\text{and}\quad J=\begin{bmatrix}0&1\\0&0\end{bmatrix}
+		 }}}
+		\]
+		</span>
+		</section>
+		
+		<section  align="left">									
+		<p>It follows that</p>
+		\[
+		\begin{align*}
+		e^{At} = He^{Jt}H^{-1} &= \begin{bmatrix}1&0\\1&-1\end{bmatrix} \begin{bmatrix}1&t\\0&1\end{bmatrix}\begin{bmatrix}1&0\\1&-1\end{bmatrix}\\
+		&=\begin{bmatrix}1&0\\1&-1\end{bmatrix}\begin{bmatrix}1+t&-t\\1&-1\end{bmatrix} = \color{#00FF00}{\boxed{\color{white}{\begin{bmatrix}1+t&-t\\t&1-t\end{bmatrix}}}}
+		\end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Now </p>
+		\[
+		e^{At}B = \begin{bmatrix}1+t&-t\\t&1-t\end{bmatrix}\begin{bmatrix}1\\0\end{bmatrix} = \begin{bmatrix}1+t\\t\end{bmatrix} 
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<p>And setting $\displaystyle \mathbf{x}=\begin{bmatrix}\alpha&\beta\end{bmatrix}^T$ arbitrarily</p>
+		\[
+		\mathbf{x}^Te^{At}B = \begin{bmatrix}\alpha&\beta\end{bmatrix}^T\begin{bmatrix}1+t\\t\end{bmatrix} = \alpha +(\alpha + \beta)t = 0
+		\]
+		<p>Which $\displaystyle \implies \alpha = \alpha+\beta = 0$ so that $\mathbf{x}=0$</p>
+		</span>
+		<p class="fragment fade-in">We see that <em>no</em> non-zero solutions exist and so the system <em>is</em> controllable</p>
+		</section>
+	</section>
+
+	<section>
+		<h2 style="color:#00FF00">Lecture 15 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+					<ul>
+						<li>introduction to controllability</li>													
+						<li>examples</li>
+					</ul><br>
+					<li>After this lecture you should </li>
+					<ul>
+						<li>have an awareness of mathematical control theory and its applications</li>												
+						<li>be able to solve simple controllability problems</li>												
+					</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>

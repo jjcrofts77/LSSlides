@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+ <div class="reveal">
+    <div class="slides">
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<!-- ################################################### -->
+	<section>
+		<h1>Linear Systems</h1>
+		<h2>Lecture 9</h2>
+		<p style="font-size:48px; color: #00FF00">Jonathan Crofts</p>        
+		<p style="color: #00FF00">Nottingham Trent University</p>
+    </section>
+	  <!-- ################################################### -->
+      <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L9</h1>
+		<br>
+		<ul>
+			<span style="color: #00FF00"> 
+			<li>Introduction to systems of linear difference equations</li>
+			</span>
+			<br>
+			<li>Stability of systems of difference equations</li>			
+		</ul>
+	</section>				
+			
+				
+	<section>
+		<section  align="left">					
+			<h2>Systems of difference equations</h2>					
+						
+			<p>Let $A$ be an $n$ by $n$ matrix and suppose that we have a sequence $\mathbf{x}_0, \mathbf{x}_1, \ldots$ of vectors that evolve according to the rule</p>
+			\[
+			 \mathbf{x}_{k+1}=A\mathbf{x}_k
+			\]			
+						
+			<p>Then just as for ODEs we can solve via a similarity transformation</p>					
+			
+			<span class="fragment fade-in">
+			<h3>Example 9.1</h3>
+			<font size="5">
+			<p>Suppose</p>
+			\[
+			 A = \frac{1}{6}\begin{bmatrix}3&3&3\\-1&3&1\\1&3&5\end{bmatrix}
+			\]
+			<p>And that $A=HDH^{-1}$ where</p>
+			\[
+			H = \begin{bmatrix}1&0&1\\-1&1&0\\1&-1&1\end{bmatrix}\quad H^{-1}=\begin{bmatrix}3&-1&-1\\1&0&-1\\0&1&1\end{bmatrix}\quad D=\frac{1}{6}\begin{bmatrix}3&0&0\\0&2&0\\0&0&6\end{bmatrix}
+			\]
+			</font>
+			</span>
+			
+		</section>
+				
+		<section  align="left">				
+			<font size="5">
+			<p>And that we want to solve the system $\displaystyle \quad\color{red}{\boxed{\color{white}{\mathbf{x}_{k+1}=A\mathbf{x}_k :\quad \mathbf{x}_0=\begin{bmatrix}0\\0\\1\end{bmatrix}}}}$</p>
+			
+			<P>Where $A$ is as given on the previous slide</p>
+			
+			<span class="fragment fade-in">
+			<p>We can rewrite the above as</p>
+			\[			
+			 H^{-1}\mathbf{x}_{k+1}=DH^{-1}\mathbf{x}_k \implies \mathbf{y}_{k+1}=D\mathbf{y}_k: \quad \mathbf{y}_0=H^{-1}\mathbf{x}_0
+			\]
+			</span>
+			
+			<span class="fragment fade-in">
+			<p >Or</p>
+			\[
+			\mathbf{y}_{k+1}=D\mathbf{y}_k=\frac{1}{6}\begin{bmatrix}3&0&0\\0&2&0\\0&0&6\end{bmatrix}\mathbf{y}_k: \quad\mathbf{y}_0=\begin{bmatrix}0\\0\\1\end{bmatrix}
+			\]
+			</span>
+			
+			<span class="fragment fade-in">
+			<p >Thus</p>
+			
+			\[
+			\begin{align*}
+			y^{(1)}_{k+1}&=\frac{1}{2}y^{(1)}_{k}:\quad y_0^{(1)}=0\\y^{(2)}_{k+1}&=\frac{1}{3}y^{(2)}_{k}:\quad y_0^{(2)}=0 
+			\\y^{(3)}_{k+1}&=y^{(3)}_{k}:\qquad y_0^{(3)}=0
+			\end{align*}
+			\implies
+			\color{#00FF00}{\boxed{\color{white}{
+			\mathbf{y}_k = 
+			\begin{bmatrix}
+			-\left(\frac{1}{2}\right)^k\\-\left(\frac{1}{3}\right)^k\\1
+			\end{bmatrix}
+			}}}
+			\]
+			</font>			
+			</span>
+					
+		</section>
+				
+		<section  align="left">										
+		<p>We can find $\mathbf{x}_k$ as</p> 
+		\[
+		\begin{align*}
+		\mathbf{x}_k&=H\mathbf{y}_k\\
+		&=\begin{bmatrix}1&0&1\\-1&1&0\\1&-1&1\end{bmatrix}\begin{bmatrix}
+			-\left(\frac{1}{2}\right)^k\\-\left(\frac{1}{3}\right)^k\\1
+			\end{bmatrix}\\
+		&= \color{red}{\boxed{\color{white}{\begin{bmatrix}1-\left(\frac{1}{2}\right)^k\\\left(\frac{1}{2}\right)^k-\left(\frac{1}{3}\right)^k\\1-\left(\frac{1}{2}\right)^k+\left(\frac{1}{3}\right)^k\end{bmatrix}}}}
+		\end{align*}
+		\]
+		
+		
+		</section>
+			
+	</section>
+	
+	<section>
+		<section  align="left">					
+				
+		<p>Note that there is an easier way to solve the equation </p>
+		
+		\[
+		 \mathbf{x}_{k+1}=A\mathbf{x}_k
+		\]
+		<p>By noting that</p>
+		\[
+		\begin{align*}
+		\mathbf{x}_1 &=A\mathbf{x}_0\\
+		\mathbf{x}_2 &=A\mathbf{x}_1=A^2\mathbf{x}_0\\
+		\mathbf{x}_3 &=A\mathbf{x}_2=A^3\mathbf{x}_0\\
+		\mathbf{x}_4 &=A\mathbf{x}_3=A^4\mathbf{x}_0\quad \text{etc.}
+		\end{align*}
+		\]
+		
+		<span class="fragment fade-in">
+		<p>Thus</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		 \mathbf{x}_k = A^k\mathbf{x}_0
+		 }}}
+		\]
+		
+		</section>
+			
+		<section  align="left">					
+				
+		<p>We can use this result to solve for $\mathbf{x}_k$ as follows</p>
+		\[
+		
+		 \mathbf{x}_k = A^k\mathbf{x}_0
+		 		 
+		 \implies
+		 \begin{align*}
+		 \mathbf{x}_k&=\left(HDH^{-1}\right)^{k}\mathbf{x}_0\\
+		 &=\left(HDH^{-1}\right)\left(HDH^{-1}\right)\cdots \left(HDH^{-1}\right)\mathbf{x}_0\\
+		 &= HD^kH^{-1}\mathbf{X}_0\\
+		 &=H\begin{bmatrix}\lambda_1&&&\\&\lambda_2&&\\&&\ddots&\\&&&\lambda_n\end{bmatrix}H^{-1}\mathbf{x}_0
+		 \end{align*}
+		 
+		\]
+		
+		<span class="fragment fade-in">
+		<p>From Example 9.1 we see that</p>
+		\[
+		 \mathbf{x}_k= \begin{bmatrix}1&0&1\\-1&1&0\\1&-1&1\end{bmatrix}\begin{bmatrix}\left(\frac{1}{2}\right)^k&0&0\\0&\left(\frac{1}{3}\right)^k&0\\0&0&1\end{bmatrix}\begin{bmatrix}3&-1&-1\\1&0&-1\\0&1&1\end{bmatrix} 
+		 \begin{bmatrix}0\\0\\1\end{bmatrix}= \begin{bmatrix}1-\left(\frac{1}{2}\right)^k\\\left(\frac{1}{2}\right)^k-\left(\frac{1}{3}\right)^k\\1-\left(\frac{1}{2}\right)^k+\left(\frac{1}{3}\right)^k\end{bmatrix}
+		 
+		\]
+		<p class="fragment fade-in" style="color: red"><b>This agrees with our earlier result</b></p>
+		</span>
+		</section>		
+	</section>
+	
+	
+	<section  align="left">					
+				
+		<p>What about when $A$ is not diagonalisable?</p>
+		
+		<span class="fragment fade-in">
+		<p>In this case we have </p>
+		\[
+		 A=HJH^{-1}
+		\]
+		<p>Where $J$ is a Jordan matrix and so</p>
+		\[
+		\color{red}{\boxed{\color{white}{
+		\begin{align*}
+		 \mathbf{x}_k&=HJ^kH^{-1}\mathbf{x}_0\\
+		 &=H\begin{bmatrix}J_{n_1}(\lambda_1)^k&&\\&\ddots&\\&&J_{n_q}(\lambda_q)^k\end{bmatrix}H^{-1}
+		 \end{align*}
+		 }}}
+		\]
+		</span>
+		
+		<span class="fragment fade-in">
+		<h3>Note</h3>
+		<ol>
+			<li>To solve system of difference equations requires us to compute powers of Jordan matrices</li>
+			<li class="fragment fade-in">We have a formula for this!</li>
+		</ol>
+		</span>
+		
+	</section>
+	
+	<section>
+		<section  align="left">					
+		<h3>Example 9.2</h3>		
+		<p>Solve the system of difference equations</p>
+		\[
+		 \mathbf{x}_{k+1}=J\mathbf{x}_k: \quad \mathbf{x}_0=\begin{bmatrix}1&1&1&1&1&1\end{bmatrix}^T
+		\]
+		where
+		\[
+		J = \begin{bmatrix}J_1(3)&&&\\&J_1(2)&&\\&&J_1(2)&\\&&&J_3(-1)\end{bmatrix}
+		\]
+		
+		<h3>Solution</h3>		
+		<span class="fragment fade-in">
+		\[
+		 \mathbf{x}_k=J^k\mathbf{x}_0\quad \text{and}\quad J^k = \begin{bmatrix}3^k&&&&&\\&2^k&&&&\\&&2^k&&&\\&&&(-1)^k&k(-1)^{k-1}&\frac{k(k-1)}{2}(-1)^{k-2}\\
+		 &&&0&(-1)^k&k(-1)^{k-1}\\&&&0&0&(-1)^k\end{bmatrix}
+		\]
+		</span>
+		</section>
+		
+		<section  align="left">					
+		<p>Thus</p>
+		\[
+		 \begin{align*}
+		 \mathbf{x}_k &= J^k\mathbf{x}_0\\
+		 &=\begin{bmatrix}3^k&&&&&\\&2^k&&&&\\&&2^k&&&\\&&&(-1)^k&k(-1)^{k-1}&\frac{k(k-1)}{2}(-1)^{k-2}\\
+		 &&&0&(-1)^k&k(-1)^{k-1}\\&&&0&0&(-1)^k\end{bmatrix}\begin{bmatrix}1\\1\\1\\1\\1\\1\end{bmatrix}\\
+		 &=\begin{bmatrix}3^3\\2^k\\2^k\\(-1)^k+k(-1)^{k-1}+\frac{k(k-1)}{2}(-1)^{k-2}\\(-1)^k+k(-1)^{k-1}\\(-1)^k\end{bmatrix}
+		 =\color{red}{\boxed{\color{white}{\begin{bmatrix}3^3\\2^k\\2^k\\(-1)^k\left(1-k+\frac{k(k-1)}{2}\right)\\(-1)^k(1-k)\\(-1)^k\end{bmatrix}}}}
+		 \end{align*}
+		\]
+		
+		</section>
+		
+	</section>
+
+	
+	<!-- ################################################### -->
+    <!-- ################################################### -->
+	<section align="left">
+		<h1>Linear Systems L9</h1>
+		<br>
+		<ul>
+			<li>Introduction to systems of linear difference equations</li>			
+			<br>
+					<span style="color: #00FF00"> 
+			<li>Stability of systems of difference equations</li>			
+			</span>
+		</ul>
+	</section>					
+			
+	<section>
+		<section  align="left">										
+					
+		<h2>Stability properties of difference equations</h2> 
+		<p>Recall that as $r$ tends to infinity $J_n(\lambda)^r$ depends on the magnitude of $\lambda$</p>
+		<ol>
+		 <li>$J^r\longrightarrow 0$ if $|\lambda| < 1$</li>
+		 <li class="fragment fade-in">$J_n(\lambda)^r$ is unbounded if $|\lambda|>1$</li>
+		 <li class="fragment fade-in">$J_n(\lambda)^r$ is unbounded if $|\lambda|=1$ unless $n=1$</li>
+		</ol>
+		
+		<br><br>
+		<span class="fragment fade-in">
+		<p>This follows from the formula $\displaystyle\longrightarrow \color{red}{\boxed{\color{white}{
+		\begin{bmatrix}\lambda^r&{r\choose 1}\lambda^{r-1}&\cdots&\cdots&{r\choose n-1}\lambda^{r-n+1}\\
+		0&\lambda^r&{r\choose 1}\lambda^{r-1}&&\vdots\\
+		\vdots&&\ddots&\ddots&\vdots\\
+		\vdots&&&&{r\choose 1}\lambda^{r-1}&\\
+		0&\cdots&\cdots&0&\lambda^r
+		\end{bmatrix}		}}}$</p>
+		</span>
+		</section>
+				
+		<section  align="left">										
+			<p>Now suppose that $J$ has a <em>strictly dominant eigenvalue</em> $\lambda=1$ so that</p>
+			\[
+			J^r=\begin{bmatrix}J_{n_1}^r&&&\\&\ddots&&\\&&J_{n_{q-1}}^r&\\&&&1^r\end{bmatrix}\longrightarrow
+			\begin{bmatrix}0&&&\\&\ddots&&\\&&0&\\&&&1\end{bmatrix} \text{ as } r\to\infty
+			\]
+			
+			<span class="fragment fade-in">
+			<p>Thus</p>
+			\[
+			\mathbf{x}_k =HJ^kH^{-1}\mathbf{x}_0 \longrightarrow H\begin{bmatrix}0&&&\\&\ddots&&\\&&0&\\&&&1\end{bmatrix}H^{-1}\mathbf{x}_0
+			=H\begin{bmatrix}0\\\hat{\mathbf{h}}_n\end{bmatrix}\mathbf{x}_0 =\color{red}{\boxed{\color{white}{\mathbf{h}_n\hat{\mathbf{h}}_n\mathbf{x}_0}}}
+			\]
+			</span>
+			
+			<span class="fragment fade-in">
+			<h3>Note</h3>
+			<ol>
+			<li>Here $\displaystyle \mathbf{h}_n, \hat{\mathbf{h}}_n$ are the last column and last row of $H$, respectively</li>
+			<li class="fragment fade-in">This means that $\mathbf{x}_k$ tends to a constant vector</li>			
+			</ol>
+			</span>
+		</section>
+			
+	</section>			
+	
+	<section>
+		<section  align="left">										
+		<h3>Example 9.3</h3>	
+		<p>Recall from Example 9.1 the system</p>
+		\[
+		\mathbf{x}_{k+1}=A\mathbf{x}_k:\quad \mathbf{x}_0=\mathbf{c}
+		\]
+		<p>With</p>		
+		\[
+		 A = \frac{1}{6}\begin{bmatrix}3&3&3\\-1&3&1\\1&3&5\end{bmatrix}\quad\text{and}\quad c=\begin{bmatrix}0\\0\\1\end{bmatrix}
+		\]
+		<p>What happens to $\mathbf{x}_k$ for large $k$?</p>
+		
+		<h3>Solution</h3>
+		<span class="fragment fade-in">
+		\[
+		 A = \begin{bmatrix}1&0&1\\-1&1&0\\1&-1&1\end{bmatrix}
+			 \begin{bmatrix}\frac{1}{2}&&\\&\frac{1}{3}&\\&&1\end{bmatrix}
+			 \begin{bmatrix}1&-1&-1\\1&0&-1\\0&1&1\end{bmatrix}
+			 \implies
+			 \mathbf{x}_k\to\begin{bmatrix}1\\0\\1\end{bmatrix}
+			 \begin{bmatrix}0&1&1\end{bmatrix}\mathbf{x}_0
+		\]
+		</span>
+		</section>
+		
+		<section  align="left">										
+			<p>Since</p>
+			\[
+			\mathbf{x}_0 = \begin{bmatrix}0&0&1\end{bmatrix}^T
+			\]
+			<p>We have that</p>
+			\[
+			\mathbf{x}_k\to\begin{bmatrix}1\\0\\1\end{bmatrix}
+			 \begin{bmatrix}0&1&1\end{bmatrix}
+			 \begin{bmatrix}0\\0\\1\end{bmatrix}
+			 =\begin{bmatrix}0&1&1\\0&0&0\\0&1&1\end{bmatrix}
+			 \begin{bmatrix}0\\0\\1\end{bmatrix}=\color{red}{\boxed{\color{white}{\begin{bmatrix}1\\0\\1\end{bmatrix}}}}
+			\]
+			
+			<span class="fragment fade-in">
+			<p>Recalling from Example 9.1 that</p>
+			\[
+			\mathbf{x}_k = \begin{bmatrix}1-\left(\frac{1}{2}\right)^k\\\left(\frac{1}{2}\right)^k-\left(\frac{1}{3}\right)^k\\1-\left(\frac{1}{2}\right)^k+\left(\frac{1}{3}\right)^k\end{bmatrix}
+			\to \begin{bmatrix}1\\0\\1\end{bmatrix} \text{ as } k\to\infty
+			\]
+			<p>Since both</p>
+			\[
+			\left(\frac{1}{2}\right)^k \text{ and } \left(\frac{1}{3}\right)^k \to 0 \text{ as } k\to \infty
+			\]
+			</span>
+		</section>
+			
+	</section>			
+	
+	<section>
+		<h2 style="color:#00FF00">Lecture 9 Review</h2>
+		<br>				
+		<ul>						
+			<li>In this lecture we covered</li>
+				<ul>
+					<li>introduction to systems of difference equations</li>
+					<li>examples</li>
+				</ul><br>
+			<li>After this lecture you should </li>
+				<ul>							
+					<li>know how to deploy iterative techniques to solve systems of linear difference equations</li>
+				</ul><br>					
+		</ul>			
+	</section>
+						
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+				// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+		});
+	</script>
+          <script src="plugin/math/math.js"></script>
+          <script>
+            Reveal.initialize({ plugins:[ RevealMath.KaTeX ] });
+          </script>
+</body>
+</html>
