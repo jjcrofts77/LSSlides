@@ -68,7 +68,7 @@
 						<span class="fragment fade-in">
 						<li type="1"><p>If </p>
 						\[
-						 A\mathbf{u}=\lambda\mathbf{u}\quad \lambda\in\mathbb{R}, A\in\mathbb{R}^{n\times n}\quad \text{and}\quad \mathbf{0}\neq \mathbf{u}
+						 A\mathbf{u}=\lambda\mathbf{u}\quad \lambda\in\mathbb{R}, A\in\mathbb{R}^{n\times n}\quad \text{and}\quad \mathbf{u}\quad\text{non-zero}
 						\]
 						<p>then $\lambda$ is an <em>eigenvalue</em> of $A$ and $\mathbf{u}$ is an <em>eigenvector</em> of $A$</p>						
 						</li>
@@ -122,7 +122,7 @@
 				\[
 				\chi_A(t) = (t-2)^2 \quad \text{and}\quad \Biggl \{ \alpha\begin{bmatrix}-1\\1\end{bmatrix}: \alpha\in\mathbb{R} \Biggr \}
 				\]
-				<p>so that $AM=2\neq 1=GM$</p>
+				<p>so that $AM=2 > 1=GM$</p>
 				</span>
 				<p style="color:red" class="fragment fade-in"><b>It does however have a JNF</b></p>
 				</section>
@@ -134,10 +134,11 @@
 				</ol>
 				
 				<br><br>
+				<span class="fragment fade-in">
 				<h3>Note</h3>
 				<br>
 				<ul>
-					<li class="fragment fade-in">From 6. we have that a matrix $A$ is similar to a diagonal matrix $D$ iff $AM=GM$ separately for <em>all</em> eigenvalues</li>
+					<li>From 6. we have that a matrix $A$ is similar to a diagonal matrix $D$ iff $AM=GM$ separately for <em>all</em> eigenvalues</li></span>
 					<br>
 					<li class="fragment fade-in">From the previous lecture we know that there always exists a similarity transformation $P$ such that $\displaystyle A=PJP^{-1}$</li>
 					<br>
@@ -184,7 +185,7 @@
 			\]
 			</span>
 			<p class="fragment fade-in"> From the previous slides we see that for the matrix $A_1$ the eigenvalue $\lambda =1$ has $AM=2=GM$ and so $A_1$ is (trivially) diagonalisable</p> 
-			<p class="fragment fade-in"> For the matrix $A_2$ the eigenvalue $\lambda =1$ has $AM=2\neq 1=GM$ and so $A_2$ is <em>not</em> diagonalisable</p> 
+			<p class="fragment fade-in"> For the matrix $A_2$ the eigenvalue $\lambda =1$ has $AM=2>1=GM$ and so $A_2$ is <em>not</em> diagonalisable</p> 
 			
 			<b style="color:red" class="fragment fade-in">Of course in this simple example these observations could be deduced immediately; however, this will not typically be the case</b>
 			</section>	
@@ -219,13 +220,13 @@
 			\[
 			 \chi_A(A) = 0
 			\]
-			
+			<p></p>
 			</textBox>
 			<p class="fragment fade-in">The proof of this theorem lies outside the scope of the current course</p>
 			
 			<span class="fragment fade-in">
 			<h3>Example 3.2</h3>
-			
+			<font size=4.5>
 			<div style="width: 50%; float:left;">  
 			<p>Let $\displaystyle A=\begin{bmatrix}1&1\\2&1\end{bmatrix}$ then</p>			
 			\[
@@ -247,6 +248,7 @@
 		\]
         </div>  
 			</span>
+			</font>
 		</section>				
 		
 		<section>
@@ -256,7 +258,7 @@
 			<h3>Example 3.3</h3>
 			<p>For the matrix $\displaystyle A=\begin{bmatrix}1&2\\3&4\end{bmatrix}$ we have </p>
 			\[
-			\chi_A(t) = \begin{vmatrix}1-t&-2\\-3&4-t\end{vmatrix} = t^2-5t-2
+			\chi_A(t) = \begin{vmatrix}1-t&2\\3&4-t\end{vmatrix} = t^2-5t-2
 			\]
 			<span class="fragment fade-in">
 			<p>So that</p>
@@ -288,7 +290,7 @@
 			<span class="fragment fade-in">
 			<p>Let's check this</p>
 			\[
-			 A^{-1}=\frac{1}{2}\begin{bmatrix}-2&2\\3&-1\end{bmatrix}\implies \frac{1}{2}\begin{bmatrix}-2&2\\3&-1\end{bmatrix}\begin{bmatrix}1&2\\3&4\end{bmatrix} =  \frac{1}{2}\begin{bmatrix}2&0\\0&2\end{bmatrix} = I_2
+			 A^{-1}=\frac{1}{2}\begin{bmatrix}-4&2\\3&-1\end{bmatrix}\implies \frac{1}{2}\begin{bmatrix}-4&2\\3&-1\end{bmatrix}\begin{bmatrix}1&2\\3&4\end{bmatrix} =  \frac{1}{2}\begin{bmatrix}2&0\\0&2\end{bmatrix} = I_2
 			\]
 			<p>as required</p>
 			</span>
@@ -351,7 +353,7 @@
 			<span class="fragment fade-in">
 			<p>Let's check</p>
 			\[
-			 A_2-I_2 = \begin{bmatrix}1&1\\0&1\end{bmatrix}-\begin{bmatrix}1&0\\0&1\end{bmatrix}=\begin{bmatrix}0&1\\0&0\end{bmatrix}\neq 0
+			 A_2-I_2 = \begin{bmatrix}1&1\\0&1\end{bmatrix}-\begin{bmatrix}1&0\\0&1\end{bmatrix}=\begin{bmatrix}0&1\\0&0\end{bmatrix} \quad \text{(non-zero)}
 			\]
 			</span>
 			<span class="fragment fade-in">
