@@ -132,7 +132,7 @@
 			<h3>Example 7.1 </h3> 
 			<p>Let $n=4$ then</p>
 			\[
-				J_4(\lambda) = \begin{bmatrix}\lambda^r&{r\choose 1}\lambda^{r-1}&{r\choose 2}\lambda^{r-2}&{r\choose 3}\lambda^{r-3}\\
+				\left(J_4(\lambda)\right)^r = \begin{bmatrix}\lambda^r&{r\choose 1}\lambda^{r-1}&{r\choose 2}\lambda^{r-2}&{r\choose 3}\lambda^{r-3}\\
 				0&\lambda^r&{r\choose 1}\lambda^{r-1}&{r\choose 2}\lambda^{r-2}\\
 				0&0&\lambda^r&{r\choose 1}\lambda^{r-1}\\0&0&0&\lambda^r
 				\end{bmatrix}
@@ -154,7 +154,7 @@
 		<p>Given these results we compute powers of Jordan matrices since if</p>
 		
 		\[
-		J = \begin{bmatrix}J_{n_1}&&&\\&J_{n_1}&&\\&&J_{n_1}&\\&&&J_{n_1}\end{bmatrix} \implies J^r = \begin{bmatrix}J_{n_1}^r&&&\\&J_{n_1}^r&&\\&&J_{n_1}^r&\\&&&J_{n_1}^r\end{bmatrix}
+		J = \begin{bmatrix}J_{n_1}&&&\\&J_{n_2}&&\\&&\ddots&\\&&&J_{n_1}\end{bmatrix} \implies J^r = \begin{bmatrix}J_{n_1}^r&&&\\&J_{n_2}^r&&\\&&\ddots&\\&&&J_{n_1}^r\end{bmatrix}
 		\]
 		<p><em>i.e.</em> we just compute the powers of the individual Jordan blocks</p>
 		
