@@ -330,7 +330,7 @@
 	</section>				
 			
 
-	
+	<section>
 	<section  align="left">									
 		<h2>Routh-Hurwitz criteria</h2>
 		
@@ -340,7 +340,7 @@
 		<span class="fragment fade-in">
 		<p>Suppose the characteristic polynomial is given by</p>
 		\[
-		\chi_A(t) t^n+a_1t^{n-1}+a_2t^{n-2}+\cdots+a_{n-1}t+a_n
+		\chi_A(t) = t^n+a_1t^{n-1}+a_2t^{n-2}+\cdots+a_{n-1}t+a_n
 		\]
 		<p>Then we construct the <em>Routh-Hurwitz matrix</em> as follows</p>
 		\[
@@ -351,6 +351,20 @@
 		\]
 		<p>Alongside the condition that $a_i=0$ for $i>n$</p>
 		</span>
+	</section>
+	<section align="left">
+	<p>Importantly, the system with characeristic polynomial $\displaystyle\chi_A(t)$ is asymptotically stable if and only if all the leading principal minors of $H$ are positive:</p>
+	\[
+	\begin{align*}
+	 H_1 &= |a_1| = a_1>0\\\\
+	 H_2 &= \begin{vmatrix}a_1&a_3\\1&a_2\end{vmatrix}>0\\\\
+	 H_2 &= \begin{vmatrix}a_1&a_3&a_5\\1&a_2&a_6\\0&a_1&a_3\end{vmatrix}>0
+	\end{align*}
+	\]
+	<p>And so on ...</p>
+	
+	<p>An example should make the above ideas clearer</p>
+	</section>
 	</section>
 	
 	<section>
