@@ -313,32 +313,68 @@
 			</span>
 		</ul>
 	</section>			
-			
-	<section  align="left">						
+
+	<section>			
+		<section  align="left">						
 				
-		<h2>Properties of the matrix exponential</h2> 
-		<p>Recall that the matrix exponential is given by</p>
-		\[
-		 \begin{align*}
-		 e^{At}&=I+At+\frac{A^2t^2}{2!}+\frac{A^3t^3}{3!}+\cdots\\
-		 &=\sum_{r=0}^\infty \frac{A^rt^r}{r!}
-		 \end{align*}
-		\]								
+			<h2>Properties of the matrix exponential</h2> 
+			<p>Recall that the matrix exponential is given by</p>
+			\[
+			\begin{align*}
+			e^{At}&=I+At+\frac{A^2t^2}{2!}+\frac{A^3t^3}{3!}+\cdots\\
+			&=\sum_{r=0}^\infty \frac{A^rt^r}{r!}
+			\end{align*}
+			\]								
 		
-		<span class="fragment fade-in">	
-		<p>Some important properties of the matrix exponential are:</p>
-		<ol>
-			<li>If $\displaystyle A=HJH^{-1}$ then $\displaystyle e^{A}=e^{HJH^{-1}} = He^{J}H^{-1}$</li>
-			<br>
-			<li class="fragment fade-in">If $\displaystyle A\in\mathbb{R}^{n\times n}$ then $\displaystyle e^{At}\left|_{t=0}\right. = I_n$</li>
-			<br>
-			<li class="fragment fade-in">$\displaystyle e^{At}\mathbf{x}_0$ is the unique solution of $\displaystyle \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t}=A\mathbf{x} : \mathbf{x}(0)=\mathbf{x}_0$</li>
-		</ol>
-		</span>
+			<span class="fragment fade-in">	
+			<p>Some important properties of the matrix exponential are:</p>
+			<ol>
+				<li>If $\displaystyle A=HJH^{-1}$ then $\displaystyle e^{A}=e^{HJH^{-1}} = He^{J}H^{-1}$</li>
+				<br>
+				<li class="fragment fade-in">If $\displaystyle A\in\mathbb{R}^{n\times n}$ then $\displaystyle e^{At}\left|_{t=0}\right. = I_n$</li>
+				<br>
+				<li class="fragment fade-in">$\displaystyle e^{At}\mathbf{x}_0$ is the unique solution of $\displaystyle \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t}=A\mathbf{x} : \mathbf{x}(0)=\mathbf{x}_0$</li>
+			</ol>
+			</span>
 		
-		<p class="fragment fade-in" style="color: red"><b>The last property is of particular interest to us!</b></p>
-	</section>
-						
+			<p class="fragment fade-in" style="color: red"><b>The last property is of particular interest to us!</b></p>
+		</section>
+	
+		<section align="left">
+	
+			<p>Proof of property 3</p>
+		
+			<p>(a) To show that $\displaystyle e^{At}\mathbf{x}_0$ is a solution note that</p>
+			\[
+			\begin{align*}
+			\frac{\mathrm{d}}{\mathrm{d}t}\left(e^{At}\mathbf{x}_0\right) &= \lim_{h\to 0}\frac{e^{A(t+h)}-e^{At}}{h}\\
+			&= \lim_{h\to 0}\frac{e^{At}\left(e^{Ah}-I_n\right)}{h}\\
+			&= e^{At}\lim_{h\to 0}\frac{e^{Ah}-I_n}{h}\\
+			&= e^{At}\lim_{h\to 0}\left(A+\frac{h}{2!}A^2+\cdots\right)\\
+			&= e^{At}A = Ae^{At}
+			\end{align*}
+			\]
+			<p>Thus $\displaystyle \frac{\mathrm{d}\mathbf{x}(t)}{\mathrm{d}t}= \frac{\mathrm{d}}{\mathrm{d}t} \left(e^{At}\mathbf{x}_0\right) 
+			= A\left(e^{At}\mathbf{x}_0\right) = A\mathbf{x}(t)$ as required</p>
+		</section>
+		
+		<section align="left">
+			<p>To prove uniqueness let $\displaystyle \mathbf{y}(t) = e^{-At}\mathbf{x}(t)$ where $\mathbf{x}(t)$ is any 
+			solution of our system.</p>
+			
+			<p>Then</p>
+			\[
+			\begin{align*}
+			\frac{\mathrm{d}\mathbf{y}(t)}{\mathrm{d}t} &= -Ae^{-At}\mathbf{x}(t) + e^{-At}\frac{\mathrm{d}\mathbf{x}(t)}{\mathrm{d}t}\\
+			&= -Ae^{-At}\mathbf{x}(t) + Ae^{-At}\mathbf{x}(t)\\
+			&= \left(-A+A\right)e^{At} = 0
+			\end{align*}
+			\]
+			<p>Thus $\mathbf{y}(t)$ is a constant.</p> 
+			
+			<p>Setting $t=0$ gives $\mathbf{y} = \mathbf{x}_0$ completeing the proof. 
+		</section>
+	</section>					
 			
 	<section>
 		<section  align="left">						
