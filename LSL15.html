@@ -173,7 +173,7 @@
 		<font size="5">
 		\[
 		\begin{align*}
-		\mathbf{x}_f &=e^{At_f}\mathbf{x}_0+\int_0^{t_f}e^{A(t_f-\tau)}B\mathbf{u}(t_f-\tau)\mathrm{d}\tau\\
+		\mathbf{x}_f &=e^{At_f}\mathbf{x}_0+\int_0^{t_f}e^{A(t_f-\tau)}B\mathbf{u}(\tau)\mathrm{d}\tau\\
 		&=e^{At_f}\mathbf{x}_0+\int_0^{t_f}e^{A(t_f-\tau)}BB^Te^{A^T(t_f-\tau)}W^{-1}(0,t_f)\left[\mathbf{x}_f-e^{At_f}\mathbf{x}_0\right]\mathrm{d}\tau\\
 		&= e^{At_f}\mathbf{x}_0+\color{red}{\boxed{\color{white}{\int_0^{t_f}e^{A(t_f-\tau)}BB^Te^{A^T(t_f-\tau)}\mathrm{d}\tau}}}\color{white}{
 		\cdot W^{-1}(0,t_f)\left[\mathbf{x}_f-e^{At_f}\mathbf{x}_0\right]}
