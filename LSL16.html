@@ -66,7 +66,7 @@
 			<span class="fragment fade-in">
 			<p>Consider now the <em>controllability matrix</em></p>
 			\[
-			\color{red}{\boxed{\color{white}{
+			\color{#00FF00}{\boxed{\color{white}{
 			 G = \begin{bmatrix}B&AB& A^2B&\ldots&A^{n-1}B\end{bmatrix}\in\mathbb{R}^{n\times np}
 			 }}}
 			\]
@@ -89,7 +89,7 @@
 		 e^{At} = \sum_{r=0}^{n-1}c_rA^r \implies \mathbf{x}_1^Te^{At}B=0
 		\]
 		
-		<p class="fragment fade-in" style="color: red"><b>Thus if $G$ does not have full rank then the system fails to be controllable</b></p>
+		<p class="fragment fade-in" style="color: #00FF00"><b>Thus if $G$ does not have full rank then the system fails to be controllable</b></p>
 		</section>
 		
 		<section  align="left">		
@@ -114,7 +114,7 @@
 		\]		
 		<p>And so $G$ is not of full rank</p>
 		</span>
-		<p class="fragment fade-in" style="color:red"><b>It follows that the ODE system is controllable if and only if the matrix $G$ is of full rank</b></p>
+		<p class="fragment fade-in" style="color:magenta"><b>It follows that the ODE system is controllable if and only if the matrix $G$ is of full rank</b></p>
 		</section>
 	</section>
 			
@@ -136,7 +136,7 @@
 		<font size="5">
 		\[
 		 AB = \begin{bmatrix}1\\-2\\5\end{bmatrix}  \quad A^2B=A(AB) = \begin{bmatrix}0&1&1\\-1&-2&-1\\3&5&2\end{bmatrix}\begin{bmatrix}1\\-2\\5\end{bmatrix} =\begin{bmatrix}3\\-2\\3\end{bmatrix}
-		 \implies \color{red}{\boxed{\color{white}{G=\begin{bmatrix}0&1&3\\1&-2&-2\\0&5&3\end{bmatrix}}}}
+		 \implies \color{#00FF00}{\boxed{\color{white}{G=\begin{bmatrix}0&1&3\\1&-2&-2\\0&5&3\end{bmatrix}}}}
 		\]
 		</font>
 		</span>
@@ -177,7 +177,7 @@
 		<font size="5">
 		\[
 		 AB = \begin{bmatrix}1\\1\\1\end{bmatrix}  \quad A^2B=A(AB) = \begin{bmatrix}0&1&0\\0&0&1\\0&1&0\end{bmatrix}\begin{bmatrix}1\\1\\1\end{bmatrix} =\begin{bmatrix}1\\1\\1\end{bmatrix}
-		 \implies \color{red}{\boxed{\color{white}{G=\begin{bmatrix}0&1&1\\1&1&1\\1&1&1\end{bmatrix}}}}
+		 \implies \color{#00FF00}{\boxed{\color{white}{G=\begin{bmatrix}0&1&1\\1&1&1\\1&1&1\end{bmatrix}}}}
 		\]
 		</font>
 		</span>
@@ -227,7 +227,7 @@
 		<section  align="left">									
 		<p>Importantly, it can be shown that the system (*) is observable if and only if the <em>observability matrix</em></p> 
 		\[
-		\color{red}{\boxed{\color{white}{
+		\color{#00FF00}{\boxed{\color{white}{
 		\theta = \begin{bmatrix}C\\CA\\\vdots\\CA^{n-1}\end{bmatrix}\in\mathbb{R}^{nq\times n}
 		}}}
 		\]
@@ -287,7 +287,7 @@
 		<font size="5">
 		\[
 		AB=\begin{bmatrix}0\\1\\k\end{bmatrix}\quad A^2B=\begin{bmatrix}1&-1&0\\1&0&1\\0&1&k\end{bmatrix}\begin{bmatrix}0\\1\\k\end{bmatrix}=\begin{bmatrix}-1\\k\\1+k^2\end{bmatrix}
-		\implies \color{red}{\boxed{\color{white}{G=\begin{bmatrix}0&0&-1\\0&1&k\\1&k&1+k^2\end{bmatrix}}}}
+		\implies \color{#00FF00}{\boxed{\color{white}{G=\begin{bmatrix}0&0&-1\\0&1&k\\1&k&1+k^2\end{bmatrix}}}}
 		\]
 		</font>
 		</span>
@@ -312,7 +312,7 @@
 			\]
 			</font><br>
 			\[
-		\implies \color{red}{\boxed{\color{white}{\theta=\begin{bmatrix}-1&1&0\\0&1&1\\1&1&1+k\end{bmatrix}}}}
+		\implies \color{#00FF00}{\boxed{\color{white}{\theta=\begin{bmatrix}-1&1&0\\0&1&1\\1&1&1+k\end{bmatrix}}}}
 			\]
 		</span>
 		</section>
@@ -323,7 +323,7 @@
 				 \begin{align*}
 				 |\theta|=\begin{vmatrix}-1&1&0\\0&1&1\\1&1&1+k\end{vmatrix}&=-1\begin{vmatrix}1&1\\1&1+k\end{vmatrix}-\begin{vmatrix}0&1\\1&1+k\end{vmatrix}\\
 				 &=-(k)-(-1)\\
-				 &=\color{red}{\boxed{\color{white}{1-k}}}
+				 &=\color{magenta}{\boxed{\color{white}{1-k}}}
 				 \end{align*}
 				\]
 				
